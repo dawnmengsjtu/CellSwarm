@@ -1,0 +1,137 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: apoptosis_intrinsic
+pathway_name: Intrinsic (Mitochondrial) Apoptosis
+category: cell_death
+kegg_id: hsa04210
+components:
+  receptors: []
+  ligands: []
+  downstream:
+  - BAX
+  - BAK1
+  - BCL2
+  - BCL2L1
+  - MCL1
+  - CYCS
+  - APAF1
+  transcription_factors:
+  - TP53
+  key_genes:
+  - BAX
+  - BAK1
+  - BCL2
+  - BCL2L1
+  - MCL1
+  - BID
+  - CYCS
+  - APAF1
+  - CASP9
+  - CASP3
+signal_fields_affected:
+- oxygen
+- glucose
+cell_type_effects:
+  CD8_T:
+    when_active: Intrinsic apoptosis eliminates exhausted or over-activated T cells.
+      BCL2 family balance determines T cell lifespan in TME.
+    behavioral_mapping:
+      apoptosis: 0.3
+      attack: -0.15
+      proliferate: -0.1
+    state_effects:
+      survival: -0.3
+      exhaustion: 0.1
+  Tumor:
+    when_active: Tumor cells frequently evade intrinsic apoptosis via BCL2/MCL1 overexpression
+      or TP53 loss. Restoring apoptosis is a therapeutic strategy.
+    behavioral_mapping:
+      apoptosis: 0.25
+      proliferate: -0.2
+      evade: -0.15
+    state_effects:
+      survival: -0.3
+  Treg:
+    when_active: Tregs are relatively resistant to apoptosis in TME due to high BCL2
+      expression.
+    behavioral_mapping:
+      apoptosis: 0.15
+      suppress: -0.1
+    state_effects:
+      survival: -0.15
+  Macrophage:
+    when_active: Macrophage apoptosis reduces TME inflammation. Efferocytosis of apoptotic
+      cells promotes M2 polarization.
+    behavioral_mapping:
+      apoptosis: 0.2
+      phagocytose: -0.1
+      polarize: 0.1
+    state_effects:
+      survival: -0.2
+      m2_polarization: 0.1
+  NK:
+    when_active: NK cells undergo apoptosis upon chronic activation or cytokine withdrawal.
+    behavioral_mapping:
+      apoptosis: 0.25
+      attack: -0.15
+    state_effects:
+      survival: -0.25
+  B_cell:
+    when_active: Germinal center B cells undergo apoptosis if they fail selection.
+      BCL6 protects from premature apoptosis.
+    behavioral_mapping:
+      apoptosis: 0.2
+      signal: -0.1
+    state_effects:
+      survival: -0.2
+crosstalk:
+- pathway: TP53_pathway
+  type: activating
+  description: p53 transcriptionally activates BAX, PUMA, NOXA to trigger intrinsic
+    apoptosis
+- pathway: PI3K_AKT_mTOR
+  type: antagonistic
+  description: AKT phosphorylates and inactivates BAD, blocking intrinsic apoptosis
+- pathway: TNF_NFKB
+  type: antagonistic
+  description: NF-kB upregulates BCL2 and BCL-XL, inhibiting intrinsic apoptosis
+targeted_by: []
+references:
+- description: BCL-2 family in cancer. Czabotar et al. Nat Rev Mol Cell Biol 2014
+  pmid: '24355989'
+  pmid_verified: true
+- description: 'Hallmarks of cancer: next generation. Hanahan & Weinberg. Cell 2011'
+  pmid: '21376230'
+  pmid_verified: true
+additional_agents:
+- drug_id: venetoclax
+  mechanism: BCL2 inhibitor, restores intrinsic apoptosis
+  in_drug_library: false
+- drug_id: navitoclax
+  mechanism: BCL2/BCL-XL/BCL-W inhibitor
+  in_drug_library: false
+data_calibration:
+  source: GSE176078 TNBC scRNA-seq (CellChat-lite)
+  n_cells: 997
+  communication_strength: 0.0133
+  max_communication_strength: 0.0253
+  n_active_pairs: 3
+  top_interactions:
+  - sender: NK
+    receiver: Tumor
+    ligand: TNFSF10
+    receptor: TNFRSF10B
+    probability: 0.0253
+  - sender: CD8_T
+    receiver: Tumor
+    ligand: TNFSF10
+    receptor: TNFRSF10A
+    probability: 0.0075
+  - sender: NK
+    receiver: Tumor
+    ligand: TNFSF10
+    receptor: TNFRSF10A
+    probability: 0.0071

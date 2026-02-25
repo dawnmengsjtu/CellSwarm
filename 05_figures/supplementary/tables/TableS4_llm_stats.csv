@@ -1,0 +1,9 @@
+model,total_calls,total_tokens,total_errors,total_time_s,cache_hits,cache_size
+deepseek,3036,2806760,0,1231.0,408,2702
+glm4flash,3069,2814612,0,766.9,368,2809
+qwen_turbo,3005,2979609,0,490.2,308,2694
+rules,0,0,0,0.0,0,0
+qwen_plus,2972,3022628,0,820.4,181,2658
+qwen_max,3084,3035342,0,1422.7,225,2748
+kimi_k25,3232,3202857,0,2955.5,920,2903
+random,0,0,0,0.0,0,0

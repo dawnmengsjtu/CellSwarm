@@ -1,0 +1,210 @@
+meta:
+  schema_version: '1.0'
+  cancer_id: TNBC
+  full_name: Triple-Negative Breast Cancer
+  tissue: breast
+  tme_phenotype: immune_hot
+  generated_at: '2026-02-13'
+  generated_by: Dawn (literature curation)
+  compatible_engine: cellswarm>=2.0
+  calibrated_from: GSE176078 (Wu et al. 2021)
+  calibration_date: '2026-02-13'
+  calibration_method: gene_signature_scoring → environment parameter mapping
+engine_params:
+  grid:
+    size:
+    - 200
+    - 200
+    resolution: 10
+  vessels:
+    density: medium
+    concentration:
+      oxygen: 0.08
+      glucose: 5.0
+  fields:
+    oxygen:
+      initial_level: 0.0854
+      diffusion_coeff: 2.0e-05
+      decay_rate: 0.01
+      consumption:
+        Tumor: 0.003
+        CD8_T: 0.001
+      sensitivity_range:
+      - 0.8
+      - 1.2
+      reference:
+        pmid: '30643250'
+        note: Bhandari 2019 - tumor hypoxia landmarks
+    glucose:
+      initial_level: 4.19
+      diffusion_coeff: 1.0e-05
+      decay_rate: 0.005
+      consumption:
+        Tumor: 0.15
+        CD8_T: 0.05
+      sensitivity_range:
+      - 0.7
+      - 1.3
+      reference:
+        pmid: '27386546'
+        note: DeBerardinis 2016 - cancer metabolism
+    IFN_gamma:
+      initial_level: 0.0
+      diffusion_coeff: 1.0e-06
+      decay_rate: 0.1
+      secretion:
+        CD8_T:
+          rate: 0.05
+          condition: action==attack
+        NK:
+          rate: 0.04
+          condition: action==attack
+      reference:
+        pmid: '29686425'
+        note: Binnewies 2018 - TIME review
+    IL2:
+      initial_level: 0.0
+      diffusion_coeff: 1.0e-06
+      decay_rate: 0.05
+      secretion:
+        CD8_T:
+          rate: 0.03
+      consumption:
+        Treg: 0.04
+      reference:
+        pmid: '29686425'
+        note: Binnewies 2018 - TIME review
+    TGF_beta:
+      initial_level: 0.1
+      diffusion_coeff: 8.0e-07
+      decay_rate: 0.08
+      secretion:
+        Treg:
+          rate: 0.04
+        Tumor:
+          rate: 0.03
+          condition: HIF1a>0.5
+        Macrophage:
+          rate: 0.02
+          condition: polarization>=0.6
+      reference:
+        pmid: '32710082'
+        note: Derynck 2021 - TGFβ in cancer
+    PD_L1:
+      initial_level: 0.0
+      diffusion_coeff: 0
+      decay_rate: 0.2
+      secretion:
+        Tumor:
+          rate: 0.02
+      ifng_induction: 0.08
+      reference:
+        pmid: '33580222'
+        note: Doroshow 2021 - PD-L1 biomarker
+  migration_speeds:
+    Tumor: 0.1
+    CD8_T: 0.8
+    NK: 0.6
+    Treg: 0.5
+    Macrophage: 0.3
+    B_cell: 0.2
+  cell_composition:
+    total_cells: 100
+    proportions:
+      Tumor: 0.35
+      CD8_T: 0.25
+      Macrophage: 0.15
+      NK: 0.1
+      Treg: 0.08
+      B_cell: 0.07
+    spawn_regions:
+      Tumor: center
+      CD8_T: border
+      NK: border
+      Treg: stroma
+      Macrophage: distributed
+      B_cell: stroma
+semantic_thresholds:
+  oxygen:
+    severe_hypoxia: 0.01
+    hypoxia: 0.02
+    normoxia:
+    - 0.04
+    - 0.08
+    display_unit: mM
+  glucose:
+    depleted: 0.5
+    low: 1.5
+    normal:
+    - 3.0
+    - 5.5
+  IFN_gamma:
+    low: 0.02
+    active: 0.1
+    high: 0.3
+  TGF_beta:
+    low: 0.05
+    immunosuppressive: 0.15
+    high: 0.3
+  PD_L1:
+    negative: 0.05
+    low_expression: 0.15
+    high_expression: 0.3
+  IL2:
+    absent: 0.01
+    supportive: 0.05
+    proliferative: 0.15
+cancer_profile:
+  immune_context: immune_hot
+  infiltration_pattern: 高 TIL 浸润但空间异质性大，肿瘤边缘富集
+  key_immune_features:
+  - CD8+ T 细胞丰富但常见 PD-1+/TIM-3+ 耗竭表型
+  - Treg 浸润与预后负相关
+  - M2 巨噬细胞富集于肿瘤边缘，促进免疫逃逸
+  - PD-L1 表达 40-60% 阳性，CPS 评分异质性大
+  - NK 细胞活性受 TGF-β 抑制
+  metabolic_features:
+  - Warburg effect 显著，高糖酵解竞争性消耗葡萄糖
+  - 中度缺氧区域，HIF1a 驱动 VEGF 和血管生成
+  - 乳酸累积抑制 T 细胞功能
+  stroma_features:
+  - TGF-β 驱动的纤维化基质
+  - 中等血管密度，血管结构异常
+  - 胶原沉积限制 T 细胞迁移
+  therapeutic_context:
+  - 'Pembrolizumab + 化疗 (KEYNOTE-355): CPS≥10 亚组 ORR 53%'
+  - 'Atezolizumab + nab-paclitaxel (IMpassion130): PD-L1+ 亚组获益'
+  - PARP 抑制剂对 BRCA 突变亚型有效
+references:
+- pmid: '30345906'
+  description: Schmid P et al. Atezolizumab and nab-paclitaxel in advanced TNBC (IMpassion130).
+    N Engl J Med. 2018
+  verified: true
+- pmid: '33278935'
+  description: Cortes J et al. Pembrolizumab plus chemotherapy versus placebo plus
+    chemotherapy for TNBC (KEYNOTE-355). Lancet. 2020
+  verified: true
+- pmid: '32710082'
+  description: Derynck R et al. TGFβ biology in cancer progression and immunotherapy.
+    Nat Rev Clin Oncol. 2021
+  verified: true
+- pmid: '27386546'
+  description: DeBerardinis RJ, Chandel NS. Fundamentals of cancer metabolism. Sci
+    Adv. 2016
+  verified: true
+- pmid: '21376230'
+  description: 'Hanahan D, Weinberg RA. Hallmarks of cancer: the next generation.
+    Cell. 2011'
+  verified: true
+- pmid: '30643250'
+  description: Bhandari V et al. Molecular landmarks of tumor hypoxia across cancer
+    types. Nat Genet. 2019
+  verified: true
+- pmid: '29686425'
+  description: Binnewies M et al. Understanding the tumor immune microenvironment
+    (TIME) for effective immunotherapy. Nat Med. 2018
+  verified: true
+- pmid: '33580222'
+  description: Doroshow DB et al. PD-L1 as a biomarker of response to immune-checkpoint
+    inhibitors. Nat Rev Clin Oncol. 2021
+  verified: true

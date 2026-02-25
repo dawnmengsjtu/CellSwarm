@@ -1,0 +1,114 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: WNT_beta_catenin
+pathway_name: WNT/beta-Catenin Signaling
+category: proliferation
+kegg_id: hsa04310
+components:
+  receptors:
+  - FZD1
+  - FZD7
+  - LRP5
+  - LRP6
+  ligands:
+  - WNT1
+  - WNT3A
+  - WNT5A
+  downstream:
+  - DVL1
+  - GSK3B
+  - AXIN1
+  - APC
+  - CTNNB1
+  transcription_factors:
+  - TCF7
+  - LEF1
+  - TCF7L2
+  key_genes:
+  - CTNNB1
+  - APC
+  - AXIN1
+  - GSK3B
+  - TCF7
+  - MYC
+  - CCND1
+signal_fields_affected:
+- glucose
+cell_type_effects:
+  CD8_T:
+    when_active: WNT/TCF1 signaling maintains stem-like CD8 T cells (progenitor exhausted).
+      TCF1+ T cells sustain anti-tumor responses and respond to checkpoint blockade.
+    behavioral_mapping:
+      rest: 0.15
+      proliferate: 0.1
+      migrate: 0.1
+      attack: -0.05
+    state_effects:
+      stemness: 0.25
+      exhaustion: -0.15
+      memory_potential: 0.2
+  Tumor:
+    when_active: Aberrant WNT activation (APC loss, CTNNB1 mutation) drives proliferation
+      and stemness. Active in colorectal, breast, and other cancers. Promotes immune
+      exclusion.
+    behavioral_mapping:
+      proliferate: 0.25
+      evade: 0.15
+      migrate: 0.05
+    state_effects:
+      stemness: 0.25
+      immune_exclusion: 0.2
+      growth_rate: 0.2
+  Treg:
+    when_active: WNT signaling can promote Treg survival and function in TME.
+    behavioral_mapping:
+      suppress: 0.1
+    state_effects:
+      survival: 0.1
+  Macrophage:
+    when_active: WNT ligands from tumors promote M2 macrophage polarization and immune
+      suppression.
+    behavioral_mapping:
+      polarize: 0.15
+      phagocytose: -0.05
+    state_effects:
+      m2_polarization: 0.15
+  NK:
+    when_active: WNT signaling has limited direct effects on mature NK cells.
+    behavioral_mapping:
+      rest: 0.05
+    state_effects:
+      activation: -0.05
+  B_cell:
+    when_active: WNT signaling supports early B cell development but limited role
+      in mature B cells in TME.
+    behavioral_mapping:
+      proliferate: 0.05
+    state_effects:
+      survival: 0.05
+crosstalk:
+- pathway: PI3K_AKT_mTOR
+  type: cross_activation
+  description: AKT inhibits GSK3-beta, stabilizing beta-catenin; bidirectional cross-talk
+- pathway: RAS_MAPK
+  type: modulating
+  description: RAS/ERK can phosphorylate LRP6, enhancing WNT signaling
+- pathway: TGFB_SMAD
+  type: context_dependent
+  description: TGF-beta and WNT cooperate in EMT; SMAD/beta-catenin form complexes
+targeted_by: []
+references:
+- description: WNT signaling in cancer. Nusse & Clevers. Cell 2017
+  pmid: '28575679'
+  pmid_verified: true
+- description: beta-Catenin promotes T cell immune exclusion. Spranger et al. Nature
+    2015
+  pmid: '25970248'
+  pmid_verified: true
+additional_agents:
+- drug_id: porcupine_inhibitor
+  mechanism: Blocks WNT ligand secretion (e.g., LGK974)
+  in_drug_library: false

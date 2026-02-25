@@ -1,0 +1,109 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: il2_high_dose
+generic_name: Aldesleukin
+brand_name: Proleukin
+drug_class: immunomodulator
+subclass: cytokine
+molecular_type: cytokine
+fda_status: approved
+approved_indications:
+- melanoma
+targets:
+- name: IL-2R
+  gene: IL2RA
+  type: receptor
+  action: agonist
+  selectivity: low
+cell_effects:
+  CD8_T:
+    direct: true
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.1
+    - parameter: energy
+      direction: increase
+      rate_per_step: 0.05
+    - parameter: cytotoxicity
+      direction: increase
+      rate_per_step: 0.08
+    functional_effects:
+    - action: proliferate
+      probability_modifier: 0.2
+    - action: attack
+      probability_modifier: 0.15
+  Tumor:
+    direct: false
+    state_effects: []
+  Treg:
+    direct: true
+    state_effects:
+    - parameter: suppressive_activity
+      direction: increase
+      rate_per_step: 0.05
+    notes: IL-2 also expands Tregs (CD25hi) - double-edged sword
+  Macrophage:
+    direct: false
+    state_effects: []
+  NK:
+    direct: true
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.1
+    - parameter: cytotoxicity
+      direction: increase
+      rate_per_step: 0.08
+    notes: Strong NK cell activator
+  B_cell:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.03
+environment_effects:
+- field: IL2
+  action: amplify
+  magnitude: 0.5
+pharmacokinetics:
+  administration: IV
+  standard_dose: 600000 IU/kg q8h x14
+  onset_steps: 1
+  peak_steps: 1
+  half_life_steps: 0.1
+  concentration_curve: pulse
+  steady_state_fraction: 0.5
+dose_response:
+  model: hill
+  ec50: 0.5
+  hill_coefficient: 1.5
+  max_effect: 1.0
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.3
+    notes: Not standard
+  Melanoma:
+    efficacy_modifier: 0.7
+    notes: Historical response ~15-20%
+  NSCLC:
+    efficacy_modifier: 0.2
+    notes: Not standard
+  CRC-MSI-H:
+    efficacy_modifier: 0.3
+    notes: Not standard
+  CRC-MSS:
+    efficacy_modifier: 0.1
+    notes: Ineffective
+  Ovarian:
+    efficacy_modifier: 0.2
+    notes: Not standard
+resistance:
+- mechanism: Treg expansion counteracts effector T cell activation
+  onset_steps: 5
+  probability: 0.25
+references:
+- description: High-dose IL-2 in melanoma. Atkins et al. J Clin Oncol 1999
+  pmid: '10561265'
+  verified: true

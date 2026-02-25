@@ -1,0 +1,134 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: IFNG_JAK_STAT
+pathway_name: IFN-gamma/JAK-STAT1 Signaling
+category: cytokine_signaling
+kegg_id: hsa04630
+components:
+  receptors:
+  - IFNGR1
+  - IFNGR2
+  ligands:
+  - IFNG
+  downstream:
+  - JAK1
+  - JAK2
+  - STAT1
+  transcription_factors:
+  - STAT1
+  - IRF1
+  - IRF9
+  key_genes:
+  - IFNG
+  - IFNGR1
+  - JAK1
+  - JAK2
+  - STAT1
+  - IRF1
+signal_fields_affected:
+- IFN_gamma
+- PD_L1
+cell_type_effects:
+  CD8_T:
+    when_active: IFN-gamma is the primary effector cytokine of activated CD8+ T cells.
+      Autocrine signaling sustains effector function.
+    behavioral_mapping:
+      attack: 0.15
+      signal: 0.2
+    state_effects:
+      activation: 0.15
+      cytotoxicity: 0.1
+  Tumor:
+    when_active: 'IFN-gamma has dual effects: direct anti-proliferative/pro-apoptotic,
+      but also upregulates PD-L1 (adaptive resistance).'
+    behavioral_mapping:
+      proliferate: -0.15
+      apoptosis: 0.1
+      evade: 0.15
+    state_effects:
+      immune_evasion: 0.15
+      apoptosis_susceptibility: 0.1
+  Macrophage:
+    when_active: IFN-gamma is the canonical M1 polarization signal. Activates iNOS,
+      MHC-II, and pro-inflammatory cytokines.
+    behavioral_mapping:
+      phagocytose: 0.2
+      polarize: -0.25
+      attack: 0.1
+    state_effects:
+      polarization: -0.3
+  NK:
+    when_active: IFN-gamma enhances NK cell cytotoxicity and is a major NK effector
+      cytokine.
+    behavioral_mapping:
+      attack: 0.15
+      signal: 0.15
+    state_effects:
+      activation: 0.1
+  Treg:
+    when_active: IFN-gamma can destabilize Treg function under inflammatory conditions.
+    behavioral_mapping:
+      suppress: -0.1
+    state_effects:
+      suppressive_activity: -0.1
+  B_cell:
+    when_active: IFN-gamma promotes B cell class switching to IgG2a.
+    behavioral_mapping:
+      signal: 0.1
+    state_effects:
+      activation: 0.05
+crosstalk:
+- pathway: PD1_PDL1
+  type: negative_feedback
+  description: IFN-gamma upregulates PD-L1 on tumor cells, creating adaptive immune
+    resistance
+- pathway: TGFB_SMAD
+  type: antagonistic
+  description: IFN-gamma and TGF-beta have opposing effects on macrophage polarization
+- pathway: TNF_NFKB
+  type: synergistic_activation
+  description: IFN-gamma and TNF synergize in M1 macrophage activation
+targeted_by: []
+references:
+- description: Interferons, immunity and cancer immunoediting. Dunn et al. Nat Rev
+    Immunol 2006
+  pmid: '17063185'
+  pmid_verified: true
+- description: IFN-gamma in anti-tumor immunity and adaptive resistance. Zaretsky
+    et al. NEJM 2016
+  pmid: '27433843'
+  pmid_verified: true
+additional_agents:
+- drug_id: emapalumab
+  mechanism: Anti-IFN-gamma antibody (used in HLH, not cancer)
+  in_drug_library: false
+data_calibration:
+  source: GSE176078 TNBC scRNA-seq (CellChat-lite)
+  n_cells: 997
+  communication_strength: 0.349
+  max_communication_strength: 0.4447
+  n_active_pairs: 4
+  top_interactions:
+  - sender: CD8_T
+    receiver: Macrophage
+    ligand: IFNG
+    receptor: IFNGR1
+    probability: 0.4447
+  - sender: NK
+    receiver: Macrophage
+    ligand: IFNG
+    receptor: IFNGR1
+    probability: 0.4197
+  - sender: NK
+    receiver: Tumor
+    ligand: IFNG
+    receptor: IFNGR1
+    probability: 0.2696
+  - sender: CD8_T
+    receiver: Tumor
+    ligand: IFNG
+    receptor: IFNGR1
+    probability: 0.2619

@@ -1,0 +1,304 @@
+{
+  "source": "GSE176078",
+  "reference": "Wu et al. Nature Genetics 2021",
+  "pmid": "34493872",
+  "cancer_type": "TNBC",
+  "total_cells_processed": 27011,
+  "gene_signatures_used": {
+    "CD8_T": {
+      "exhaustion": [
+        "PDCD1",
+        "HAVCR2",
+        "LAG3",
+        "TIGIT",
+        "CTLA4"
+      ],
+      "activation": [
+        "GZMB",
+        "PRF1",
+        "IFNG",
+        "GNLY",
+        "NKG7"
+      ],
+      "energy": [
+        "MKI67",
+        "ATP5A1",
+        "SLC2A1"
+      ],
+      "cytotoxicity": [
+        "GZMB",
+        "PRF1",
+        "GNLY",
+        "GZMA"
+      ]
+    },
+    "Tumor": {
+      "proliferation_rate": [
+        "MKI67",
+        "TOP2A",
+        "PCNA",
+        "MCM2"
+      ],
+      "immune_evasion": [
+        "CD274",
+        "PDCD1LG2",
+        "IDO1",
+        "LGALS9"
+      ],
+      "energy": [
+        "SLC2A1",
+        "HK2",
+        "LDHA",
+        "PKM"
+      ],
+      "hypoxia": [
+        "HIF1A",
+        "VEGFA",
+        "CA9",
+        "BNIP3"
+      ]
+    },
+    "Treg": {
+      "suppressive_activity": [
+        "FOXP3",
+        "IL2RA",
+        "CTLA4",
+        "TIGIT",
+        "IL10"
+      ],
+      "activation": [
+        "TNFRSF4",
+        "TNFRSF18",
+        "ICOS"
+      ],
+      "energy": [
+        "MKI67",
+        "SLC2A1"
+      ]
+    },
+    "Macrophage": {
+      "m2_score": [
+        "CD163",
+        "MRC1",
+        "MSR1"
+      ],
+      "m1_score": [
+        "NOS2",
+        "TNF",
+        "IL1B",
+        "CXCL10"
+      ],
+      "energy": [
+        "MKI67",
+        "SLC2A1"
+      ],
+      "phagocytosis": [
+        "CD68",
+        "FCGR1A",
+        "FCGR3A"
+      ]
+    },
+    "NK": {
+      "activation": [
+        "NKG7",
+        "GNLY",
+        "GZMB",
+        "PRF1",
+        "KLRD1"
+      ],
+      "energy": [
+        "MKI67",
+        "SLC2A1"
+      ],
+      "cytotoxicity": [
+        "GZMB",
+        "PRF1",
+        "GNLY"
+      ]
+    },
+    "B_cell": {
+      "activation": [
+        "CD19",
+        "MS4A1",
+        "CD79A",
+        "CD27"
+      ],
+      "energy": [
+        "MKI67",
+        "SLC2A1"
+      ]
+    }
+  },
+  "type_statistics": {
+    "CD8_T": {
+      "n_cells": 4621,
+      "params": {
+        "exhaustion": {
+          "mean": 0.3155,
+          "std": 0.3081,
+          "median": 0.2773,
+          "q25": 0.0,
+          "q75": 0.497
+        },
+        "activation": {
+          "mean": 0.7829,
+          "std": 0.501,
+          "median": 0.7167,
+          "q25": 0.4159,
+          "q75": 1.0961
+        },
+        "energy": {
+          "mean": 0.1043,
+          "std": 0.1556,
+          "median": 0.0,
+          "q25": 0.0,
+          "q75": 0.231
+        },
+        "cytotoxicity": {
+          "mean": 0.7196,
+          "std": 0.4938,
+          "median": 0.6598,
+          "q25": 0.3466,
+          "q75": 1.0236
+        }
+      }
+    },
+    "Tumor": {
+      "n_cells": 10836,
+      "params": {
+        "proliferation_rate": {
+          "mean": 0.2963,
+          "std": 0.4282,
+          "median": 0.1733,
+          "q25": 0.0,
+          "q75": 0.3466
+        },
+        "immune_evasion": {
+          "mean": 0.0354,
+          "std": 0.1069,
+          "median": 0.0,
+          "q25": 0.0,
+          "q75": 0.0
+        },
+        "energy": {
+          "mean": 1.0828,
+          "std": 0.6144,
+          "median": 1.0358,
+          "q25": 0.6212,
+          "q75": 1.4883
+        },
+        "hypoxia": {
+          "mean": 0.4382,
+          "std": 0.4265,
+          "median": 0.3466,
+          "q25": 0.1733,
+          "q75": 0.6598
+        }
+      }
+    },
+    "Treg": {
+      "n_cells": 1710,
+      "params": {
+        "suppressive_activity": {
+          "mean": 0.5537,
+          "std": 0.3538,
+          "median": 0.497,
+          "q25": 0.2773,
+          "q75": 0.7773
+        },
+        "activation": {
+          "mean": 0.7497,
+          "std": 0.6267,
+          "median": 0.5973,
+          "q25": 0.231,
+          "q75": 1.1337
+        },
+        "energy": {
+          "mean": 0.0187,
+          "std": 0.0866,
+          "median": 0.0,
+          "q25": 0.0,
+          "q75": 0.0
+        }
+      }
+    },
+    "Macrophage": {
+      "n_cells": 4088,
+      "params": {
+        "m2_score": {
+          "mean": 0.7942,
+          "std": 0.5895,
+          "median": 0.7324,
+          "q25": 0.231,
+          "q75": 1.2296
+        },
+        "m1_score": {
+          "mean": 0.482,
+          "std": 0.5607,
+          "median": 0.2747,
+          "q25": 0.0,
+          "q75": 0.7489
+        },
+        "energy": {
+          "mean": 0.0158,
+          "std": 0.0818,
+          "median": 0.0,
+          "q25": 0.0,
+          "q75": 0.0
+        },
+        "phagocytosis": {
+          "mean": 1.5254,
+          "std": 0.8316,
+          "median": 1.5607,
+          "q25": 0.9242,
+          "q75": 2.1084
+        }
+      }
+    },
+    "NK": {
+      "n_cells": 1113,
+      "params": {
+        "activation": {
+          "mean": 1.4077,
+          "std": 0.6004,
+          "median": 1.3902,
+          "q25": 0.9883,
+          "q75": 1.8102
+        },
+        "energy": {
+          "mean": 0.0234,
+          "std": 0.0955,
+          "median": 0.0,
+          "q25": 0.0,
+          "q75": 0.0
+        },
+        "cytotoxicity": {
+          "mean": 1.3426,
+          "std": 0.7631,
+          "median": 1.2904,
+          "q25": 0.7675,
+          "q75": 1.8184
+        }
+      }
+    },
+    "B_cell": {
+      "n_cells": 4643,
+      "params": {
+        "activation": {
+          "mean": 0.6398,
+          "std": 0.4404,
+          "median": 0.5756,
+          "q25": 0.2747,
+          "q75": 0.9344
+        },
+        "energy": {
+          "mean": 0.0145,
+          "std": 0.0754,
+          "median": 0.0,
+          "q25": 0.0,
+          "q75": 0.0
+        }
+      }
+    }
+  }
+}

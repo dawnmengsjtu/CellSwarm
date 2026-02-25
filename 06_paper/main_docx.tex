@@ -1,0 +1,144 @@
+% CellSwarm: LLM-driven cell agents for tumor microenvironment simulation
+% Target: Cell Systems
+\documentclass[11pt,letterpaper]{article}
+
+% === Packages ===
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{lineno}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{cleveref}
+
+% === Settings ===
+\linenumbers
+\doublespacing
+\graphicspath{{figures/}}
+\captionsetup{font=small,labelfont=bf}
+
+% === Convenience ===
+\newcommand{\figref}[1]{Fig.~\ref{#1}}
+\newcommand{\tabref}[1]{Table~\ref{#1}}
+\newcommand{\js}{\text{JS}}
+\newcommand{\cellswarm}{\textsc{CellSwarm}}
+
+% === Title ===
+\title{\cellswarm{}: LLM-Driven Cell Agents Recapitulate Tumor Microenvironment Dynamics and Sense Indirect Genetic Perturbations}
+
+\author{
+  Xuanlin Meng\textsuperscript{1,$\dagger$},
+  Tengjiao Wang\textsuperscript{2,$\dagger$},
+  Zhongyuan Dong\textsuperscript{1},
+  Xinhao Li\textsuperscript{1},
+  Xiuliang Cui\textsuperscript{3,*},
+  Lianghua Wang\textsuperscript{1,4,*}
+  \\[6pt]
+  {\small
+  \textsuperscript{1}Department of Biochemistry and Molecular Biology, College of Basic Medical Sciences, Naval Medical University, Shanghai 200433, China\\
+  \textsuperscript{2}Medical and Artificial Intelligence Collaborative Innovation Research Center, Naval Medical University, Shanghai, China\\
+  \textsuperscript{3}National Center for Liver Cancer, Eastern Hepatobiliary Surgery Hospital, Naval Medical University, Shanghai 200438, China\\
+  \textsuperscript{4}Key Laboratory of Biosafety Defense (Naval Medical University), Ministry of Education, Shanghai 200433, China\\[4pt]
+  \textsuperscript{$\dagger$}These authors contributed equally to this work.\\
+  \textsuperscript{*}Correspondence: Xiuliang Cui (\texttt{cuixl\_bio@126.com}), Lianghua Wang (\texttt{lhwang@smmu.edu.cn})
+  }
+}
+
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+% ============================================================
+% ABSTRACT
+% ============================================================
+\newpage
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\textbf{Keywords:} large language models, agent-based modeling, tumor microenvironment, cell simulation, immune checkpoint
+
+% ============================================================
+% INTRODUCTION
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+\input{sections/introduction}
+
+% ============================================================
+% RESULTS
+% ============================================================
+\section{Results}
+\label{sec:results}
+
+\subsection{Design of the CellSwarm framework}
+\label{sec:result1}
+\input{sections/result1}
+
+\subsection{CellSwarm recapitulates TNBC tumor microenvironment composition}
+\label{sec:result2}
+\input{sections/result2_tnbc}
+
+\subsection{Cross-cancer generalization and treatment response prediction}
+\label{sec:result3}
+\input{sections/result3_crosscancer}
+
+\subsection{LLM-driven agents sense indirect genetic perturbations that rule-based models cannot}
+\label{sec:result4}
+\input{sections/result4_perturbation}
+
+\subsection{Model robustness, knowledge base ablation, and computational cost}
+\label{sec:result5}
+\input{sections/result5_robustness}
+
+\subsection{Mechanistic dissection of emergent simulation dynamics}
+\label{sec:result6}
+\input{sections/result6_mechanism}
+
+% ============================================================
+% DISCUSSION
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+\input{sections/discussion}
+
+% ============================================================
+% METHODS
+% ============================================================
+\section{STAR Methods}
+\label{sec:methods}
+\input{sections/methods}
+
+% ============================================================
+% ACKNOWLEDGMENTS
+% ============================================================
+\section*{Acknowledgments}
+This work is supported by the AI for Science Project (Grant No. RGZD002) of the Shanghai Municipal Education Commission.
+
+% ============================================================
+% REFERENCES
+% ============================================================
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+% ============================================================
+% FIGURES
+% ============================================================
+\clearpage
+\input{sections/figures_docx}
+
+% ============================================================
+% TABLES
+% ============================================================
+\clearpage
+\input{sections/tables}
+
+\end{document}

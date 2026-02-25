@@ -1,0 +1,98 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: ido_inhibitor
+generic_name: Epacadostat
+brand_name: N/A
+drug_class: immunomodulator
+subclass: IDO1_inhibitor
+molecular_type: small_molecule
+fda_status: investigational
+approved_indications: []
+targets:
+- name: IDO1
+  gene: IDO1
+  type: enzyme
+  action: inhibitor
+  selectivity: high
+cell_effects:
+  CD8_T:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.04
+    - parameter: energy
+      direction: increase
+      rate_per_step: 0.03
+    notes: Restores tryptophan availability for T cells
+  Tumor:
+    direct: true
+    state_effects:
+    - parameter: immune_evasion
+      direction: decrease
+      rate_per_step: 0.05
+    notes: IDO1 expressed by tumor cells for immune evasion
+  Treg:
+    direct: false
+    state_effects:
+    - parameter: suppressive_activity
+      direction: decrease
+      rate_per_step: 0.04
+    notes: Kynurenine promotes Treg differentiation
+  Macrophage:
+    direct: false
+    state_effects:
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.02
+  NK:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.03
+  B_cell:
+    direct: false
+    state_effects: []
+environment_effects: []
+pharmacokinetics:
+  administration: oral
+  standard_dose: 100 mg BID
+  onset_steps: 1
+  peak_steps: 1
+  half_life_steps: 0.5
+  concentration_curve: exponential_decay
+  steady_state_fraction: 0.7
+dose_response:
+  model: hill
+  ec50: 0.5
+  hill_coefficient: 1.5
+  max_effect: 0.75
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.5
+    notes: IDO1 expressed in TNBC
+  Melanoma:
+    efficacy_modifier: 0.4
+    notes: ECHO-301 failed as monotherapy
+  NSCLC:
+    efficacy_modifier: 0.4
+    notes: Investigational
+  CRC-MSI-H:
+    efficacy_modifier: 0.3
+    notes: Limited data
+  CRC-MSS:
+    efficacy_modifier: 0.4
+    notes: IDO1 in immunosuppressive TME
+  Ovarian:
+    efficacy_modifier: 0.5
+    notes: IDO1 high in ovarian TME
+resistance:
+- mechanism: TDO2 compensatory tryptophan catabolism
+  onset_steps: 10
+  probability: 0.2
+references:
+- description: 'ECHO-301: Epacadostat+Pembro in melanoma. Long et al. Lancet Oncol 2019'
+  pmid: '31221619'
+  verified: true

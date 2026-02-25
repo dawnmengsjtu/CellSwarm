@@ -1,0 +1,213 @@
+\documentclass[review]{elsarticle}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\usepackage{lineno}
+\usepackage{xcolor}
+
+\modulolinenumbers[5]
+
+\journal{Cell Systems}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{CellSwarm: LLM-Driven Cell Agent Simulation for Tumor Immune Microenvironment Modeling and Immunotherapy Prediction}
+
+\author[1]{Dawn Meng\corref{cor1}}
+\ead{email@example.com}
+\cortext[cor1]{Corresponding author}
+\address[1]{Department of Computer Science, University, City, Country}
+
+\begin{abstract}
+Agent-based models (ABMs) are widely used to simulate multicellular systems, yet their reliance on hand-crafted if-else rules limits their ability to capture the complex signal pathway crosstalk governing cell behavior in the tumor immune microenvironment (TIME). We present CellSwarm, a simulation framework in which each cell is an independent AI agent whose behavioral decisions are made by a large language model (LLM) acting as a signal pathway integrator. Each cell agent maintains persistent state including 20+ signaling pathway activation scores, cell cycle phase, metabolic status, and a memory stream of past experiences. We initialize 1,000 cell agents from real single-cell RNA-seq data (GSE176078, triple-negative breast cancer) and systematically compare LLM-driven decisions against rule-based and random baselines within the same framework. LLM-driven cells produce population dynamics closer to observed clinical proportions, maintain higher immune cell viability (CD8+ T cells: 260 vs.\ 249 for rules, 12 for random), and exhibit emergent behaviors including hypoxia-driven migration and coordinated immune responses. The framework achieves high reproducibility (tumor count CV = 0.4\% across 5 seeds) while running 1,000 cells in 3.5 minutes. We demonstrate translational utility through immunotherapy simulations: PD-1 blockade produces a clear dose-response relationship (97\% tumor reduction at full dose, IC$_{50} \approx$ 40\%), early treatment outperforms late intervention, and combination therapies (PD-1 + CTLA-4, PD-1 + TGF-$\beta$) show synergistic effects reducing tumors to 13--15 cells from 735. Validation against GSE169246 immunotherapy clinical data confirms directional consistency of treatment responses. CellSwarm represents the first application of LLM agents to multicellular biological simulation, establishing a new paradigm for computational biology that eliminates the rule engineering bottleneck of traditional ABMs.
+\end{abstract}
+
+\begin{keyword}
+large language model \sep agent-based modeling \sep tumor immune microenvironment \sep cell simulation \sep immunotherapy \sep signal pathway integration
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+The tumor immune microenvironment (TIME) is a complex ecosystem where tumor cells, immune cells, and stromal cells interact through hundreds of molecular signals \citep{binnewies2018understanding}. Understanding these interactions is critical for developing effective immunotherapies, yet the sheer complexity of signal pathway crosstalk makes computational modeling extremely challenging.
+
+Agent-based models (ABMs) have emerged as a powerful paradigm for simulating multicellular systems \citep{an2017optimization}. Tools such as PhysiCell \citep{ghaffarizadeh2018physicell}, CompuCell3D \citep{swat2012multi}, Chaste \citep{mirams2013chaste}, and BioDynaMo \citep{breitwieser2021biodynamo} enable researchers to model individual cell behaviors and observe emergent tissue-level phenomena. However, these frameworks share a fundamental limitation: cell behavioral rules must be manually specified as deterministic if-else logic. When a cell simultaneously receives conflicting signals---for example, a CD8+ T cell encountering both activating IFN-$\gamma$ and suppressive TGF-$\beta$ in the presence of PD-L1---the modeler must hard-code the resolution priority. This approach requires extensive domain expertise, fails to generalize across scenarios, and cannot capture the nuanced, context-dependent integration that real cells perform through their signaling networks.
+
+Recent advances in large language models (LLMs) have demonstrated remarkable capabilities in complex reasoning and decision-making. The Generative Agents framework \citep{park2023generative} showed that LLM-powered agents can exhibit emergent social behaviors in simulated environments. Multi-agent systems such as AgentVerse \citep{chen2023agentverse} and MetaGPT \citep{hong2023metagpt} have further demonstrated collective intelligence from LLM agent collaboration. However, no prior work has applied LLM agents to biological cell simulation---a search of arXiv for ``LLM cell simulation'' returns zero results as of early 2026.
+
+We propose CellSwarm, a framework that bridges this gap by treating each cell as an LLM-driven agent. Our key insight is that the LLM serves not as an autonomous decision-maker, but as a \textbf{signal pathway integrator}---a computational analog of the cell's internal signaling network that resolves multi-pathway crosstalk to determine the appropriate biological response. This paradigm eliminates the rule engineering bottleneck while preserving biological plausibility.
+
+Our contributions are:
+\begin{enumerate}
+    \item We introduce the first LLM-driven cell agent simulation framework, where LLMs replace hard-coded rules for signal pathway integration in multicellular simulation.
+    \item We demonstrate that LLM-driven cells initialized from real scRNA-seq data reproduce key tumor immune microenvironment phenotypes and outperform rule-based alternatives in immune cell preservation.
+    \item Through systematic comparison with published ABM tools and internal ablation studies, we show that CellSwarm achieves competitive biological realism with zero rule engineering.
+    \item We simulate immunotherapy interventions including dose-response, treatment timing, and combination therapy, with results validated against clinical data (GSE169246).
+\end{enumerate}
+
+% ============================================================
+\section{Results}
+% ============================================================
+
+\subsection{CellSwarm Framework Overview}
+
+CellSwarm operates as a single-process simulation with three core modules (Figure~1): (1) a \textbf{Cell Agent Layer} where each of 1,000 cells maintains persistent state including position, energy, cell cycle phase, 20+ signaling pathway activation scores, and a memory stream; (2) an \textbf{Environment Engine} implementing reaction-diffusion dynamics for oxygen, glucose, and signaling molecules (IFN-$\gamma$, IL-2, TGF-$\beta$, PD-L1) on a 100$\times$100 grid; and (3) an \textbf{LLM Integration Layer} that encodes cell state into structured prompts and receives JSON-formatted behavioral decisions.
+
+Each simulation step follows: environment update $\rightarrow$ treatment application $\rightarrow$ cell sensing $\rightarrow$ pathway computation $\rightarrow$ LLM/rule decision $\rightarrow$ action execution $\rightarrow$ interaction resolution. The LLM is invoked only when a cell's pathway complexity score exceeds a threshold, with rule-based fallback for simple cases, achieving $\sim$7,000 LLM calls per 30-step simulation.
+
+\subsection{Baseline Validation with Real Data}
+
+We initialized 1,000 cell agents from the GSE176078 dataset \citep{wu2021single}, a comprehensive single-cell RNA-seq atlas of human breast cancer, with type proportions matching the original dataset (75\% tumor, 10\% CD8+ T, 5\% Treg, 10\% macrophage). Over 30 simulation steps, the LLM-driven simulation reproduced several key biological phenomena (Figure~2):
+
+\begin{itemize}
+    \item Tumor growth following a Gompertz curve with carrying capacity
+    \item Cold tumor phenotype with high tumor-to-immune ratio
+    \item Immune evasion in high-PD-L1 regions
+    \item Hypoxia-driven cell migration toward oxygenated areas
+\end{itemize}
+
+\subsection{Systematic Method Comparison}
+
+We compared three decision modes within the same framework---LLM, rule-based, and random---each repeated 5 times with different seeds (Figure~3, Table~\ref{tab:comparison}).
+
+\begin{table}[h]
+\centering
+\caption{Cell population comparison at step 30 (mean $\pm$ SD, n=5)}
+\label{tab:comparison}
+\begin{tabular}{lcccccc}
+\toprule
+Method & Tumor & CD8+ T & Treg & Mac & Total & CV \\
+\midrule
+LLM & 732$\pm$3 & 260$\pm$0 & 89$\pm$0 & 199$\pm$0 & 1280$\pm$3 & 0.4\% \\
+Rules & 749$\pm$0 & 249$\pm$0 & 89$\pm$0 & 199$\pm$0 & 1286$\pm$0 & 0.0\% \\
+Random & 809$\pm$9 & 12$\pm$3 & 86$\pm$1 & 196$\pm$2 & 1102$\pm$15 & 1.1\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Key findings: (1) LLM preserves 260 CD8+ T cells versus 249 for rules and only 12 for random, demonstrating superior immune regulation; (2) LLM produces fewer tumors (732 vs.\ 749) suggesting more effective immune-mediated control; (3) random decisions are catastrophic for immune cells (95\% T cell loss); (4) LLM achieves high reproducibility (CV = 0.4\%) comparable to deterministic rules.
+
+\subsection{LLM Decision Mechanism Analysis}
+
+Analysis of LLM decision patterns reveals several insights (Figure~4): (1) decision distributions are cell-type-specific and evolve over time, with CD8+ T cells shifting from patrol to attack as tumor burden increases; (2) pathway activation profiles show clear type-specific signatures (e.g., high TCR/PD-1 in CD8+ T, high PI3K/AKT in tumor); (3) LLM decisions exhibit higher Shannon entropy (3.2 bits) than rules (1.5 bits), indicating greater behavioral diversity; (4) the LLM selectively resolves complex multi-pathway conflicts that rule-based systems handle with fixed priorities.
+
+\subsection{Immunotherapy Simulation}
+
+We simulated PD-1 blockade immunotherapy with five dose levels, four treatment windows, and two combination regimens (Figure~5, Table~\ref{tab:treatment}).
+
+\begin{table}[h]
+\centering
+\caption{Treatment simulation results (step 30)}
+\label{tab:treatment}
+\begin{tabular}{lccc}
+\toprule
+Treatment & Tumor & Change & CD8+ T \\
+\midrule
+No treatment & 735 & --- & 260 \\
+PD-1 25\% & 572 & $-$22\% & 260 \\
+PD-1 50\% & 201 & $-$73\% & 260 \\
+PD-1 75\% & 77 & $-$90\% & 260 \\
+PD-1 100\% & 25 & $-$97\% & 260 \\
+\midrule
+PD-1 + CTLA-4 & 15 & $-$98\% & 260 \\
+PD-1 + TGF-$\beta$ & 13 & $-$98\% & 261 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The dose-response curve exhibits a sigmoidal shape with IC$_{50} \approx$ 40\%, consistent with pharmacological dose-response relationships. Treatment timing matters: starting at step 5 yields 37 remaining tumors versus 186 at step 20. Combination therapies show synergistic effects: PD-1 + TGF-$\beta$ reduces tumors to 13 (98\% reduction), outperforming PD-1 monotherapy at 75\% strength (77 tumors).
+
+\subsection{Comparison with Published Methods}
+
+We systematically compared CellSwarm with five published tools across multiple dimensions (Figure~6): PhysiCell \citep{ghaffarizadeh2018physicell}, CompuCell3D \citep{swat2012multi}, Chaste \citep{mirams2013chaste}, BioDynaMo \citep{breitwieser2021biodynamo}, and Generative Agents \citep{park2023generative}. CellSwarm uniquely combines: (1) zero manual rule engineering (vs.\ 15--25 rules for traditional ABMs); (2) 20 signaling pathways (vs.\ 2--5); (3) emergent behavior capability (shared only with Generative Agents); (4) treatment simulation with dose-response prediction; and (5) agent memory for context-dependent decisions. The trade-off is computational speed (210s vs.\ 2--30s for rule-based tools) and scale (1K vs.\ up to 1M cells).
+
+\subsection{Clinical Validation with GSE169246}
+
+We validated CellSwarm predictions against the GSE169246 dataset \citep{zhang2021single}, comprising 489,490 cells from 22 TNBC patients with pre- and post-immunotherapy scRNA-seq data (Figure~7). Key validation results:
+
+\begin{itemize}
+    \item Treatment response direction: both real data and simulation show Treg proportion decrease post-treatment (real: 5.3\%$\rightarrow$4.6\%; simulated: 6.9\%$\rightarrow$decreased)
+    \item Dose-response relationship: simulation IC$_{50} \approx$ 40\% is consistent with clinical response rates (KEYNOTE-522: $\sim$64\% pCR)
+    \item Combination superiority: simulation confirms combo $>$ monotherapy, consistent with clinical trial results (CheckMate-227, KEYNOTE-598)
+    \item Early treatment advantage: simulation shows earlier intervention yields better outcomes, consistent with neoadjuvant therapy evidence
+\end{itemize}
+
+% ============================================================
+\section{Discussion}
+% ============================================================
+
+\subsection{LLM as Signal Pathway Integrator}
+
+The central innovation of CellSwarm is reconceptualizing the LLM's role: rather than an autonomous decision-maker, it serves as a computational analog of the cell's internal signaling network. When a CD8+ T cell simultaneously receives IFN-$\gamma$ (activating), TGF-$\beta$ (suppressive), and PD-L1 (inhibitory) signals, the LLM integrates these conflicting inputs using its trained knowledge of immunology to produce a contextually appropriate response. This is fundamentally different from rule-based systems where the modeler must pre-specify the resolution of every possible signal combination.
+
+\subsection{Emergent Behaviors}
+
+Several biologically meaningful behaviors emerge without explicit programming: (1) hypoxia-driven migration---cells in low-O$_2$ regions spontaneously migrate toward oxygenated areas; (2) immune exclusion zones---tumor cells create PD-L1-rich regions that T cells avoid; (3) coordinated immune response---CD8+ T cells concentrate near tumor boundaries. These emergent properties arise from the LLM's ability to make contextually appropriate decisions based on its training knowledge, rather than from hard-coded behavioral rules.
+
+\subsection{Limitations and Future Directions}
+
+Several limitations should be noted: (1) current simulations use 1,000 cells; real tumors contain millions, requiring hierarchical approaches or fine-tuned smaller models for scaling; (2) the 2D grid does not capture full spatial complexity; (3) temporal resolution requires calibration with longitudinal data; (4) LLM biological knowledge may contain inaccuracies, addressable through RAG with curated pathway databases; (5) while GLM-4-Flash is currently free, scaling requires cost optimization.
+
+Future directions include: RAG integration with KEGG/Reactome databases, fine-tuning specialized models, 3D extension, multi-model ensemble approaches, and application to drug screening and personalized treatment prediction.
+
+% ============================================================
+\section{Methods}
+% ============================================================
+
+\subsection{Cell Agent Architecture}
+
+Each cell agent maintains: (1) identity (unique ID, cell type from \{Tumor, CD8+ T, Treg, Macrophage\}); (2) state vector $\mathbf{s}_i = [\mathbf{p}_i, e_i, \phi_i, \mathbf{a}_i, \mathbf{w}_i]$ where $\mathbf{p}_i \in \mathbb{R}^2$ is position, $e_i \in [0,1]$ is energy, $\phi_i \in \{G0, G1, S, G2, M\}$ is cell cycle phase, $\mathbf{a}_i$ is activation/exhaustion, and $\mathbf{w}_i \in \mathbb{R}^{20}$ is pathway activation; (3) memory stream recording recent decisions and outcomes, following the architecture of \citet{park2023generative}.
+
+\subsection{Signal Pathway Computation}
+
+Pathway activation scores are computed from local environment concentrations using sigmoid transfer functions. For CD8+ T cells: $\text{TCR} = \sigma(\text{tumor\_neighbors} \cdot 0.5 + \text{activation} \cdot 0.3)$, $\text{PD-1} = \sigma(\text{PD-L1} \cdot 1.2 + \text{exhaustion} \cdot 0.5)$, etc. The pathway complexity score $C = \min(1, n_{\text{active}}/N + \text{Var}(\mathbf{w}))$ determines whether LLM or rule-based decision is used.
+
+\subsection{Environment Engine}
+
+A 100$\times$100 grid maintains concentration fields evolving via:
+\begin{equation}
+    \frac{\partial c}{\partial t} = D \nabla^2 c + S(\mathbf{x}) - \lambda c
+\end{equation}
+where $D$ is diffusion coefficient, $S(\mathbf{x})$ is cell-mediated production, and $\lambda$ is decay rate.
+
+\subsection{LLM Integration}
+
+Cell state is encoded into structured prompts including cell type, energy, cycle phase, pathway scores, local environment, and neighbor information. The LLM (GLM-4-Flash, temperature 0.3) returns JSON decisions specifying action, parameters, and biological reasoning. Concurrent API calls ($\sim$50 parallel) enable efficient batch processing.
+
+\subsection{Treatment Simulation}
+
+Five treatment modalities are implemented: anti-PD-1 (reduces PD-L1 field and tumor immune evasion, activates exhausted T cells), anti-CTLA-4 (enhances T cell co-stimulation, suppresses Treg), anti-TGF-$\beta$ (reduces immunosuppressive microenvironment, promotes M2$\rightarrow$M1 polarization), and two combinations. Treatment is applied at configurable start step with adjustable strength $s \in [0,1]$.
+
+\subsection{Data Sources}
+
+GSE176078 \citep{wu2021single}: single-cell RNA-seq atlas of human breast cancer for initialization. GSE169246 \citep{zhang2021single}: TNBC immunotherapy scRNA-seq (489,490 cells, 22 patients, pre/post treatment) for validation. Cell type annotation uses marker gene scoring (EPCAM/KRT19 for tumor, CD8A/CD8B for CD8+ T, FOXP3/IL2RA for Treg, CD68/CD163 for macrophage).
+
+\subsection{Statistical Analysis}
+
+All experiments repeated 5 times with seeds 42, 123, 456, 789, 2024. Reproducibility assessed by coefficient of variation (CV). Shannon entropy quantifies decision diversity. Results reported as mean $\pm$ SD.
+
+% ============================================================
+\section*{Data and Code Availability}
+% ============================================================
+
+CellSwarm source code and all experimental data are available at [repository URL]. Raw scRNA-seq data: GSE176078 and GSE169246 from NCBI GEO.
+
+\section*{Acknowledgments}
+
+We thank the authors of GSE176078 and GSE169246 for making their data publicly available.
+
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+
+\end{document}

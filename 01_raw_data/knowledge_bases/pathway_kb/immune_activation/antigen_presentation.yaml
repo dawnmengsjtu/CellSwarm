@@ -1,0 +1,149 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: antigen_presentation
+pathway_name: Antigen Processing and Presentation
+category: immune_activation
+kegg_id: hsa04612
+components:
+  receptors:
+  - HLA-A
+  - HLA-B
+  - HLA-C
+  - HLA-DRA
+  - HLA-DRB1
+  - CD1D
+  ligands:
+  - B2M
+  - peptide_antigens
+  downstream:
+  - TAP1
+  - TAP2
+  - TAPBP
+  - CALR
+  - PDIA3
+  - CANX
+  transcription_factors:
+  - NLRC5
+  - CIITA
+  - IRF1
+  key_genes:
+  - B2M
+  - TAP1
+  - TAP2
+  - HLA-A
+  - HLA-B
+  - HLA-C
+  - PSMB8
+  - PSMB9
+  - PSMB10
+  - NLRC5
+  - CIITA
+signal_fields_affected:
+- IFN_gamma
+cell_type_effects:
+  CD8_T:
+    when_active: MHC-I presentation of tumor neoantigens is required for CD8 T cell
+      recognition and killing. IFN-gamma upregulates MHC-I.
+    behavioral_mapping:
+      attack: 0.25
+      signal: 0.1
+    state_effects:
+      target_recognition: 0.3
+      activation: 0.15
+  Tumor:
+    when_active: Antigen presentation makes tumors visible to T cells. Tumors frequently
+      downregulate MHC-I, B2M, or TAP to escape. IFN-gamma can restore expression.
+    behavioral_mapping:
+      evade: -0.25
+      apoptosis: 0.15
+    state_effects:
+      immunogenicity: 0.3
+      immune_visibility: 0.25
+  Treg:
+    when_active: Tregs are activated by self-antigen presentation on MHC-II. DCs presenting
+      self-antigens promote Treg induction.
+    behavioral_mapping:
+      suppress: 0.1
+    state_effects:
+      activation: 0.1
+  Macrophage:
+    when_active: Macrophages are professional APCs. MHC-II presentation activates
+      CD4 T cells. Cross-presentation on MHC-I activates CD8 T cells.
+    behavioral_mapping:
+      signal: 0.25
+      phagocytose: 0.1
+    state_effects:
+      antigen_presentation: 0.3
+      apc_function: 0.25
+  NK:
+    when_active: NK cells kill MHC-I-low targets (missing-self). MHC-I downregulation
+      that evades T cells makes tumors NK-susceptible.
+    behavioral_mapping:
+      attack: 0.2
+    state_effects:
+      missing_self_detection: 0.25
+  B_cell:
+    when_active: B cells present antigens on MHC-II to CD4 T cells, receiving T cell
+      help for class switching and affinity maturation.
+    behavioral_mapping:
+      signal: 0.2
+      proliferate: 0.05
+    state_effects:
+      antigen_presentation: 0.2
+      t_cell_help: 0.15
+crosstalk:
+- pathway: TCR_signaling
+  type: upstream
+  description: Antigen presentation is the initiating event for TCR signaling
+- pathway: IFNG_JAK_STAT
+  type: synergistic
+  description: IFN-gamma strongly upregulates MHC-I, MHC-II, TAP, and immunoproteasome
+    components
+- pathway: PD1_PDL1
+  type: contextual
+  description: IFN-gamma-induced MHC-I upregulation co-occurs with PD-L1 upregulation
+    (adaptive resistance)
+targeted_by: []
+references:
+- description: 'Cancer immunoediting: integrating immunity''s roles in cancer suppression
+    and promotion. Schreiber et al. Science 2011'
+  pmid: '21436444'
+  pmid_verified: true
+- description: Antigen processing and presentation. Neefjes et al. Nat Rev Immunol
+    2011
+  pmid: '22076556'
+  pmid_verified: true
+additional_agents:
+- drug_id: IFN_gamma_therapy
+  mechanism: Recombinant IFN-gamma upregulates antigen presentation machinery
+  in_drug_library: false
+data_calibration:
+  source: GSE176078 TNBC scRNA-seq (CellChat-lite)
+  n_cells: 997
+  communication_strength: 4.2437
+  max_communication_strength: 6.4386
+  n_active_pairs: 4
+  top_interactions:
+  - sender: Tumor
+    receiver: CD8_T
+    ligand: B2M
+    receptor: CD8A
+    probability: 6.4386
+  - sender: Macrophage
+    receiver: CD8_T
+    ligand: HLA-A
+    receptor: CD8A
+    probability: 4.0014
+  - sender: Tumor
+    receiver: CD8_T
+    ligand: HLA-B
+    receptor: CD8A
+    probability: 3.4553
+  - sender: Tumor
+    receiver: CD8_T
+    ligand: HLA-A
+    receptor: CD8A
+    probability: 3.0795

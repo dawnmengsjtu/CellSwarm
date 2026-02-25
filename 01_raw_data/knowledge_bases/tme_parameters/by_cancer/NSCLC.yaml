@@ -1,0 +1,193 @@
+meta:
+  schema_version: '1.0'
+  cancer_id: NSCLC
+  full_name: Non-Small Cell Lung Cancer
+  tissue: lung
+  tme_phenotype: immune_altered_excluded
+  generated_at: '2026-02-13'
+  generated_by: Dawn (literature curation)
+  compatible_engine: cellswarm>=2.0
+engine_params:
+  grid:
+    size:
+    - 200
+    - 200
+    resolution: 10
+  vessels:
+    density: low
+    concentration:
+      oxygen: 0.06
+      glucose: 4.5
+  fields:
+    oxygen:
+      initial_level: 0.04
+      diffusion_coeff: 2.0e-05
+      decay_rate: 0.012
+      consumption:
+        Tumor: 0.004
+        Macrophage: 0.001
+      sensitivity_range:
+      - 0.8
+      - 1.2
+      reference:
+        pmid: '30643250'
+        note: Bhandari 2019 - tumor hypoxia landmarks
+    glucose:
+      initial_level: 4.0
+      diffusion_coeff: 1.0e-05
+      decay_rate: 0.005
+      consumption:
+        Tumor: 0.12
+        CD8_T: 0.04
+      sensitivity_range:
+      - 0.7
+      - 1.3
+      reference:
+        pmid: '27386546'
+        note: DeBerardinis 2016 - cancer metabolism
+    IFN_gamma:
+      initial_level: 0.0
+      diffusion_coeff: 1.0e-06
+      decay_rate: 0.1
+      secretion:
+        CD8_T:
+          rate: 0.04
+          condition: action==attack
+        NK:
+          rate: 0.03
+          condition: action==attack
+      reference:
+        pmid: '29686425'
+        note: Binnewies 2018 - TIME review
+    IL2:
+      initial_level: 0.0
+      diffusion_coeff: 1.0e-06
+      decay_rate: 0.05
+      secretion:
+        CD8_T:
+          rate: 0.025
+      consumption:
+        Treg: 0.035
+      reference:
+        pmid: '29686425'
+        note: Binnewies 2018 - TIME review
+    TGF_beta:
+      initial_level: 0.06
+      diffusion_coeff: 8.0e-07
+      decay_rate: 0.08
+      secretion:
+        Treg:
+          rate: 0.03
+        Tumor:
+          rate: 0.02
+          condition: HIF1a>0.5
+      reference:
+        pmid: '32710082'
+        note: Derynck 2021 - TGFβ in cancer
+    PD_L1:
+      initial_level: 0.0
+      diffusion_coeff: 0
+      decay_rate: 0.2
+      secretion:
+        Tumor:
+          rate: 0.03
+      ifng_induction: 0.1
+      reference:
+        pmid: '33580222'
+        note: Doroshow 2021 - PD-L1 biomarker
+  migration_speeds:
+    Tumor: 0.1
+    CD8_T: 0.7
+    NK: 0.5
+    Treg: 0.4
+    Macrophage: 0.3
+    B_cell: 0.2
+  cell_composition:
+    total_cells: 100
+    proportions:
+      Tumor: 0.4
+      CD8_T: 0.18
+      Macrophage: 0.18
+      NK: 0.08
+      Treg: 0.1
+      B_cell: 0.06
+    spawn_regions:
+      Tumor: center
+      CD8_T: border
+      NK: border
+      Treg: stroma
+      Macrophage: distributed
+      B_cell: stroma
+semantic_thresholds:
+  oxygen:
+    severe_hypoxia: 0.008
+    hypoxia: 0.015
+    normoxia:
+    - 0.03
+    - 0.06
+    display_unit: mM
+  glucose:
+    depleted: 0.5
+    low: 1.5
+    normal:
+    - 3.0
+    - 5.0
+  IFN_gamma:
+    low: 0.02
+    active: 0.1
+    high: 0.3
+  TGF_beta:
+    low: 0.04
+    immunosuppressive: 0.12
+    high: 0.25
+  PD_L1:
+    negative: 0.05
+    low_expression: 0.15
+    high_expression: 0.3
+  IL2:
+    absent: 0.01
+    supportive: 0.05
+    proliferative: 0.15
+cancer_profile:
+  immune_context: mixed, PD-L1 expression-dependent
+  infiltration_pattern: T 细胞常被排斥在肿瘤基质中，难以浸润肿瘤核心
+  key_immune_features:
+  - PD-L1 高表达 (TPS≥50% 约 25-30% 患者)
+  - 吸烟相关突变负荷高，新抗原丰富
+  - 肿瘤相关巨噬细胞 (TAM) 丰富
+  - Treg 浸润与免疫排斥相关
+  metabolic_features:
+  - 严重缺氧，肺组织血管重塑
+  - KRAS/STK11 突变影响代谢重编程
+  stroma_features:
+  - 致密纤维化基质阻碍免疫浸润
+  - 低血管密度，血管异常
+  therapeutic_context:
+  - 'Pembrolizumab 单药 (KEYNOTE-024): TPS≥50% 一线标准'
+  - 'Nivolumab + ipilimumab (CheckMate-227): TMB≥10 获益'
+  - EGFR/ALK 突变亚型对免疫治疗反应差
+references:
+- pmid: '27718847'
+  description: Reck M et al. Pembrolizumab vs chemotherapy for PD-L1+ NSCLC (KEYNOTE-024).
+    N Engl J Med. 2016
+  verified: true
+- pmid: '31562796'
+  description: Hellmann MD et al. Nivolumab plus ipilimumab in advanced NSCLC (CheckMate-227).
+    N Engl J Med. 2019
+  verified: true
+- pmid: '29364287'
+  description: Herbst RS et al. The biology and management of non-small cell lung
+    cancer. Nature. 2018
+  verified: true
+- pmid: '25765070'
+  description: Rizvi NA et al. Mutational landscape determines sensitivity to PD-1
+    blockade in NSCLC. Science. 2015
+  verified: true
+- pmid: '29686425'
+  description: Binnewies M et al. Understanding the tumor immune microenvironment
+    (TIME) for effective immunotherapy. Nat Med. 2018
+  verified: true
+- pmid: '21376230'
+  description: 'Hanahan D, Weinberg RA. Hallmarks of cancer: the next generation.
+    Cell. 2011'
+  verified: true

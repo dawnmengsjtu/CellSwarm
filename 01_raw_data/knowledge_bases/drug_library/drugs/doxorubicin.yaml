@@ -1,0 +1,126 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: doxorubicin
+generic_name: Doxorubicin
+brand_name: Adriamycin
+drug_class: chemotherapy
+subclass: cytotoxic
+molecular_type: small_molecule
+fda_status: approved
+approved_indications:
+- TNBC
+- Melanoma
+- NSCLC
+- CRC-MSI-H
+- CRC-MSS
+- Ovarian
+targets:
+- name: DNA/microtubule
+  type: cellular_machinery
+  action: inhibitor
+  selectivity: low
+cell_effects:
+  CD8_T:
+    direct: true
+    state_effects:
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.03
+      notes: Mild lymphotoxicity
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.06
+      notes: ICD-mediated activation
+  Tumor:
+    direct: true
+    state_effects:
+    - parameter: apoptosis_susceptibility
+      direction: increase
+      rate_per_step: 0.2
+    - parameter: proliferation_rate
+      direction: decrease
+      rate_per_step: 0.15
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.1
+    notes: 'ICD strength: 3/3'
+  Treg:
+    direct: true
+    state_effects:
+    - parameter: suppressive_activity
+      direction: decrease
+      rate_per_step: 0.04
+    notes: Tregs are relatively chemo-sensitive
+  Macrophage:
+    direct: false
+    state_effects:
+    - parameter: phagocytic_activity
+      direction: increase
+      rate_per_step: 0.09
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.06
+    notes: ICD promotes phagocytosis of dying tumor cells
+  NK:
+    direct: true
+    state_effects:
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.02
+    notes: Mild NK toxicity
+  B_cell:
+    direct: true
+    state_effects:
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.03
+    notes: B cells are chemo-sensitive
+environment_effects:
+- field: IFN_gamma
+  action: amplify
+  magnitude: 0.15000000000000002
+  notes: ICD-mediated immune activation
+pharmacokinetics:
+  administration: IV
+  standard_dose: 60 mg/m2 q3w
+  onset_steps: 1
+  peak_steps: 1
+  half_life_steps: 0.7
+  concentration_curve: pulse
+  steady_state_fraction: 0.6
+dose_response:
+  model: hill
+  ec50: 0.4
+  hill_coefficient: 2.0
+  max_effect: 1.0
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.85
+    notes: AC regimen backbone
+  Melanoma:
+    efficacy_modifier: 0.3
+    notes: Not standard
+  NSCLC:
+    efficacy_modifier: 0.3
+    notes: Not standard
+  CRC-MSI-H:
+    efficacy_modifier: 0.2
+    notes: Not standard
+  CRC-MSS:
+    efficacy_modifier: 0.2
+    notes: Not standard
+  Ovarian:
+    efficacy_modifier: 0.7
+    notes: PLD (pegylated liposomal)
+resistance:
+- mechanism: Drug efflux pump (MDR1/P-gp) upregulation
+  onset_steps: 10
+  probability: 0.2
+- mechanism: DNA repair pathway upregulation
+  onset_steps: 12
+  probability: 0.15
+references:
+- description: Doxorubicin as ICD inducer. Obeid et al. Nat Med 2007
+  pmid: '17187072'
+  verified: true

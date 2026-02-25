@@ -1,0 +1,108 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: bevacizumab
+generic_name: Bevacizumab
+brand_name: Avastin
+drug_class: targeted_therapy
+subclass: anti_VEGF
+molecular_type: monoclonal_antibody
+fda_status: approved
+approved_indications:
+- CRC-MSS
+- Ovarian
+- NSCLC
+targets:
+- name: VEGF-A
+  gene: VEGFA
+  type: ligand
+  action: antagonist
+  selectivity: high
+cell_effects:
+  CD8_T:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.03
+    notes: VEGF inhibition normalizes vasculature, improves T cell infiltration
+  Tumor:
+    direct: true
+    state_effects:
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.08
+    - parameter: proliferation_rate
+      direction: decrease
+      rate_per_step: 0.06
+    notes: Anti-angiogenic starvation
+  Treg:
+    direct: false
+    state_effects:
+    - parameter: suppressive_activity
+      direction: decrease
+      rate_per_step: 0.02
+  Macrophage:
+    direct: false
+    state_effects:
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.03
+    notes: VEGF promotes M2; blocking shifts to M1
+  NK:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.02
+  B_cell:
+    direct: false
+    state_effects: []
+environment_effects:
+- field: oxygen
+  action: amplify
+  magnitude: 0.15
+  notes: Vascular normalization improves oxygenation
+- field: glucose
+  action: amplify
+  magnitude: 0.1
+pharmacokinetics:
+  administration: IV
+  standard_dose: 15 mg/kg q3w
+  onset_steps: 2
+  peak_steps: 5
+  half_life_steps: 20
+  concentration_curve: plateau
+  steady_state_fraction: 0.85
+dose_response:
+  model: hill
+  ec50: 0.4
+  hill_coefficient: 1.5
+  max_effect: 0.9
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.5
+    notes: Moderate anti-angiogenic benefit
+  Melanoma:
+    efficacy_modifier: 0.3
+    notes: Not standard
+  NSCLC:
+    efficacy_modifier: 0.7
+    notes: With chemo
+  CRC-MSI-H:
+    efficacy_modifier: 0.6
+    notes: Standard with chemo
+  CRC-MSS:
+    efficacy_modifier: 0.8
+    notes: First-line with FOLFOX
+  Ovarian:
+    efficacy_modifier: 0.8
+    notes: ICON7, GOG-218
+resistance:
+- mechanism: Alternative angiogenic pathways (FGF, PDGF)
+  onset_steps: 15
+  probability: 0.2
+references:
+- description: Bevacizumab in CRC. Hurwitz et al. NEJM 2004
+  pmid: '15175435'
+  verified: true

@@ -1,0 +1,139 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: TNF_NFKB
+pathway_name: TNF-alpha / NF-kB Signaling
+category: cytokine_signaling
+kegg_id: hsa04668
+components:
+  receptors:
+  - TNFRSF1A
+  - TNFRSF1B
+  ligands:
+  - TNF
+  - LTA
+  downstream:
+  - TRADD
+  - TRAF2
+  - RIPK1
+  - IKBKB
+  - NFKBIA
+  transcription_factors:
+  - NFKB1
+  - RELA
+  - RELB
+  key_genes:
+  - TNF
+  - TNFRSF1A
+  - NFKB1
+  - RELA
+  - IKBKB
+  - BIRC3
+  - BCL2L1
+signal_fields_affected:
+- IFN_gamma
+cell_type_effects:
+  CD8_T:
+    when_active: TNF co-stimulates T cell activation and promotes effector differentiation.
+      NF-kB is essential for T cell survival and cytokine production.
+    behavioral_mapping:
+      attack: 0.15
+      proliferate: 0.1
+      signal: 0.15
+      apoptosis: -0.05
+    state_effects:
+      activation: 0.15
+      cytotoxicity: 0.1
+  Tumor:
+    when_active: Chronic NF-kB activation promotes tumor survival, proliferation,
+      and resistance to apoptosis. TNF in TME can paradoxically support tumor growth.
+    behavioral_mapping:
+      proliferate: 0.15
+      evade: 0.1
+      apoptosis: -0.15
+    state_effects:
+      survival: 0.2
+      immune_evasion: 0.1
+  Treg:
+    when_active: TNF-TNFR2 signaling promotes Treg expansion and suppressive function
+      in TME.
+    behavioral_mapping:
+      suppress: 0.15
+      proliferate: 0.1
+    state_effects:
+      suppressive_activity: 0.15
+  Macrophage:
+    when_active: NF-kB drives M1 polarization, pro-inflammatory cytokine production
+      (TNF, IL-1, IL-6). Key for anti-tumor macrophage activation.
+    behavioral_mapping:
+      polarize: 0.2
+      signal: 0.15
+      phagocytose: 0.1
+    state_effects:
+      m1_polarization: 0.25
+      pro_inflammatory: 0.2
+  NK:
+    when_active: TNF enhances NK cell cytotoxicity and IFN-gamma production.
+    behavioral_mapping:
+      attack: 0.15
+      signal: 0.1
+    state_effects:
+      cytotoxicity: 0.1
+  B_cell:
+    when_active: NF-kB is essential for B cell survival, maturation, and antibody
+      class switching.
+    behavioral_mapping:
+      proliferate: 0.1
+      signal: 0.15
+    state_effects:
+      survival: 0.15
+      antibody_secretion: 0.1
+crosstalk:
+- pathway: IFNG_JAK_STAT
+  type: synergistic
+  description: TNF and IFN-gamma synergize for M1 macrophage polarization and anti-tumor
+    immunity
+- pathway: apoptosis_extrinsic
+  type: activating
+  description: TNF-TNFR1 can trigger extrinsic apoptosis via FADD/caspase-8 when NF-kB
+    is inhibited
+- pathway: PI3K_AKT_mTOR
+  type: cross_activation
+  description: NF-kB and AKT pathways cross-activate to promote cell survival
+targeted_by: []
+references:
+- description: 'NF-kB in cancer: from innocent bystander to major culprit. Karin &
+    Greten. Nat Rev Immunol 2005'
+  pmid: '16175180'
+  pmid_verified: true
+- description: TNF and TNF receptors superfamily. Aggarwal. Nat Rev Immunol 2003
+  pmid: '12949498'
+  pmid_verified: true
+additional_agents:
+- drug_id: infliximab
+  mechanism: Anti-TNF monoclonal antibody
+  in_drug_library: false
+data_calibration:
+  source: GSE176078 TNBC scRNA-seq (CellChat-lite)
+  n_cells: 997
+  communication_strength: 0.1134
+  max_communication_strength: 0.1714
+  n_active_pairs: 3
+  top_interactions:
+  - sender: Macrophage
+    receiver: Tumor
+    ligand: TNF
+    receptor: TNFRSF1A
+    probability: 0.1714
+  - sender: Macrophage
+    receiver: CD8_T
+    ligand: TNF
+    receptor: TNFRSF1B
+    probability: 0.1554
+  - sender: NK
+    receiver: Tumor
+    ligand: TNF
+    receptor: TNFRSF1A
+    probability: 0.0134

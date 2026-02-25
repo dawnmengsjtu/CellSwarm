@@ -1,0 +1,231 @@
+meta:
+  schema_version: '1.0'
+  cell_type: B_cell
+  total_entries: 6
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+perturbations:
+- id: CD19_KO_BCELL
+  gene: CD19
+  gene_full_name: CD19 Molecule
+  perturbation_type: knockout
+  context: in_vitro
+  phenotype_changes:
+  - parameter: bcr_signaling
+    direction: decrease
+    effect_size: -0.6
+    confidence: high
+  - parameter: activation
+    direction: decrease
+    effect_size: -0.5
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      signal: -0.2
+      proliferate: -0.15
+      rest: 0.15
+    state_changes:
+      activation: -0.35
+      antibody_secretion: -0.2
+  evidence:
+  - description: CD19 in B cell receptor signaling. Tedder. Nat Rev Rheumatol 2009
+    pmid: '19798033'
+    pmid_verified: true
+  notes: CD19 amplifies BCR signaling; loss severely impairs B cell activation
+- id: PAX5_KO_BCELL
+  gene: PAX5
+  gene_full_name: Paired Box 5
+  perturbation_type: knockout
+  context: in_vitro
+  phenotype_changes:
+  - parameter: b_cell_identity
+    direction: decrease
+    effect_size: -0.85
+    confidence: high
+  - parameter: antibody_production
+    direction: decrease
+    effect_size: -0.7
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      signal: -0.25
+      proliferate: -0.1
+      apoptosis: 0.15
+    state_changes:
+      activation: -0.3
+      antibody_secretion: -0.4
+  evidence:
+  - description: PAX5 as B cell lineage commitment factor. Nutt et al. Nature 1999
+    pmid: '10524629'
+    pmid_verified: true
+  notes: PAX5 is the master regulator of B cell identity; loss causes dedifferentiation
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 6092_PAX5_P1P2_ENSG00000196092
+    pathway_effects:
+      proliferation:
+        mean_effect: -0.0097
+        max_effect: 0.0486
+        min_effect: -0.0573
+        n_markers: 6
+      apoptosis:
+        mean_effect: -0.0023
+        max_effect: 0.1341
+        min_effect: -0.12
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0236
+        max_effect: 0.1253
+        min_effect: -0.0915
+        n_markers: 3
+      migration:
+        mean_effect: -0.0265
+        max_effect: -0.0265
+        min_effect: -0.0265
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0092
+        max_effect: 0.0901
+        min_effect: -0.0717
+        n_markers: 2
+- id: BCL6_OE_BCELL
+  gene: BCL6
+  gene_full_name: BCL6 Transcription Repressor
+  perturbation_type: overexpression
+  context: in_vitro
+  phenotype_changes:
+  - parameter: germinal_center_formation
+    direction: increase
+    effect_size: 0.7
+    confidence: high
+  - parameter: affinity_maturation
+    direction: increase
+    effect_size: 0.55
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      proliferate: 0.15
+      signal: 0.1
+    state_changes:
+      activation: 0.2
+      antibody_secretion: 0.15
+  evidence:
+  - description: BCL6 in germinal center B cell biology. Basso & Dalla-Favera. Annu
+      Rev Immunol 2015
+    pmid: '26620759'
+    pmid_verified: true
+  notes: BCL6 is essential for germinal center formation and antibody affinity maturation
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 805_BCL6_P1P2_ENSG00000113916
+    pathway_effects:
+      proliferation:
+        mean_effect: -0.016
+        max_effect: 0.0397
+        min_effect: -0.1291
+        n_markers: 6
+      apoptosis:
+        mean_effect: -0.0003
+        max_effect: 0.0824
+        min_effect: -0.0756
+        n_markers: 5
+      immune_evasion:
+        mean_effect: -0.0516
+        max_effect: 0.0345
+        min_effect: -0.1089
+        n_markers: 3
+      migration:
+        mean_effect: 0.0475
+        max_effect: 0.0475
+        min_effect: 0.0475
+        n_markers: 1
+      inflammation:
+        mean_effect: -0.007
+        max_effect: 0.0628
+        min_effect: -0.0768
+        n_markers: 2
+- id: CD40_STIM_BCELL
+  gene: CD40
+  gene_full_name: CD40 Molecule
+  perturbation_type: drug_inhibition
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: activation
+    direction: increase
+    effect_size: 0.65
+    confidence: high
+  - parameter: antigen_presentation
+    direction: increase
+    effect_size: 0.55
+    confidence: high
+  - parameter: antibody_production
+    direction: increase
+    effect_size: 0.5
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      signal: 0.2
+      proliferate: 0.1
+    state_changes:
+      activation: 0.35
+      antibody_secretion: 0.25
+  evidence:
+  - description: CD40 agonism in anti-tumor immunity. Vonderheide. Clin Cancer Res
+      2007
+    pmid: '17327609'
+    pmid_verified: true
+  notes: CD40 stimulation activates B cells as APCs and enhances antibody responses
+- id: IL10_OE_BCELL
+  gene: IL10
+  gene_full_name: Interleukin 10
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: regulatory_function
+    direction: increase
+    effect_size: 0.55
+    confidence: medium
+  - parameter: t_cell_suppression
+    direction: increase
+    effect_size: 0.45
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      signal: 0.15
+      suppress: 0.1
+    state_changes:
+      activation: 0.1
+      antibody_secretion: -0.05
+  evidence:
+  - description: Regulatory B cells in cancer. Sarvaria et al. Cell Immunol 2017
+    pmid: '28626234'
+    pmid_verified: true
+  notes: IL-10-producing Bregs suppress anti-tumor immunity; enriched in some tumor
+    types
+- id: CXCR5_OE_BCELL
+  gene: CXCR5
+  gene_full_name: C-X-C Motif Chemokine Receptor 5
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: tertiary_lymphoid_structure_formation
+    direction: increase
+    effect_size: 0.6
+    confidence: medium
+  - parameter: tumor_infiltration
+    direction: increase
+    effect_size: 0.5
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      migrate: 0.2
+      signal: 0.1
+    state_changes:
+      activation: 0.15
+  evidence:
+  - description: B cells in tertiary lymphoid structures predict immunotherapy response.
+      Helmink et al. Nature 2020
+    pmid: '31942075'
+    pmid_verified: true
+  notes: CXCR5+ B cells home to TLS; TLS presence correlates with better immunotherapy
+    outcomes

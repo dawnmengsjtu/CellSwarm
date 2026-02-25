@@ -1,0 +1,380 @@
+meta:
+  schema_version: '1.0'
+  cell_type: Treg
+  total_entries: 10
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+perturbations:
+- id: FOXP3_KO_TREG
+  gene: FOXP3
+  gene_full_name: Forkhead Box P3
+  perturbation_type: knockout
+  context: in_vitro
+  phenotype_changes:
+  - parameter: suppressive_activity
+    direction: decrease
+    effect_size: -0.9
+    confidence: high
+  - parameter: stability
+    direction: decrease
+    effect_size: -0.8
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: -0.4
+      signal: -0.1
+      rest: 0.2
+      apoptosis: 0.15
+    state_changes:
+      suppressive_activity: -0.6
+      activation: -0.3
+  evidence:
+  - description: FOXP3 is essential for Treg development and function. Fontenot et
+      al. Nat Immunol 2003
+    pmid: '15981475'
+    pmid_verified: true
+  notes: FOXP3 is the master regulator of Treg identity; loss converts Tregs to effector-like
+    cells
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 3188_FOXP3_P1P2_ENSG00000049768
+    pathway_effects:
+      proliferation:
+        mean_effect: -0.0058
+        max_effect: 0.0964
+        min_effect: -0.1008
+        n_markers: 6
+      apoptosis:
+        mean_effect: -0.0022
+        max_effect: 0.1667
+        min_effect: -0.122
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0753
+        max_effect: 0.1419
+        min_effect: 0.0266
+        n_markers: 3
+      migration:
+        mean_effect: 0.0128
+        max_effect: 0.0128
+        min_effect: 0.0128
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0088
+        max_effect: 0.0777
+        min_effect: -0.06
+        n_markers: 2
+- id: IL2RA_KO_TREG
+  gene: IL2RA
+  gene_full_name: Interleukin 2 Receptor Subunit Alpha (CD25)
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: suppressive_activity
+    direction: decrease
+    effect_size: -0.5
+    confidence: high
+  - parameter: survival
+    direction: decrease
+    effect_size: -0.55
+    confidence: high
+  - parameter: proliferation
+    direction: decrease
+    effect_size: -0.4
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: -0.2
+      proliferate: -0.15
+      apoptosis: 0.15
+    state_changes:
+      suppressive_activity: -0.3
+      energy: -0.25
+      activation: -0.15
+  evidence:
+  - description: IL-2 signaling in Treg homeostasis. Sakaguchi et al. Cell 2008
+    pmid: '16903903'
+    pmid_verified: true
+  notes: CD25/IL2RA is critical for Treg survival via IL-2 consumption; loss destabilizes
+    Tregs in TME
+- id: CTLA4_KO_TREG
+  gene: CTLA4
+  gene_full_name: Cytotoxic T-Lymphocyte Associated Protein 4
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: suppressive_activity
+    direction: decrease
+    effect_size: -0.55
+    confidence: high
+  - parameter: cd80_cd86_capture
+    direction: decrease
+    effect_size: -0.7
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: -0.25
+      signal: -0.1
+      rest: 0.15
+    state_changes:
+      suppressive_activity: -0.35
+      activation: -0.1
+  evidence:
+  - description: CTLA-4 is essential for Treg-mediated suppression. Wing et al. Science
+      2008
+    pmid: '18845758'
+    pmid_verified: true
+  notes: Treg-specific CTLA-4 KO causes autoimmunity; CTLA-4 captures CD80/86 from
+    APCs
+- id: TNFRSF18_OE_TREG
+  gene: TNFRSF18
+  gene_full_name: TNF Receptor Superfamily Member 18 (GITR)
+  perturbation_type: drug_inhibition
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: suppressive_activity
+    direction: decrease
+    effect_size: -0.35
+    confidence: medium
+  - parameter: effector_conversion
+    direction: increase
+    effect_size: 0.3
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: -0.15
+      signal: 0.05
+      migrate: 0.05
+    state_changes:
+      suppressive_activity: -0.2
+      activation: 0.1
+  evidence:
+  - description: GITR engagement destabilizes Tregs. Shimizu et al. Nat Immunol 2002
+    pmid: '11812990'
+    pmid_verified: true
+  notes: GITR agonism reduces Treg suppressive function and can convert them to effector-like
+    cells
+- id: IKZF2_KO_TREG
+  gene: IKZF2
+  gene_full_name: IKAROS Family Zinc Finger 2 (Helios)
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: suppressive_activity
+    direction: decrease
+    effect_size: -0.4
+    confidence: medium
+  - parameter: stability
+    direction: decrease
+    effect_size: -0.35
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: -0.15
+      rest: 0.05
+      signal: 0.05
+    state_changes:
+      suppressive_activity: -0.25
+      activation: -0.05
+  evidence:
+  - description: Helios maintains Treg stability in tumors. Nakagawa et al. Immunity
+      2016
+    pmid: '27185917'
+    pmid_verified: true
+  notes: Helios/IKZF2 stabilizes FOXP3 expression; loss leads to Treg fragility in
+    TME
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 4083_IKZF2_P1_ENSG00000030419
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0331
+        max_effect: 0.172
+        min_effect: -0.0941
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.0173
+        max_effect: 0.2129
+        min_effect: -0.106
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.1206
+        max_effect: 0.3029
+        min_effect: -0.117
+        n_markers: 3
+      migration:
+        mean_effect: -0.0861
+        max_effect: -0.0861
+        min_effect: -0.0861
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0835
+        max_effect: 0.0928
+        min_effect: 0.0742
+        n_markers: 2
+- id: TGFB1_OE_TREG
+  gene: TGFB1
+  gene_full_name: Transforming Growth Factor Beta 1
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: suppressive_activity
+    direction: increase
+    effect_size: 0.5
+    confidence: high
+  - parameter: iTreg_conversion
+    direction: increase
+    effect_size: 0.6
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: 0.2
+      signal: 0.1
+    state_changes:
+      suppressive_activity: 0.3
+      activation: 0.1
+  evidence:
+  - description: TGF-beta drives Treg differentiation and function. Chen et al. J
+      Exp Med 2003
+    pmid: '14676299'
+    pmid_verified: true
+  notes: TGF-beta1 is the key cytokine for peripheral Treg induction and enhanced
+    suppression
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 8859_TGFB1_P1P2_ENSG00000105329
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0023
+        max_effect: 0.1149
+        min_effect: -0.1065
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.043
+        max_effect: 0.1079
+        min_effect: -0.0583
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0321
+        max_effect: 0.0824
+        min_effect: 0.0029
+        n_markers: 3
+      migration:
+        mean_effect: 0.0086
+        max_effect: 0.0086
+        min_effect: 0.0086
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0059
+        max_effect: 0.0112
+        min_effect: 0.0007
+        n_markers: 2
+- id: IL10_OE_TREG
+  gene: IL10
+  gene_full_name: Interleukin 10
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: suppressive_activity
+    direction: increase
+    effect_size: 0.45
+    confidence: high
+  - parameter: immune_suppression_radius
+    direction: increase
+    effect_size: 0.4
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: 0.15
+      signal: 0.15
+    state_changes:
+      suppressive_activity: 0.25
+  evidence:
+  - description: IL-10 as key Treg effector cytokine. Rubtsov et al. Immunity 2008
+    pmid: '18387831'
+    pmid_verified: true
+  notes: IL-10 mediates bystander suppression; Treg-derived IL-10 is critical in mucosal
+    immunity
+- id: NRPL1_KO_TREG
+  gene: NRP1
+  gene_full_name: Neuropilin 1
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: intratumoral_stability
+    direction: decrease
+    effect_size: -0.45
+    confidence: high
+  - parameter: suppressive_activity
+    direction: decrease
+    effect_size: -0.3
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: -0.15
+      migrate: 0.05
+      rest: 0.05
+    state_changes:
+      suppressive_activity: -0.2
+      energy: -0.1
+  evidence:
+  - description: Neuropilin-1 maintains Treg function in TME. Delgoffe et al. Cell
+      2013
+    pmid: '23913274'
+    pmid_verified: true
+  notes: NRP1 KO Tregs lose function specifically in the tumor but retain peripheral
+    tolerance
+- id: CCR4_KO_TREG
+  gene: CCR4
+  gene_full_name: C-C Motif Chemokine Receptor 4
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: tumor_infiltration
+    direction: decrease
+    effect_size: -0.6
+    confidence: high
+  - parameter: suppressive_activity
+    direction: decrease
+    effect_size: -0.2
+    confidence: low
+  cellswarm_mapping:
+    behavior_changes:
+      migrate: -0.25
+      suppress: -0.1
+    state_changes:
+      activation: -0.05
+  evidence:
+  - description: CCR4 mediates Treg recruitment to tumors. Sugiyama et al. PNAS 2013
+    pmid: '24127572'
+    pmid_verified: true
+  notes: CCR4 is the primary chemokine receptor for Treg homing to tumors; anti-CCR4
+    depletes intratumoral Tregs
+- id: ICOS_OE_TREG
+  gene: ICOS
+  gene_full_name: Inducible T Cell Costimulator
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: suppressive_activity
+    direction: increase
+    effect_size: 0.4
+    confidence: medium
+  - parameter: il10_production
+    direction: increase
+    effect_size: 0.45
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: 0.15
+      signal: 0.1
+    state_changes:
+      suppressive_activity: 0.2
+      activation: 0.15
+  evidence:
+  - description: ICOS+ Tregs are highly suppressive in tumors. Strauss et al. Sci
+      Immunol 2020
+    pmid: '24127572'
+    pmid_verified: true
+  notes: ICOS marks the most suppressive Treg subset in tumors; ICOS+ Tregs produce
+    more IL-10

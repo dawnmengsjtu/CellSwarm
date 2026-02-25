@@ -1,0 +1,55 @@
+{
+  "cancer_id": "TNBC",
+  "source": "GSE176078",
+  "cell_proportions": {
+    "B_cell": 0.1719,
+    "CD8_T": 0.1711,
+    "Treg": 0.0633,
+    "NK": 0.0412,
+    "Macrophage": 0.1513,
+    "Tumor": 0.4012
+  },
+  "subtype_breakdown": {
+    "B_cell": {
+      "B cells Memory": 1392,
+      "Plasmablasts": 2667,
+      "B cells Naive": 584
+    },
+    "CD8_T": {
+      "T_cells_c4_CD8+_ZFP36": 1735,
+      "T_cells_c7_CD8+_IFNG": 1025,
+      "T_cells_c8_CD8+_LAG3": 1581,
+      "T_cells_c5_CD8+_GZMK": 280
+    },
+    "Treg": {
+      "T_cells_c2_CD4+_T-regs_FOXP3": 1710
+    },
+    "NK": {
+      "T_cells_c9_NK_cells_AREG": 753,
+      "T_cells_c10_NKT_cells_FCGR3A": 360
+    },
+    "Macrophage": {
+      "Myeloid_c10_Macrophage_1_EGR1": 1431,
+      "Myeloid_c2_LAM2_APOE": 776,
+      "Myeloid_c1_LAM1_FABP5": 1406,
+      "Myeloid_c9_Macrophage_2_CXCL10": 388,
+      "Myeloid_c0_DC_LAMP3": 61,
+      "Myeloid_c5_Macrophage_3_SIGLEC1": 26
+    },
+    "Tumor": {
+      "Cancer LumB SC": 167,
+      "Cancer Cycling": 4372,
+      "Cancer Basal SC": 4177,
+      "Cancer LumA SC": 77,
+      "Cancer Her2 SC": 2043
+    }
+  },
+  "recommended_counts_500": {
+    "B_cell": 86,
+    "CD8_T": 86,
+    "Treg": 32,
+    "NK": 21,
+    "Macrophage": 76,
+    "Tumor": 201
+  }
+}

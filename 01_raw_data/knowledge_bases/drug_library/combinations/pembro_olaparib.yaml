@@ -1,0 +1,63 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+combination_id: pembro_olaparib
+components:
+- pembrolizumab
+- olaparib
+clinical_trial: MEDIOLA / KEYLYNK-009
+indication: BRCA+ TNBC
+interaction_model: bliss_independence
+synergy_rules:
+  CD8_T:
+    synergy_factor: 1.3
+    affected_parameters:
+    - activation
+    - exhaustion
+    notes: PARP inhibition activates STING → IFN → enhanced anti-PD-1
+  Tumor:
+    synergy_factor: 1.35
+    affected_parameters:
+    - apoptosis_susceptibility
+    - immune_evasion
+    notes: Synthetic lethality + immune attack
+  Treg:
+    synergy_factor: 1.0
+    affected_parameters: []
+  Macrophage:
+    synergy_factor: 1.15
+    affected_parameters:
+    - polarization
+  NK:
+    synergy_factor: 1.1
+    affected_parameters:
+    - activation
+  B_cell:
+    synergy_factor: 1.0
+    affected_parameters: []
+toxicity_interaction:
+  irAE_probability: 0.25
+  dose_adjustment: 0.9
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 1.3
+    notes: BRCA+ TNBC strong rationale
+  Melanoma:
+    efficacy_modifier: 0.5
+    notes: Limited HRD
+  NSCLC:
+    efficacy_modifier: 0.4
+    notes: Limited HRD
+  CRC-MSI-H:
+    efficacy_modifier: 0.5
+    notes: Some HRD overlap
+  CRC-MSS:
+    efficacy_modifier: 0.2
+    notes: Low HRD
+  Ovarian:
+    efficacy_modifier: 1.2
+    notes: BRCA+ HGSOC strong rationale
+references:
+- description: 'MEDIOLA: Durvalumab+Olaparib in BRCA+ cancers. Domchek et al. Lancet Oncol 2020'
+  pmid: '32771088'
+  verified: true

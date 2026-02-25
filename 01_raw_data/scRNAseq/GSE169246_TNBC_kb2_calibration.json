@@ -1,0 +1,40 @@
+{
+  "cancer_id": "TNBC",
+  "drug": "atezolizumab_paclitaxel",
+  "source": "GSE169246",
+  "reference": "Zhang et al. Cancer Cell 2021",
+  "pmid": "34653365",
+  "treatment_steps": 10,
+  "cell_effects": {
+    "Tumor": {
+      "proportion_change_rate": 0.00018,
+      "direction": "increase",
+      "fold_change": 1.1651
+    },
+    "CD8_T": {
+      "proportion_change_rate": -0.00069,
+      "direction": "decrease",
+      "fold_change": 0.9677
+    },
+    "Treg": {
+      "proportion_change_rate": -0.00082,
+      "direction": "decrease",
+      "fold_change": 0.87
+    },
+    "Macrophage": {
+      "proportion_change_rate": -0.00107,
+      "direction": "decrease",
+      "fold_change": 0.9269
+    },
+    "NK": {
+      "proportion_change_rate": 0.00933,
+      "direction": "increase",
+      "fold_change": 1.2805
+    },
+    "B_cell": {
+      "proportion_change_rate": -0.00694,
+      "direction": "decrease",
+      "fold_change": 0.7024
+    }
+  }
+}

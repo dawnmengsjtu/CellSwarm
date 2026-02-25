@@ -1,0 +1,117 @@
+% ============================================================
+% FIGURE LEGENDS — v4c (2026-02-16)
+% Story: Architecture → Validation → Generalization → Perturbation → Robustness → Mechanism
+% ============================================================
+
+% ────────────────────────────────────────────────────────────
+% Fig 1: ARCHITECTURE — "What is CellSwarm?"
+% ────────────────────────────────────────────────────────────
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{fig1/composed/fig1.png}
+\caption{\textbf{CellSwarm: an LLM-driven multi-agent framework for tumor microenvironment simulation.}
+Each cell in the tumor microenvironment is modeled as an autonomous agent with persistent internal state (14 signaling pathways, cell cycle phase, memory stream) and an LLM cognitive core that interprets local signals and decides actions (proliferate, migrate, secrete, die, or remain quiescent). Agents interact on a 2D grid through diffusible signals (cytokines, growth factors). Four modular knowledge bases---Cancer Atlas, Drug Library, Signaling Pathways, and Perturbation Atlas---provide cancer-type-specific parameters, enabling zero-shot generalization across tumor types without retraining.
+}
+\label{fig:1}
+\end{figure}
+
+% ────────────────────────────────────────────────────────────
+% Fig 2: VALIDATION — "Does it work on TNBC?"
+% Conclusion: Agent ≈ Rules >> Random; JS=0.144; 5/8 models Tier-1
+% ────────────────────────────────────────────────────────────
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{fig2/composed/fig2_composed.pdf}
+\caption{\textbf{CellSwarm recapitulates TNBC tumor microenvironment composition.}
+(\textbf{A})~Schematic of the baseline validation experiment: single-cell RNA-seq data (GSE176078; Wu et al., 2021) provides ground-truth cell-type proportions for 6 cell types; CellSwarm simulates 500 cells over 30 steps; outputs are compared via JS divergence and per-cell-type metrics.
+(\textbf{B})~Final immune-to-tumor ratio for Agent, Rules, and Random modes ($n = 5$ seeds each, mean $\pm$ SD). Dashed line: real TNBC ratio. Agent and Rules maintain ratios close to real tissue; Random collapses as CD8$^+$ T cells are depleted.
+(\textbf{C})~Simulated vs.\ real cell-type proportions (grouped bar). Agent achieves 40.0\% tumor fraction vs.\ 40.1\% real; systematic CD8$^+$ T overestimation and B cell underestimation are shared across all modes.
+(\textbf{D})~Stacked bar of final cell-type composition for Agent, Rules, Random, and Real, showing overall compositional similarity.
+(\textbf{E})~Per-cell-type absolute error $|$Sim $-$ Real$|$. Random exhibits the largest errors, particularly for Tumor and CD8$^+$ T cells.
+(\textbf{F})~Shannon diversity index over 30 simulation steps. Real TNBC $H' = 1.56$ (dashed line). Agent ($H' = 1.54$) and Rules ($H' = 1.57$) preserve realistic ecosystem diversity; Random collapses to $H' = 1.26$. Red/green shading: hot/cold diversity regions.
+(\textbf{G})~JS divergence across 8 LLM backends (horizontal bar, sorted). Five models achieve Tier-1 accuracy (JS $< 0.16$; vertical line), with DeepSeek (0.144) and GLM4Flash (0.147) performing best. Random baseline: JS = 0.263.
+(\textbf{H})~CD8$^+$/Treg ratio across 6 cancer types (Agent mode), recapitulating the expected immune contexture gradient from hot (CRC-MSI-H: 4.65) to cold (CRC-MSS: 1.00) tumors.
+}
+\label{fig:2}
+\end{figure}
+
+% ────────────────────────────────────────────────────────────
+% Fig 3: GENERALIZATION — "Does it work across cancers and treatments?"
+% Conclusion: Zero-shot cross-cancer; anti-PD1 ORR 19.4% vs clinical 21%
+% ────────────────────────────────────────────────────────────
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{fig3/composed/fig3_v4.pdf}
+\caption{\textbf{Cross-cancer generalization and treatment response prediction.}
+(\textbf{A})~Schematic: switching the Cancer Atlas KB enables zero-shot simulation of 6 cancer types spanning the immunological spectrum (CRC-MSI-H, TNBC, Melanoma, NSCLC, Ovarian, CRC-MSS).
+(\textbf{B})~Cross-cancer cell-type composition (stacked bar). Each cancer type exhibits a distinct immune landscape consistent with known biology: high CD8$^+$ T infiltration in MSI-H, elevated Treg in Ovarian.
+(\textbf{C})~Tumor count dynamics across 6 cancer types over 30 steps. Immunologically hot tumors (CRC-MSI-H, Melanoma) show greater immune-mediated tumor control.
+(\textbf{D})~CD8$^+$/Treg ratio across cancer types, confirming the hot-to-cold gradient.
+(\textbf{E})~Normalized immune landscape heatmap. Rows: cell types; columns: cancer types. Captures known patterns including high NK activity in Melanoma and elevated macrophage infiltration in NSCLC.
+(\textbf{F})~Treatment response: tumor ratio (treated/untreated) for anti-PD1, anti-CTLA4, and anti-TGF$\beta$ across Agent and Rules modes. Agent mode predicts differential drug efficacy.
+(\textbf{G})~Tumor count trajectories under treatment, showing dose-dependent reduction.
+(\textbf{H})~Early vs.\ late intervention comparison. Early treatment consistently outperforms late for both anti-PD1 and anti-CTLA4, consistent with clinical observations. Simulated vs.\ clinical ORR: anti-PD1 19.4\% vs.\ 21\%; anti-CTLA4 9.2\% vs.\ 12\%.
+}
+\label{fig:3}
+\end{figure}
+
+% ────────────────────────────────────────────────────────────
+% Fig 4: PERTURBATION — "Can it predict gene knockouts and phenocopy drugs?"
+% Conclusion: 7 KOs biologically plausible; PD1_KO phenocopies anti-PD1 (r=0.86)
+% ────────────────────────────────────────────────────────────
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{fig4/composed/fig4_v4.pdf}
+\caption{\textbf{Gene perturbation modeling and drug--knockout phenocopy analysis.}
+(\textbf{A})~Tumor ratio (final/initial) across 7 gene knockouts in Agent (blue) and Rules (grey) modes ($n = 3$ seeds, mean $\pm$ SD). Immune checkpoint KOs (PD1, CTLA4) produce the strongest tumor suppression (TR = 0.67, 0.63); oncogene KOs (TP53, BRCA1) show tumor expansion (TR $> 1.0$).
+(\textbf{B})~Heatmap of cell-type composition changes across 7 KOs (Agent mode). IFNG\_KO shows the most dramatic immune remodeling; PD1\_KO and CTLA4\_KO enhance CD8$^+$ T cell activity.
+(\textbf{C})~IFNG\_KO tumor dynamics: Agent mode (TR = 1.092) shows tumor expansion due to impaired immune surveillance, while Rules mode (TR = 0.851) applies a fixed suppression regardless of immune context.
+(\textbf{D})~Immune composition shift under IFNG\_KO, showing reduced CD8$^+$ T and NK cell proportions consistent with IFN-$\gamma$ pathway disruption.
+(\textbf{E})~Sensitivity analysis: Agent vs.\ Rules tumor ratio across all 7 KOs. Agent captures the expected direction for immune-related KOs (PD1, CTLA4, IFNG) while Rules applies uniform suppression.
+(\textbf{F--H})~Phenocopy analysis: cell-type proportion profiles of gene KOs vs.\ corresponding drug treatments. (\textbf{F})~PD1\_KO vs.\ anti-PD1 ($r = 0.86$). (\textbf{G})~CTLA4\_KO vs.\ anti-CTLA4 ($r = 0.56$). (\textbf{H})~TGFB1\_KO vs.\ anti-TGF$\beta$ ($r = 0.31$).
+(\textbf{I})~Summary of phenocopy correlations. High PD1 correlation validates that the Agent mode captures the mechanistic link between checkpoint gene disruption and immunotherapy response.
+}
+\label{fig:4}
+\end{figure}
+
+% ────────────────────────────────────────────────────────────
+% Fig 5: ROBUSTNESS — "Is it reproducible? What matters? Agent vs Rules?"
+% Conclusion: CV<10% across seeds; Cancer Atlas is critical; Rules fail cross-cancer
+% ────────────────────────────────────────────────────────────
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{fig5/composed/fig5_v4.pdf}
+\caption{\textbf{Robustness, ablation, and Agent vs.\ Rules comparison.}
+(\textbf{A})~Model comparison: JS divergence (mean $\pm$ SD) across 8 LLM backends ($n = 5$ seeds each). Five models achieve Tier-1 accuracy (JS $< 0.16$). DeepSeek: JS = 0.144 $\pm$ 0.001; Rules baseline: JS = 0.146 $\pm$ 0.001.
+(\textbf{B})~Cost--performance trade-off: API cost per run vs.\ JS divergence. DeepSeek and GLM4Flash offer the best accuracy-per-dollar.
+(\textbf{C})~Reproducibility: coefficient of variation (CV) of JS divergence across seeds. All Tier-1 models achieve CV $< 10\%$, with Rules showing the lowest variance (CV = 3.5\%).
+(\textbf{D})~Model $\times$ cell-type heatmap of proportion errors, revealing that CD8$^+$ T overestimation and B cell underestimation are systematic across all models.
+(\textbf{E})~Knowledge base ablation (Agent mode, $n = 3$ seeds). Removing Cancer Atlas causes catastrophic failure (JS: 0.144 $\to$ 0.272); removing Drug Library or Pathway KB has minimal impact (JS $\approx$ 0.143), indicating that the Cancer Atlas is the critical knowledge component.
+(\textbf{F})~Ablation comparison: Agent vs.\ Rules. Rules is insensitive to KB removal (JS $\approx$ 0.146 regardless), confirming that Rules does not actually use knowledge base information for decision-making.
+(\textbf{G})~Cross-cancer tumor ratio: Agent vs.\ Rules across 6 cancer types. Rules produces uniformly low tumor ratios (TR = 0.04--0.07) regardless of cancer type; Agent shows cancer-type-specific variation consistent with known immunological differences.
+(\textbf{H})~Cross-cancer immune composition: Agent preserves cancer-specific immune landscapes; Rules generates near-identical compositions across all cancer types.
+(\textbf{I})~Tier comparison summary: Tier-1 models (JS $< 0.16$) vs.\ Tier-2 (JS $\geq$ 0.16) across key metrics.
+}
+\label{fig:5}
+\end{figure}
+
+% ────────────────────────────────────────────────────────────
+% Fig 6: MECHANISM — "How does it work internally?"
+% Conclusion: Cell cycle control, signal dynamics, KB query patterns explain behavior
+% ────────────────────────────────────────────────────────────
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{fig6/composed/fig6_v4.pdf}
+\caption{\textbf{Mechanistic analysis of CellSwarm simulation dynamics.}
+(\textbf{A})~Cell cycle phase distribution across simulation modes. Agent (85.1\% G0) and Rules (82.4\% G0) maintain predominantly quiescent populations, matching real tumor biology. Random mode shows only 48.3\% G0 with excessive proliferation, explaining its uncontrolled tumor expansion.
+(\textbf{B})~Baseline environmental signal levels across 14 pathways for Agent, Rules, and Random modes. Agent and Rules maintain similar signal profiles; Random shows aberrant signal accumulation.
+(\textbf{C})~Anti-TGF$\beta$ failure case analysis. Simulated tumor reduction (60.3\%) vastly exceeds clinical ORR ($\sim$5\%), a 16$\times$ mismatch. The model overestimates TGF$\beta$ pathway dependence, likely because the Drug Library encodes direct anti-tumor effects that are not observed clinically.
+(\textbf{D})~IFNG\_KO signal perturbation: environmental signal changes relative to baseline, showing reduced IFN-$\gamma$, TNF-$\alpha$, and IL-2 signaling consistent with impaired immune activation.
+(\textbf{E})~Treatment-induced IFN-$\gamma$ signal dynamics over time. Anti-PD1 and anti-CTLA4 treatments elevate IFN-$\gamma$ signaling, consistent with checkpoint blockade restoring T cell effector function.
+(\textbf{F})~Treatment effects on cell cycle distribution. Anti-PD1 increases tumor cell apoptosis while maintaining immune cell quiescence.
+(\textbf{G})~Immune remodeling heatmap across 7 gene knockouts, showing cell-type-specific responses. PD1\_KO and CTLA4\_KO enhance CD8$^+$ T cell proportions; IFNG\_KO reduces NK and CD8$^+$ T cells.
+(\textbf{H})~Environmental signal comparison: drug treatments vs.\ corresponding gene knockouts. PD1\_KO and anti-PD1 produce similar signal profiles, providing mechanistic support for the phenocopy observation in Fig.~4F.
+(\textbf{I})~Knowledge base query patterns across experimental conditions. Each baseline run queries $\sim$26 drug entries, $\sim$15 pathway entries, and $\sim$64 perturbation entries, confirming active KB utilization by the Agent mode.
+}
+\label{fig:6}
+\end{figure}

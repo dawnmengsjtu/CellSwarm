@@ -1,0 +1,397 @@
+meta:
+  schema_version: '1.0'
+  generated_by: CellSwarm Cancer Atlas Builder
+  generated_at: '2026-02-13'
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+cancer_id: CRC-MSS
+full_name: Colorectal Cancer - Microsatellite Stable
+tissue: Colon/Rectum
+icd_code: C18.9
+tme_phenotype: immune_altered_excluded
+cell_types:
+  Tumor:
+    proportion:
+    - 0.6
+    - 0.75
+    subtypes:
+    - CMS2 (Canonical)
+    - CMS3 (Metabolic)
+    - CMS4 (Mesenchymal)
+    key_markers:
+    - CK20
+    - CDX2
+    - APC
+    - TP53
+    - KRAS
+    - SMAD4
+    doubling_time_hours:
+    - 48
+    - 72
+    functional_states:
+    - WNT_signaling_active
+    - moderate_mutational_burden
+    - EMT_active_in_CMS4
+    - angiogenic
+    initial_state:
+      energy:
+      - 0.65
+      - 0.85
+      immune_evasion:
+      - 0.6
+      - 0.8
+      proliferation_rate:
+      - 0.7
+      - 0.85
+      apoptosis_susceptibility:
+      - 0.15
+      - 0.35
+    behavior_mapping:
+      proliferate: 0.45
+      migrate: 0.2
+      signal: 0.15
+      rest: 0.1
+      apoptosis: 0.05
+      evade: 0.05
+    notes: MSS CRC is the most common subtype. CMS classification divides into 4 subtypes. CMS4 (mesenchymal) has poorest
+      prognosis.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  CD8_T:
+    proportion:
+    - 0.03
+    - 0.1
+    subtypes:
+    - Effector
+    - Exhausted
+    - Suppressed
+    key_markers:
+    - CD8A
+    - CD8B
+    - GZMB
+    - PRF1
+    - PDCD1
+    - LAG3
+    functional_states:
+    - low_cytotoxicity
+    - excluded_from_core
+    - suppressed_by_stroma
+    initial_state:
+      energy:
+      - 0.35
+      - 0.55
+      activation:
+      - 0.25
+      - 0.45
+      exhaustion:
+      - 0.5
+      - 0.7
+      cytotoxicity:
+      - 0.3
+      - 0.5
+    behavior_mapping:
+      attack: 0.1
+      migrate: 0.3
+      proliferate: 0.05
+      rest: 0.3
+      signal: 0.15
+      apoptosis: 0.1
+    notes: Low CD8+ T cell infiltration in MSS tumors. T cells often excluded from tumor core by fibrotic stroma.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  Treg:
+    proportion:
+    - 0.04
+    - 0.09
+    subtypes:
+    - Effector Treg
+    - CCR4+ Treg
+    key_markers:
+    - FOXP3
+    - CD25
+    - CTLA4
+    - CCR4
+    - CCL22
+    functional_states:
+    - immunosuppressive
+    - IL10_producing
+    - TGF_beta_active
+    initial_state:
+      energy:
+      - 0.45
+      - 0.65
+      suppressive_activity:
+      - 0.65
+      - 0.85
+      activation:
+      - 0.5
+      - 0.7
+    behavior_mapping:
+      suppress: 0.5
+      migrate: 0.15
+      signal: 0.15
+      proliferate: 0.1
+      rest: 0.08
+      apoptosis: 0.02
+    notes: Treg infiltration relatively high compared to effector T cells, contributing to immunosuppressive milieu.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  Macrophage:
+    proportion:
+    - 0.1
+    - 0.18
+    subtypes:
+    - M1-like
+    - M2-like
+    - TAM
+    key_markers:
+    - CD68
+    - CD163
+    - CD206
+    - VSIG4
+    - MARCO
+    functional_states:
+    - M2_dominant
+    - pro_tumorigenic
+    - immunosuppressive
+    initial_state:
+      energy:
+      - 0.5
+      - 0.7
+      polarization:
+      - 0.8
+      - 0.95
+      phagocytic_activity:
+      - 0.25
+      - 0.45
+    m1_m2_ratio:
+    - 0.1
+    - 0.2
+    behavior_mapping:
+      phagocytose: 0.15
+      signal: 0.25
+      migrate: 0.15
+      polarize: 0.15
+      rest: 0.2
+      apoptosis: 0.1
+    notes: Strong M2-like TAM infiltration in MSS CRC. M1:M2 ratio approximately 1:3 to 1:5. Associated with poor prognosis.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  NK:
+    proportion:
+    - 0.01
+    - 0.04
+    subtypes:
+    - CD56dim
+    key_markers:
+    - NCAM1
+    - NKG2D
+    - NKG2A
+    functional_states:
+    - reduced_cytotoxicity
+    - inhibited
+    initial_state:
+      energy:
+      - 0.3
+      - 0.5
+      activation:
+      - 0.2
+      - 0.4
+      cytotoxicity:
+      - 0.25
+      - 0.45
+    behavior_mapping:
+      attack: 0.2
+      migrate: 0.25
+      signal: 0.1
+      rest: 0.3
+      apoptosis: 0.1
+      proliferate: 0.05
+    notes: NK cell infiltration and function suppressed in MSS tumors. HLA-E upregulation contributes.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  B_cell:
+    proportion:
+    - 0.03
+    - 0.08
+    subtypes:
+    - Naive B
+    - Memory B
+    - Plasma cells
+    key_markers:
+    - CD19
+    - CD20
+    - CD138
+    - IGHG
+    functional_states:
+    - antibody_secreting
+    - limited_TLS
+    initial_state:
+      energy:
+      - 0.4
+      - 0.6
+      activation:
+      - 0.3
+      - 0.5
+      antibody_secretion:
+      - 0.2
+      - 0.4
+    behavior_mapping:
+      signal: 0.25
+      migrate: 0.15
+      proliferate: 0.1
+      rest: 0.3
+      apoptosis: 0.1
+      attack: 0.1
+    notes: B cell infiltration lower than MSI-H. TLS less common, especially in CMS4.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+spatial_distribution:
+  tumor_core:
+    Tumor: 0.8
+    CD8_T: 0.03
+    Treg: 0.05
+    Macrophage: 0.1
+    NK: 0.01
+    B_cell: 0.01
+  tumor_margin:
+    Tumor: 0.6
+    CD8_T: 0.12
+    Treg: 0.06
+    Macrophage: 0.12
+    NK: 0.03
+    B_cell: 0.07
+  stroma:
+    Tumor: 0.2
+    CD8_T: 0.1
+    Treg: 0.06
+    Macrophage: 0.25
+    NK: 0.05
+    B_cell: 0.34
+cancer_specific_features:
+- WNT pathway activation (APC mutation in ~80%)
+- KRAS mutations (~40%)
+- TP53 mutations (~50%)
+- Chromosomal instability (CIN)
+- Low tumor mutational burden
+- Left-sided location more common
+- Fibrotic stroma (especially CMS4)
+immunotherapy_relevance:
+  approved_agents:
+  - Limited efficacy of single-agent checkpoint inhibitors
+  - Bevacizumab + atezolizumab combination (limited approval)
+  response_rate: 5-10% for single-agent anti-PD-1; limited responses
+  biomarkers:
+  - CMS4 subtype (may benefit from immunotherapy combinations)
+  - PD-L1 expression (less predictive)
+  - TMB (generally low but subset may benefit)
+  - NTRK fusions (rare, larotrectinib approved)
+immune_escape_mechanisms:
+- Low neoantigen burden
+- T cell exclusion by fibrotic stroma (CAFs)
+- M2 macrophage-mediated suppression
+- Treg accumulation
+- MDSC infiltration
+- WNT/beta-catenin pathway activation
+- TGF-beta signaling
+- Angiogenesis (VEGF)
+simulation_defaults:
+  total_cells: 1000
+  grid_size:
+  - 50
+  - 50
+  recommended_steps: 30
+  step_time_mapping: 1 step ≈ 1 day of tumor-immune interaction
+  key_signals:
+  - PD_L1
+  - TGF_beta
+  - IFN_gamma
+  - IL2
+  - oxygen
+  - glucose
+references:
+- pmid: 34019806
+  description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+  verified: true
+- pmid: 30127393
+  description: Jiang et al. TIDE signatures. Nat Med 2018
+  verified: true
+- pmid: 29628290
+  description: Thorsson et al. The Immune Landscape of Cancer. Immunity 2018
+  verified: true
+- pmid: 26457759
+  description: Guinney et al. Consensus molecular subtypes of CRC. Nat Med 2015
+  verified: true
+- pmid: 17008531
+  description: Galon et al. Type, density, location of immune cells predict CRC outcome. Science 2006
+  verified: true
+- pmid: 29754777
+  description: Pagès et al. International validation of Immunoscore. Lancet 2018
+  verified: true
+- pmid: 34450029
+  description: Pelka et al. Spatially organized immune hubs in CRC. Cell 2021
+  verified: true
+- pmid: 32451460
+  description: Lee et al. Lineage-dependent gene expression in CRC immunity. Nat Genet 2020
+  verified: true
+- pmid: 32302573
+  description: Zhang et al. Single-cell analyses of myeloid-targeted therapies in CRC. Cell 2020
+  verified: true
+- pmid: 38981439
+  description: Chen et al. Spatiotemporal scRNA analysis of CRC. Cancer Cell 2024
+  verified: true
+- pmid: 35365629
+  description: Qi et al. FAP+ fibroblasts and SPP1+ macrophages in CRC. Nat Commun 2022
+  verified: true
+- pmid: 25822800
+  description: Newman et al. CIBERSORT. Nat Methods 2015
+  verified: true
+- pmid: 32442275
+  description: Li et al. TIMER2.0. Nucleic Acids Res 2020
+  verified: true
+- pmid: 28117416
+  description: Mantovani et al. TAMs as treatment targets. Nat Rev Clin Oncol 2017
+  verified: true
+- pmid: 29625050
+  description: Sanchez-Vega et al. TCGA oncogenic signaling pathways. Cell 2018
+  verified: true
+visualization:
+  cell_colors:
+    Tumor: '#C44E52'
+    CD8_T: '#4C72B0'
+    Treg: '#DD8452'
+    Macrophage: '#55A868'
+    NK: '#8172B3'
+    B_cell: '#CCB974'
+  abbreviation: CRC-MSS
+  icon: colon

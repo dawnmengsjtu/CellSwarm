@@ -1,0 +1,121 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: IL2_STAT5
+pathway_name: IL-2/JAK-STAT5 Signaling
+category: cytokine_signaling
+kegg_id: hsa04630
+components:
+  receptors:
+  - IL2RA
+  - IL2RB
+  - IL2RG
+  ligands:
+  - IL2
+  downstream:
+  - JAK1
+  - JAK3
+  - STAT5A
+  - STAT5B
+  - PI3K
+  - AKT
+  transcription_factors:
+  - STAT5A
+  - STAT5B
+  key_genes:
+  - IL2
+  - IL2RA
+  - IL2RB
+  - JAK1
+  - JAK3
+  - STAT5A
+  - STAT5B
+signal_fields_affected:
+- IL2
+cell_type_effects:
+  CD8_T:
+    when_active: IL-2 promotes CD8+ T cell proliferation, survival, and effector differentiation.
+      Essential for clonal expansion.
+    behavioral_mapping:
+      proliferate: 0.25
+      attack: 0.1
+      signal: 0.05
+    state_effects:
+      activation: 0.15
+      energy: 0.1
+  Treg:
+    when_active: Tregs constitutively express high-affinity IL-2R (CD25). IL-2 is
+      essential for Treg survival and suppressive function. Tregs act as IL-2 sinks.
+    behavioral_mapping:
+      suppress: 0.25
+      proliferate: 0.15
+    state_effects:
+      suppressive_activity: 0.2
+      activation: 0.15
+  NK:
+    when_active: IL-2 activates NK cells, enhancing cytotoxicity and proliferation.
+    behavioral_mapping:
+      attack: 0.15
+      proliferate: 0.1
+    state_effects:
+      activation: 0.15
+      cytotoxicity: 0.1
+  Tumor:
+    when_active: Minimal direct effect on most tumors.
+    behavioral_mapping: {}
+    state_effects: {}
+  Macrophage:
+    when_active: IL-2 can activate macrophages and promote M1 polarization.
+    behavioral_mapping:
+      phagocytose: 0.05
+    state_effects: {}
+  B_cell:
+    when_active: IL-2 promotes B cell proliferation and antibody secretion.
+    behavioral_mapping:
+      proliferate: 0.1
+      signal: 0.1
+    state_effects:
+      antibody_secretion: 0.1
+crosstalk:
+- pathway: CTLA4_CD28
+  type: downstream_target
+  description: CD28 costimulation drives IL-2 production; CTLA-4 suppresses it
+- pathway: PD1_PDL1
+  type: antagonistic
+  description: PD-1 signaling reduces IL-2 production by T cells
+- pathway: TGFB_SMAD
+  type: antagonistic
+  description: TGF-beta opposes IL-2-driven T cell expansion
+targeted_by: []
+references:
+- description: IL-2 signaling in T cell expansion. Boyman & Sprent. Nat Rev Immunol
+    2012
+  pmid: '22564618'
+  pmid_verified: true
+- description: Foxp3+ CD25+ CD4+ natural regulatory T cells. Sakaguchi et al. Immunol
+    Rev 2006
+  pmid: '16903903'
+  pmid_verified: true
+additional_agents:
+- drug_id: aldesleukin
+  mechanism: Recombinant IL-2 (high-dose immunotherapy)
+  in_drug_library: false
+data_calibration:
+  source: GSE176078 TNBC scRNA-seq (CellChat-lite)
+  n_cells: 997
+  communication_strength: 0.0023
+  max_communication_strength: 0.0031
+  n_active_pairs: 2
+  top_interactions:
+  - sender: CD8_T
+    receiver: Treg
+    ligand: IL2
+    receptor: IL2RA
+    probability: 0.0031
+  - sender: CD8_T
+    receiver: CD8_T
+    ligand: IL2
+    receptor: IL2RA
+    probability: 0.0014

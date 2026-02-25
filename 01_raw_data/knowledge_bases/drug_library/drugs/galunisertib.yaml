@@ -1,0 +1,111 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: galunisertib
+generic_name: Galunisertib
+brand_name: N/A
+drug_class: targeted_therapy
+subclass: TGFbeta_inhibitor
+molecular_type: small_molecule
+fda_status: investigational
+approved_indications: []
+targets:
+- name: TGFβR1
+  gene: TGFBR1
+  type: kinase
+  action: inhibitor
+  selectivity: moderate
+cell_effects:
+  CD8_T:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.06
+    - parameter: exhaustion
+      direction: decrease
+      rate_per_step: 0.04
+    notes: TGF-beta suppresses T cell function; blocking restores it
+  Tumor:
+    direct: true
+    state_effects:
+    - parameter: proliferation_rate
+      direction: decrease
+      rate_per_step: 0.05
+    - parameter: immune_evasion
+      direction: decrease
+      rate_per_step: 0.06
+    notes: TGF-beta promotes EMT and immune evasion in tumors
+  Treg:
+    direct: true
+    state_effects:
+    - parameter: suppressive_activity
+      direction: decrease
+      rate_per_step: 0.08
+    notes: TGF-beta is key for Treg differentiation and function
+  Macrophage:
+    direct: true
+    state_effects:
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.06
+    notes: TGF-beta promotes M2 polarization
+  NK:
+    direct: false
+    state_effects:
+    - parameter: cytotoxicity
+      direction: increase
+      rate_per_step: 0.04
+  B_cell:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.02
+environment_effects:
+- field: TGF_beta
+  action: deplete
+  magnitude: 0.7
+- field: IFN_gamma
+  action: amplify
+  magnitude: 0.05
+pharmacokinetics:
+  administration: oral
+  standard_dose: 150 mg BID
+  onset_steps: 1
+  peak_steps: 1
+  half_life_steps: 0.5
+  concentration_curve: exponential_decay
+  steady_state_fraction: 0.7
+dose_response:
+  model: hill
+  ec50: 0.4
+  hill_coefficient: 1.5
+  max_effect: 0.9
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.7
+    notes: High TGF-beta in mesenchymal TNBC
+  Melanoma:
+    efficacy_modifier: 0.5
+    notes: Moderate TGF-beta role
+  NSCLC:
+    efficacy_modifier: 0.6
+    notes: TGF-beta drives T cell exclusion
+  CRC-MSI-H:
+    efficacy_modifier: 0.4
+    notes: Less TGF-beta dependent
+  CRC-MSS:
+    efficacy_modifier: 0.8
+    notes: CMS4 mesenchymal subtype high TGF-beta
+  Ovarian:
+    efficacy_modifier: 0.7
+    notes: TGF-beta prominent in ascites
+resistance:
+- mechanism: Alternative immunosuppressive pathways (IL-10, VEGF)
+  onset_steps: 15
+  probability: 0.15
+references:
+- description: Galunisertib in hepatocellular carcinoma. Kelley et al. Clin Transl Gastroenterol 2019
+  pmid: '31295152'
+  verified: true

@@ -1,0 +1,128 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: PD1_PDL1
+pathway_name: PD-1/PD-L1 Immune Checkpoint
+category: immune_checkpoint
+kegg_id: hsa04514
+components:
+  receptors:
+  - PDCD1
+  ligands:
+  - CD274
+  - PDCD1LG2
+  downstream:
+  - SHP2
+  - PI3K
+  - AKT
+  - RAS
+  transcription_factors:
+  - NFAT
+  - AP1
+  - NFKB
+  key_genes:
+  - PDCD1
+  - CD274
+  - PDCD1LG2
+  - PTPN11
+signal_fields_affected:
+- PD_L1
+- IFN_gamma
+cell_type_effects:
+  CD8_T:
+    when_active: PD-1 engagement inhibits TCR signaling via SHP2, reducing proliferation,
+      cytokine production, and cytotoxicity. Promotes exhaustion.
+    behavioral_mapping:
+      attack: -0.3
+      proliferate: -0.2
+      rest: 0.25
+      migrate: 0.1
+      apoptosis: 0.05
+      signal: -0.1
+    state_effects:
+      exhaustion: 0.15
+      activation: -0.2
+      cytotoxicity: -0.25
+  Tumor:
+    when_active: PD-L1 expression enables immune evasion. High PD-L1 tumors resist
+      T cell killing.
+    behavioral_mapping:
+      evade: 0.35
+      proliferate: 0.05
+    state_effects:
+      immune_evasion: 0.3
+  Treg:
+    when_active: PD-1 signaling on Tregs can enhance suppressive function in TME.
+    behavioral_mapping:
+      suppress: 0.1
+    state_effects:
+      suppressive_activity: 0.1
+  Macrophage:
+    when_active: PD-1 on macrophages reduces phagocytic activity.
+    behavioral_mapping:
+      phagocytose: -0.15
+      polarize: 0.1
+    state_effects:
+      phagocytic_activity: -0.15
+  NK:
+    when_active: PD-1 expression on NK cells impairs cytotoxicity.
+    behavioral_mapping:
+      attack: -0.2
+    state_effects:
+      cytotoxicity: -0.15
+  B_cell:
+    when_active: PD-1 on B cells modulates antibody responses.
+    behavioral_mapping:
+      signal: -0.1
+    state_effects:
+      antibody_secretion: -0.1
+crosstalk:
+- pathway: CTLA4_CD28
+  type: synergistic_inhibition
+  description: PD-1 and CTLA-4 inhibit T cells via distinct mechanisms; dual blockade
+    is synergistic
+- pathway: IFNG_JAK_STAT
+  type: negative_feedback
+  description: IFN-gamma upregulates PD-L1 expression, creating adaptive immune resistance
+- pathway: TCR_signaling
+  type: antagonistic
+  description: PD-1 directly antagonizes proximal TCR signaling via SHP2
+targeted_by:
+- drug_id: pembrolizumab
+  mechanism: Anti-PD-1 monoclonal antibody
+- drug_id: nivolumab
+  mechanism: Anti-PD-1 monoclonal antibody
+- drug_id: atezolizumab
+  mechanism: Anti-PD-L1 monoclonal antibody
+- drug_id: durvalumab
+  mechanism: Anti-PD-L1 monoclonal antibody
+references:
+- description: PD-1 blockade in cancer immunotherapy. Topalian et al. NEJM 2012
+  pmid: '22658128'
+  pmid_verified: true
+- description: PD-L1 adaptive resistance mechanism. Ribas. Cancer Discov 2015
+  pmid: '26272491'
+  pmid_verified: true
+additional_agents:
+- drug_id: avelumab
+  mechanism: Anti-PD-L1 monoclonal antibody
+  in_drug_library: false
+data_calibration:
+  source: GSE176078 TNBC scRNA-seq (CellChat-lite)
+  n_cells: 997
+  communication_strength: 0.0187
+  max_communication_strength: 0.0362
+  n_active_pairs: 2
+  top_interactions:
+  - sender: Macrophage
+    receiver: CD8_T
+    ligand: PDCD1LG2
+    receptor: PDCD1
+    probability: 0.0362
+  - sender: Tumor
+    receiver: CD8_T
+    ligand: CD274
+    receptor: PDCD1
+    probability: 0.0012

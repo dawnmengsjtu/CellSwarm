@@ -1,0 +1,98 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: trastuzumab
+generic_name: Trastuzumab
+brand_name: Herceptin
+drug_class: targeted_therapy
+subclass: anti_HER2
+molecular_type: monoclonal_antibody
+fda_status: approved
+approved_indications:
+- HER2+ breast cancer
+targets:
+- name: HER2
+  gene: ERBB2
+  type: receptor
+  action: antagonist
+  selectivity: high
+cell_effects:
+  CD8_T:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.02
+    notes: ADCC-mediated immune activation
+  Tumor:
+    direct: true
+    state_effects:
+    - parameter: proliferation_rate
+      direction: decrease
+      rate_per_step: 0.12
+      condition: HER2_positive
+    - parameter: apoptosis_susceptibility
+      direction: increase
+      rate_per_step: 0.08
+      condition: HER2_positive
+  Treg:
+    direct: false
+    state_effects: []
+  Macrophage:
+    direct: false
+    state_effects:
+    - parameter: phagocytic_activity
+      direction: increase
+      rate_per_step: 0.04
+    notes: ADCP via Fc receptor
+  NK:
+    direct: false
+    state_effects:
+    - parameter: cytotoxicity
+      direction: increase
+      rate_per_step: 0.06
+    notes: ADCC via CD16/FcγRIII
+  B_cell:
+    direct: false
+    state_effects: []
+environment_effects: []
+pharmacokinetics:
+  administration: IV
+  standard_dose: 6 mg/kg q3w
+  onset_steps: 1
+  peak_steps: 3
+  half_life_steps: 28
+  concentration_curve: plateau
+  steady_state_fraction: 0.9
+dose_response:
+  model: hill
+  ec50: 0.3
+  hill_coefficient: 2.0
+  max_effect: 1.0
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.05
+    notes: TNBC is HER2-negative by definition
+  Melanoma:
+    efficacy_modifier: 0.05
+    notes: HER2 rarely expressed
+  NSCLC:
+    efficacy_modifier: 0.1
+    notes: Rare HER2 mutations
+  CRC-MSI-H:
+    efficacy_modifier: 0.1
+    notes: Rare HER2 amplification
+  CRC-MSS:
+    efficacy_modifier: 0.15
+    notes: HER2 amplified in ~5%
+  Ovarian:
+    efficacy_modifier: 0.1
+    notes: Rare HER2 overexpression
+resistance:
+- mechanism: HER2 shedding or mutation
+  onset_steps: 20
+  probability: 0.1
+references:
+- description: Trastuzumab in HER2+ breast cancer. Slamon et al. NEJM 2001
+  pmid: '11248153'
+  verified: true

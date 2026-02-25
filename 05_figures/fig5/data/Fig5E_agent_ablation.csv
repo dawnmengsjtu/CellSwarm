@@ -1,0 +1,15 @@
+condition,seed,js_divergence,tumor_ratio
+Full model,42,0.1435,0.8868
+Full model,123,0.1449,0.8531
+Full model,456,0.1431,1.0476
+No Cancer Atlas,42,0.2522,0.2632
+No Cancer Atlas,123,0.3164,0.1256
+No Cancer Atlas,456,0.2479,0.2679
+No Drug Library,42,0.1424,0.9858
+No Drug Library,123,0.1438,0.9387
+No Drug Library,456,0.1420,1.0571
+No Pathway KB,42,0.1424,0.9384
+No Pathway KB,123,0.1457,0.8302
+Random,42,0.2801,1.3147
+Random,123,0.2647,1.2178
+Random,456,0.2776,1.2935

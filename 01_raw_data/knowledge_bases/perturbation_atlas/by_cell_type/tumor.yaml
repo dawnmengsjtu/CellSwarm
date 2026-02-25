@@ -1,0 +1,697 @@
+meta:
+  schema_version: '1.0'
+  cell_type: Tumor
+  total_entries: 14
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+perturbations:
+- id: TP53_KO_TUMOR
+  gene: TP53
+  gene_full_name: Tumor Protein P53
+  perturbation_type: knockout
+  context: in_vitro
+  phenotype_changes:
+  - parameter: proliferation
+    direction: increase
+    effect_size: 0.6
+    confidence: high
+  - parameter: apoptosis_resistance
+    direction: increase
+    effect_size: 0.75
+    confidence: high
+  - parameter: genomic_instability
+    direction: increase
+    effect_size: 0.55
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      proliferate: 0.2
+      apoptosis: -0.25
+      evade: 0.1
+    state_changes:
+      proliferation_rate: 0.25
+      apoptosis_susceptibility: -0.4
+      immune_evasion: 0.1
+  evidence:
+  - description: p53 in tumor suppression and immune regulation. Kastenhuber & Lowe.
+      Cell 2017
+    pmid: '28886379'
+    pmid_verified: true
+  notes: p53 loss removes the major cell cycle checkpoint and apoptosis trigger
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 9195_TP53_P1P2_ENSG00000141510
+    pathway_effects:
+      proliferation:
+        mean_effect: -0.0051
+        max_effect: 0.1098
+        min_effect: -0.0988
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.0448
+        max_effect: 0.1363
+        min_effect: -0.0906
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0595
+        max_effect: 0.1411
+        min_effect: -0.0561
+        n_markers: 3
+      migration:
+        mean_effect: -0.0614
+        max_effect: -0.0614
+        min_effect: -0.0614
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.046
+        max_effect: 0.0636
+        min_effect: 0.0285
+        n_markers: 2
+- id: MYC_OE_TUMOR
+  gene: MYC
+  gene_full_name: MYC Proto-Oncogene
+  perturbation_type: overexpression
+  context: in_vitro
+  phenotype_changes:
+  - parameter: proliferation
+    direction: increase
+    effect_size: 0.8
+    confidence: high
+  - parameter: immune_evasion
+    direction: increase
+    effect_size: 0.45
+    confidence: medium
+  - parameter: pd_l1_expression
+    direction: increase
+    effect_size: 0.35
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      proliferate: 0.3
+      evade: 0.15
+      signal: 0.05
+    state_changes:
+      proliferation_rate: 0.35
+      immune_evasion: 0.2
+  evidence:
+  - description: MYC drives immune evasion via PD-L1 and CD47. Casey et al. Science
+      2016
+    pmid: '27113275'
+    pmid_verified: true
+  notes: MYC directly upregulates PD-L1 and CD47, creating an immune-privileged niche
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 5374_MYC_P1P2_ENSG00000136997
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0506
+        max_effect: 0.1295
+        min_effect: -0.0677
+        n_markers: 6
+      apoptosis:
+        mean_effect: -0.0425
+        max_effect: 0.0181
+        min_effect: -0.1699
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.1321
+        max_effect: 0.3266
+        min_effect: 0.0168
+        n_markers: 3
+      migration:
+        mean_effect: -0.2574
+        max_effect: -0.2574
+        min_effect: -0.2574
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0398
+        max_effect: 0.1884
+        min_effect: -0.1088
+        n_markers: 2
+- id: CD274_OE_TUMOR
+  gene: CD274
+  gene_full_name: CD274 Molecule (PD-L1)
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: immune_evasion
+    direction: increase
+    effect_size: 0.7
+    confidence: high
+  - parameter: t_cell_exhaustion_induction
+    direction: increase
+    effect_size: 0.6
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      evade: 0.3
+      signal: 0.1
+    state_changes:
+      immune_evasion: 0.4
+  evidence:
+  - description: Tumor PD-L1 promotes immune evasion. Dong et al. Nat Med 2002
+    pmid: '12091876'
+    verified: true
+  notes: PD-L1 overexpression is the primary adaptive immune resistance mechanism
+- id: B2M_KO_TUMOR
+  gene: B2M
+  gene_full_name: Beta-2-Microglobulin
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: mhc_i_expression
+    direction: decrease
+    effect_size: -0.95
+    confidence: high
+  - parameter: cd8_t_cell_recognition
+    direction: decrease
+    effect_size: -0.85
+    confidence: high
+  - parameter: nk_cell_susceptibility
+    direction: increase
+    effect_size: 0.4
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      evade: 0.35
+      proliferate: 0.05
+    state_changes:
+      immune_evasion: 0.5
+  evidence:
+  - description: B2M loss as immunotherapy resistance mechanism. Zaretsky et al. NEJM
+      2016
+    pmid: '27433843'
+    pmid_verified: true
+  notes: B2M loss abolishes MHC-I surface expression; complete escape from CD8 T cells
+    but increased NK sensitivity
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 724_B2M_P2_ENSG00000166710
+    pathway_effects:
+      proliferation:
+        mean_effect: -0.0323
+        max_effect: 0.1389
+        min_effect: -0.1033
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.0067
+        max_effect: 0.1096
+        min_effect: -0.1189
+        n_markers: 5
+      immune_evasion:
+        mean_effect: -0.0438
+        max_effect: 0.0949
+        min_effect: -0.3152
+        n_markers: 3
+      migration:
+        mean_effect: -0.0064
+        max_effect: -0.0064
+        min_effect: -0.0064
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.002
+        max_effect: 0.0635
+        min_effect: -0.0595
+        n_markers: 2
+- id: BRCA1_KO_TUMOR
+  gene: BRCA1
+  gene_full_name: BRCA1 DNA Repair Associated
+  perturbation_type: knockout
+  context: in_vitro
+  phenotype_changes:
+  - parameter: genomic_instability
+    direction: increase
+    effect_size: 0.7
+    confidence: high
+  - parameter: neoantigen_load
+    direction: increase
+    effect_size: 0.5
+    confidence: medium
+  - parameter: parp_inhibitor_sensitivity
+    direction: increase
+    effect_size: 0.85
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      proliferate: 0.05
+      apoptosis: 0.1
+    state_changes:
+      apoptosis_susceptibility: 0.2
+      immune_evasion: -0.15
+  evidence:
+  - description: BRCA1 deficiency and immunogenicity. Strickland et al. Cell Rep 2016
+    pmid: '28886379'
+    pmid_verified: true
+  notes: BRCA1 loss increases TMB and neoantigen load, making tumors more immunogenic
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 884_BRCA1_P1P2_ENSG00000012048
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0194
+        max_effect: 0.1123
+        min_effect: -0.0249
+        n_markers: 6
+      apoptosis:
+        mean_effect: -0.0133
+        max_effect: 0.1028
+        min_effect: -0.1138
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0748
+        max_effect: 0.1281
+        min_effect: 0.0175
+        n_markers: 3
+      migration:
+        mean_effect: -0.1772
+        max_effect: -0.1772
+        min_effect: -0.1772
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.1341
+        max_effect: 0.2537
+        min_effect: 0.0145
+        n_markers: 2
+- id: EGFR_OE_TUMOR
+  gene: EGFR
+  gene_full_name: Epidermal Growth Factor Receptor
+  perturbation_type: overexpression
+  context: in_vitro
+  phenotype_changes:
+  - parameter: proliferation
+    direction: increase
+    effect_size: 0.65
+    confidence: high
+  - parameter: survival_signaling
+    direction: increase
+    effect_size: 0.55
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      proliferate: 0.25
+      apoptosis: -0.1
+      migrate: 0.05
+    state_changes:
+      proliferation_rate: 0.3
+      apoptosis_susceptibility: -0.15
+  evidence:
+  - description: EGFR signaling in cancer. Sigismund et al. Curr Opin Cell Biol 2018
+    pmid: '29124875'
+    pmid_verified: true
+  notes: EGFR amplification drives proliferation via RAS-MAPK and PI3K-AKT pathways
+- id: CDH1_KO_TUMOR
+  gene: CDH1
+  gene_full_name: Cadherin 1 (E-cadherin)
+  perturbation_type: knockout
+  context: in_vitro
+  phenotype_changes:
+  - parameter: migration
+    direction: increase
+    effect_size: 0.7
+    confidence: high
+  - parameter: emt_score
+    direction: increase
+    effect_size: 0.65
+    confidence: high
+  - parameter: immune_evasion
+    direction: increase
+    effect_size: 0.3
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      migrate: 0.25
+      evade: 0.1
+      proliferate: -0.05
+    state_changes:
+      immune_evasion: 0.15
+  evidence:
+  - description: E-cadherin loss in EMT and metastasis. Dongre & Weinberg. Nat Rev
+      Mol Cell Biol 2019
+    pmid: '30459476'
+    pmid_verified: true
+  notes: E-cadherin loss triggers EMT, increasing motility and immune evasion
+- id: JAK1_KO_TUMOR
+  gene: JAK1
+  gene_full_name: Janus Kinase 1
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: ifn_gamma_response
+    direction: decrease
+    effect_size: -0.85
+    confidence: high
+  - parameter: pd_l1_induction
+    direction: decrease
+    effect_size: -0.7
+    confidence: high
+  - parameter: mhc_i_upregulation
+    direction: decrease
+    effect_size: -0.6
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      evade: 0.25
+      proliferate: 0.05
+    state_changes:
+      immune_evasion: 0.35
+  evidence:
+  - description: JAK1/2 loss as immunotherapy resistance. Manguso et al. Nature 2017
+    pmid: '28723893'
+    verified: true
+  notes: JAK1 loss blocks IFN-gamma signaling; tumors become invisible to T cells
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 4247_JAK1_P1P2_ENSG00000162434
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0483
+        max_effect: 0.1163
+        min_effect: -0.0459
+        n_markers: 6
+      apoptosis:
+        mean_effect: -0.005
+        max_effect: 0.1789
+        min_effect: -0.0843
+        n_markers: 5
+      immune_evasion:
+        mean_effect: -0.0021
+        max_effect: 0.115
+        min_effect: -0.0686
+        n_markers: 3
+      migration:
+        mean_effect: -0.0514
+        max_effect: -0.0514
+        min_effect: -0.0514
+        n_markers: 1
+      inflammation:
+        mean_effect: -0.1911
+        max_effect: -0.1225
+        min_effect: -0.2598
+        n_markers: 2
+- id: CTNNB1_OE_TUMOR
+  gene: CTNNB1
+  gene_full_name: Catenin Beta 1 (Beta-catenin)
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: t_cell_exclusion
+    direction: increase
+    effect_size: 0.55
+    confidence: high
+  - parameter: wnt_signaling
+    direction: increase
+    effect_size: 0.7
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      evade: 0.2
+      proliferate: 0.1
+    state_changes:
+      immune_evasion: 0.25
+      proliferation_rate: 0.1
+  evidence:
+  - description: WNT/beta-catenin drives T cell exclusion. Spranger et al. Nature
+      2015
+    pmid: '26380088'
+    pmid_verified: true
+  notes: Activated beta-catenin suppresses CCL4, preventing DC recruitment and T cell
+    priming
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 1937_CTNNB1_P1P2_ENSG00000168036
+    pathway_effects:
+      proliferation:
+        mean_effect: -0.0273
+        max_effect: 0.2694
+        min_effect: -0.2229
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.0302
+        max_effect: 0.3382
+        min_effect: -0.2309
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0936
+        max_effect: 0.254
+        min_effect: -0.1468
+        n_markers: 3
+      migration:
+        mean_effect: 0.0408
+        max_effect: 0.0408
+        min_effect: 0.0408
+        n_markers: 1
+      inflammation:
+        mean_effect: -0.1484
+        max_effect: -0.0808
+        min_effect: -0.216
+        n_markers: 2
+- id: VEGFA_OE_TUMOR
+  gene: VEGFA
+  gene_full_name: Vascular Endothelial Growth Factor A
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: angiogenesis
+    direction: increase
+    effect_size: 0.75
+    confidence: high
+  - parameter: immune_suppression
+    direction: increase
+    effect_size: 0.4
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      signal: 0.15
+      evade: 0.1
+    state_changes:
+      immune_evasion: 0.15
+  evidence:
+  - description: VEGF in tumor angiogenesis and immune evasion. Voron et al. J Exp
+      Med 2015
+    pmid: '25601652'
+    pmid_verified: true
+  notes: VEGF promotes abnormal vasculature and directly suppresses T cell function
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 9718_VEGFA_P1P2_ENSG00000112715
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0221
+        max_effect: 0.1223
+        min_effect: -0.0607
+        n_markers: 6
+      apoptosis:
+        mean_effect: -0.0119
+        max_effect: 0.1153
+        min_effect: -0.0811
+        n_markers: 5
+      immune_evasion:
+        mean_effect: -0.0345
+        max_effect: 0.0009
+        min_effect: -0.0924
+        n_markers: 3
+      migration:
+        mean_effect: 0.0179
+        max_effect: 0.0179
+        min_effect: 0.0179
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.1012
+        max_effect: 0.1927
+        min_effect: 0.0096
+        n_markers: 2
+- id: KRAS_G12D_TUMOR
+  gene: KRAS
+  gene_full_name: KRAS Proto-Oncogene GTPase
+  perturbation_type: overexpression
+  context: in_vitro
+  phenotype_changes:
+  - parameter: proliferation
+    direction: increase
+    effect_size: 0.7
+    confidence: high
+  - parameter: immune_evasion
+    direction: increase
+    effect_size: 0.35
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      proliferate: 0.25
+      evade: 0.1
+      signal: 0.05
+    state_changes:
+      proliferation_rate: 0.3
+      immune_evasion: 0.1
+  evidence:
+  - description: Oncogenic KRAS drives immunosuppressive TME. Pylayeva-Gupta et al.
+      Cancer Cell 2012
+    pmid: '22698407'
+    pmid_verified: true
+  notes: KRAS G12D promotes GM-CSF secretion, recruiting MDSCs and suppressing anti-tumor
+    immunity
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 4466_KRAS_P1P2_ENSG00000133703
+    pathway_effects:
+      proliferation:
+        mean_effect: -0.0098
+        max_effect: 0.1224
+        min_effect: -0.078
+        n_markers: 6
+      apoptosis:
+        mean_effect: -0.0063
+        max_effect: 0.1144
+        min_effect: -0.0749
+        n_markers: 5
+      immune_evasion:
+        mean_effect: -0.0662
+        max_effect: -0.0347
+        min_effect: -0.1126
+        n_markers: 3
+      migration:
+        mean_effect: -0.2211
+        max_effect: -0.2211
+        min_effect: -0.2211
+        n_markers: 1
+      inflammation:
+        mean_effect: -0.033
+        max_effect: -0.0255
+        min_effect: -0.0404
+        n_markers: 2
+- id: TGFB1_OE_TUMOR
+  gene: TGFB1
+  gene_full_name: Transforming Growth Factor Beta 1
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: immune_exclusion
+    direction: increase
+    effect_size: 0.6
+    confidence: high
+  - parameter: emt_score
+    direction: increase
+    effect_size: 0.5
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      evade: 0.2
+      signal: 0.1
+      migrate: 0.05
+    state_changes:
+      immune_evasion: 0.3
+  evidence:
+  - description: TGF-beta drives immune exclusion. Mariathasan et al. Nature 2018
+    pmid: '29669246'
+    pmid_verified: true
+  notes: Tumor-derived TGF-beta creates a fibrotic barrier excluding T cells from
+    tumor core
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 8859_TGFB1_P1P2_ENSG00000105329
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0023
+        max_effect: 0.1149
+        min_effect: -0.1065
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.043
+        max_effect: 0.1079
+        min_effect: -0.0583
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0321
+        max_effect: 0.0824
+        min_effect: 0.0029
+        n_markers: 3
+      migration:
+        mean_effect: 0.0086
+        max_effect: 0.0086
+        min_effect: 0.0086
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0059
+        max_effect: 0.0112
+        min_effect: 0.0007
+        n_markers: 2
+- id: IDO1_OE_TUMOR
+  gene: IDO1
+  gene_full_name: Indoleamine 2,3-Dioxygenase 1
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: tryptophan_depletion
+    direction: increase
+    effect_size: 0.6
+    confidence: high
+  - parameter: t_cell_suppression
+    direction: increase
+    effect_size: 0.5
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      evade: 0.2
+      signal: 0.05
+    state_changes:
+      immune_evasion: 0.25
+  evidence:
+  - description: IDO in tumor immune escape. Munn & Mellor. J Clin Invest 2007
+    pmid: '17476344'
+    pmid_verified: true
+  notes: IDO1 depletes tryptophan and generates kynurenine, suppressing T cells and
+    promoting Tregs
+- id: CD47_OE_TUMOR
+  gene: CD47
+  gene_full_name: CD47 Molecule
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: phagocytosis_evasion
+    direction: increase
+    effect_size: 0.7
+    confidence: high
+  - parameter: macrophage_suppression
+    direction: increase
+    effect_size: 0.5
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      evade: 0.25
+      proliferate: 0.05
+    state_changes:
+      immune_evasion: 0.3
+  evidence:
+  - description: CD47 as 'don't eat me' signal. Willingham et al. PNAS 2012
+    pmid: '22451913'
+    pmid_verified: true
+  notes: CD47 binds SIRPa on macrophages to inhibit phagocytosis; overexpressed in
+    most cancers
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 1367_CD47_P1P2_ENSG00000196776
+    pathway_effects:
+      proliferation:
+        mean_effect: -0.0232
+        max_effect: 0.0887
+        min_effect: -0.1933
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.0222
+        max_effect: 0.1384
+        min_effect: -0.0593
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.1735
+        max_effect: 0.2293
+        min_effect: 0.085
+        n_markers: 3
+      migration:
+        mean_effect: -0.0608
+        max_effect: -0.0608
+        min_effect: -0.0608
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0368
+        max_effect: 0.0932
+        min_effect: -0.0196
+        n_markers: 2

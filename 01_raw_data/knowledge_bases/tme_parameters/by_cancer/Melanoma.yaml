@@ -1,0 +1,194 @@
+meta:
+  schema_version: '1.0'
+  cancer_id: Melanoma
+  full_name: Cutaneous Melanoma
+  tissue: skin
+  tme_phenotype: immune_hot
+  generated_at: '2026-02-13'
+  generated_by: Dawn (literature curation)
+  compatible_engine: cellswarm>=2.0
+engine_params:
+  grid:
+    size:
+    - 200
+    - 200
+    resolution: 10
+  vessels:
+    density: medium
+    concentration:
+      oxygen: 0.07
+      glucose: 5.0
+  fields:
+    oxygen:
+      initial_level: 0.065
+      diffusion_coeff: 2.0e-05
+      decay_rate: 0.008
+      consumption:
+        Tumor: 0.002
+        CD8_T: 0.001
+      sensitivity_range:
+      - 0.8
+      - 1.2
+      reference:
+        pmid: '30643250'
+        note: Bhandari 2019 - tumor hypoxia landmarks
+    glucose:
+      initial_level: 4.8
+      diffusion_coeff: 1.0e-05
+      decay_rate: 0.005
+      consumption:
+        Tumor: 0.1
+        CD8_T: 0.04
+      sensitivity_range:
+      - 0.7
+      - 1.3
+      reference:
+        pmid: '27386546'
+        note: DeBerardinis 2016 - cancer metabolism
+    IFN_gamma:
+      initial_level: 0.0
+      diffusion_coeff: 1.0e-06
+      decay_rate: 0.1
+      secretion:
+        CD8_T:
+          rate: 0.06
+          condition: action==attack
+        NK:
+          rate: 0.04
+          condition: action==attack
+      reference:
+        pmid: '29686425'
+        note: Binnewies 2018 - TIME review
+    IL2:
+      initial_level: 0.0
+      diffusion_coeff: 1.0e-06
+      decay_rate: 0.05
+      secretion:
+        CD8_T:
+          rate: 0.035
+      consumption:
+        Treg: 0.03
+      reference:
+        pmid: '29686425'
+        note: Binnewies 2018 - TIME review
+    TGF_beta:
+      initial_level: 0.03
+      diffusion_coeff: 8.0e-07
+      decay_rate: 0.08
+      secretion:
+        Treg:
+          rate: 0.025
+        Tumor:
+          rate: 0.015
+          condition: HIF1a>0.5
+      reference:
+        pmid: '32710082'
+        note: Derynck 2021 - TGFβ in cancer
+    PD_L1:
+      initial_level: 0.0
+      diffusion_coeff: 0
+      decay_rate: 0.2
+      secretion:
+        Tumor:
+          rate: 0.035
+      ifng_induction: 0.12
+      reference:
+        pmid: '33580222'
+        note: Doroshow 2021 - PD-L1 biomarker
+  migration_speeds:
+    Tumor: 0.15
+    CD8_T: 0.9
+    NK: 0.7
+    Treg: 0.5
+    Macrophage: 0.3
+    B_cell: 0.2
+  cell_composition:
+    total_cells: 100
+    proportions:
+      Tumor: 0.3
+      CD8_T: 0.28
+      Macrophage: 0.15
+      NK: 0.1
+      Treg: 0.1
+      B_cell: 0.07
+    spawn_regions:
+      Tumor: center
+      CD8_T: border
+      NK: border
+      Treg: stroma
+      Macrophage: distributed
+      B_cell: stroma
+semantic_thresholds:
+  oxygen:
+    severe_hypoxia: 0.01
+    hypoxia: 0.025
+    normoxia:
+    - 0.05
+    - 0.08
+    display_unit: mM
+  glucose:
+    depleted: 0.5
+    low: 1.5
+    normal:
+    - 3.0
+    - 5.5
+  IFN_gamma:
+    low: 0.02
+    active: 0.1
+    high: 0.3
+  TGF_beta:
+    low: 0.03
+    immunosuppressive: 0.1
+    high: 0.2
+  PD_L1:
+    negative: 0.05
+    low_expression: 0.15
+    high_expression: 0.3
+  IL2:
+    absent: 0.01
+    supportive: 0.05
+    proliferative: 0.15
+cancer_profile:
+  immune_context: immune_hot, highest TMB among solid tumors
+  infiltration_pattern: 高密度 TIL 浸润，T 细胞可深入肿瘤核心
+  key_immune_features:
+  - UV 诱变导致极高突变负荷 (TMB ~15 mut/Mb)，新抗原丰富
+  - CD8+ T 细胞浸润最高的实体瘤之一
+  - PD-L1 高表达，IFN-γ 诱导显著
+  - β-catenin 通路激活可导致免疫排斥
+  - Treg 浸润但 TGF-β 水平相对较低
+  metabolic_features:
+  - 轻度缺氧，皮肤组织氧供较好
+  - BRAF V600E 突变影响代谢通路
+  stroma_features:
+  - 基质相对疏松，利于免疫细胞迁移
+  - 中等血管密度
+  therapeutic_context:
+  - 'Nivolumab + ipilimumab (CheckMate-067): 5年OS 52%'
+  - 'Pembrolizumab 单药 (KEYNOTE-006): 5年OS 39%'
+  - BRAF+MEK 抑制剂联合免疫治疗探索中
+references:
+- pmid: '28889792'
+  description: Wolchok JD et al. Overall survival with combined nivolumab and ipilimumab
+    in advanced melanoma (CheckMate-067). N Engl J Med. 2017
+  verified: true
+- pmid: '25970248'
+  description: Spranger S et al. Melanoma-intrinsic β-catenin signalling prevents
+    anti-tumour immunity. Nature. 2015
+  verified: true
+- pmid: '25765070'
+  description: Rizvi NA et al. Mutational landscape determines sensitivity to PD-1
+    blockade in NSCLC. Science. 2015
+  verified: true
+- pmid: '21376230'
+  description: 'Hanahan D, Weinberg RA. Hallmarks of cancer: the next generation.
+    Cell. 2011'
+  verified: true
+- pmid: '29686425'
+  description: Binnewies M et al. Understanding the tumor immune microenvironment
+    (TIME) for effective immunotherapy. Nat Med. 2018
+  verified: true
+- pmid: '21436444'
+  description: 'Schreiber RD et al. Cancer immunoediting: integrating immunity''s
+    roles in cancer suppression and promotion. Science. 2011'
+  verified: true

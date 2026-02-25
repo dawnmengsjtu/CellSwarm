@@ -1,0 +1,199 @@
+meta:
+  schema_version: '1.0'
+  cancer_id: Ovarian
+  full_name: High-Grade Serous Ovarian Cancer
+  tissue: ovary
+  tme_phenotype: immune_altered_immunosuppressed
+  generated_at: '2026-02-13'
+  generated_by: Dawn (literature curation)
+  compatible_engine: cellswarm>=2.0
+engine_params:
+  grid:
+    size:
+    - 200
+    - 200
+    resolution: 10
+  vessels:
+    density: low
+    concentration:
+      oxygen: 0.05
+      glucose: 4.0
+  fields:
+    oxygen:
+      initial_level: 0.035
+      diffusion_coeff: 2.0e-05
+      decay_rate: 0.012
+      consumption:
+        Tumor: 0.004
+        Macrophage: 0.001
+      sensitivity_range:
+      - 0.8
+      - 1.2
+      reference:
+        pmid: '30643250'
+        note: Bhandari 2019 - tumor hypoxia landmarks
+    glucose:
+      initial_level: 3.5
+      diffusion_coeff: 1.0e-05
+      decay_rate: 0.006
+      consumption:
+        Tumor: 0.14
+        CD8_T: 0.04
+      sensitivity_range:
+      - 0.7
+      - 1.3
+      reference:
+        pmid: '27386546'
+        note: DeBerardinis 2016 - cancer metabolism
+    IFN_gamma:
+      initial_level: 0.0
+      diffusion_coeff: 1.0e-06
+      decay_rate: 0.12
+      secretion:
+        CD8_T:
+          rate: 0.03
+          condition: action==attack
+        NK:
+          rate: 0.02
+          condition: action==attack
+      reference:
+        pmid: '29686425'
+        note: Binnewies 2018 - TIME review
+    IL2:
+      initial_level: 0.0
+      diffusion_coeff: 1.0e-06
+      decay_rate: 0.06
+      secretion:
+        CD8_T:
+          rate: 0.02
+      consumption:
+        Treg: 0.05
+      reference:
+        pmid: '29686425'
+        note: Binnewies 2018 - TIME review
+    TGF_beta:
+      initial_level: 0.12
+      diffusion_coeff: 8.0e-07
+      decay_rate: 0.07
+      secretion:
+        Treg:
+          rate: 0.05
+        Tumor:
+          rate: 0.04
+          condition: HIF1a>0.3
+        Macrophage:
+          rate: 0.03
+          condition: polarization>=0.6
+      reference:
+        pmid: '32710082'
+        note: Derynck 2021 - TGFβ in cancer
+    PD_L1:
+      initial_level: 0.0
+      diffusion_coeff: 0
+      decay_rate: 0.2
+      secretion:
+        Tumor:
+          rate: 0.01
+      ifng_induction: 0.05
+      reference:
+        pmid: '33580222'
+        note: Doroshow 2021 - PD-L1 biomarker
+  migration_speeds:
+    Tumor: 0.12
+    CD8_T: 0.5
+    NK: 0.4
+    Treg: 0.4
+    Macrophage: 0.25
+    B_cell: 0.15
+  cell_composition:
+    total_cells: 100
+    proportions:
+      Tumor: 0.5
+      CD8_T: 0.08
+      Macrophage: 0.2
+      NK: 0.05
+      Treg: 0.12
+      B_cell: 0.05
+    spawn_regions:
+      Tumor: center
+      CD8_T: border
+      NK: border
+      Treg: stroma
+      Macrophage: distributed
+      B_cell: stroma
+semantic_thresholds:
+  oxygen:
+    severe_hypoxia: 0.008
+    hypoxia: 0.015
+    normoxia:
+    - 0.03
+    - 0.06
+    display_unit: mM
+  glucose:
+    depleted: 0.4
+    low: 1.2
+    normal:
+    - 2.5
+    - 4.5
+  IFN_gamma:
+    low: 0.015
+    active: 0.08
+    high: 0.2
+  TGF_beta:
+    low: 0.06
+    immunosuppressive: 0.18
+    high: 0.35
+  PD_L1:
+    negative: 0.03
+    low_expression: 0.1
+    high_expression: 0.2
+  IL2:
+    absent: 0.01
+    supportive: 0.04
+    proliferative: 0.12
+cancer_profile:
+  immune_context: immune_cold, heavily immunosuppressive
+  infiltration_pattern: T 细胞浸润低，被基质和腹水屏障阻隔
+  key_immune_features:
+  - 免疫冷肿瘤，CD8+ T 细胞浸润低
+  - Treg 和 M2 巨噬细胞高度富集
+  - TGF-β 水平高，驱动免疫抑制和纤维化
+  - PD-L1 表达低，免疫检查点抑制剂单药效果差
+  - 腹水中免疫抑制因子（VEGF, IL-10）富集
+  metabolic_features:
+  - 严重缺氧，腹膜播散区域氧供极差
+  - 高 Warburg effect
+  - 脂质代谢异常，腹水脂肪酸促进肿瘤生长
+  stroma_features:
+  - 致密纤维化基质
+  - 低血管密度，血管异常
+  - 腹水形成独特的免疫抑制微环境
+  therapeutic_context:
+  - PARP 抑制剂 (olaparib) 对 BRCA 突变有效
+  - 免疫检查点抑制剂单药效果有限
+  - Bevacizumab + 化疗是标准方案
+  - 联合 PARP + 免疫治疗探索中
+references:
+- pmid: '27558151'
+  description: Matulonis UA et al. Ovarian cancer. Nat Rev Dis Primers. 2016
+  verified: true
+- pmid: '31403857'
+  description: 'Kandalaft LE et al. Immunotherapy in ovarian cancer: are we there
+    yet? J Clin Oncol. 2019'
+  verified: true
+- pmid: '32710082'
+  description: Derynck R et al. TGFβ biology in cancer progression and immunotherapy.
+    Nat Rev Clin Oncol. 2021
+  verified: true
+- pmid: '21376230'
+  description: 'Hanahan D, Weinberg RA. Hallmarks of cancer: the next generation.
+    Cell. 2011'
+  verified: true
+- pmid: '29686425'
+  description: Binnewies M et al. Understanding the tumor immune microenvironment
+    (TIME) for effective immunotherapy. Nat Med. 2018
+  verified: true
+- pmid: '27386546'
+  description: DeBerardinis RJ, Chandel NS. Fundamentals of cancer metabolism. Sci
+    Adv. 2016
+  verified: true

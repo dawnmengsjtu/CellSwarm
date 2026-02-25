@@ -1,0 +1,94 @@
+# Shared Defaults — 跨癌种物理常数 & Fallback 值
+# 当癌种 YAML 缺省某参数时，引擎从此文件读取默认值
+
+meta:
+  schema_version: "1.0"
+  description: "Cross-cancer shared physical constants and fallback parameters"
+  compatible_engine: ">=2.0"
+
+# 物理常数（文献共识值，不随癌种变化）
+physical_constants:
+  oxygen_diffusion_tissue: 2.0e-5    # cm²/s, Casciari 1992
+  glucose_diffusion_tissue: 1.0e-5   # cm²/s, Casciari 1992
+  cytokine_diffusion_range: [5.0e-7, 2.0e-6]  # cm²/s, Francis & Bhatt 2018
+  body_temperature_C: 37
+
+# 模拟常数
+simulation:
+  recommended_steps: 30
+  dt: 1.0
+  grid_size: [200, 200]
+  resolution: 10
+  interaction_radius: 2
+
+# 信号场 fallback（癌种文件缺省时使用）
+field_defaults:
+  oxygen:
+    initial_level: 0.06
+    diffusion_coeff: 2.0e-5
+    decay_rate: 0.01
+    vessel_concentration: 0.08
+  glucose:
+    initial_level: 5.0
+    diffusion_coeff: 1.0e-5
+    decay_rate: 0.005
+    vessel_concentration: 5.0
+  IFN_gamma:
+    initial_level: 0.0
+    diffusion_coeff: 1.0e-6
+    decay_rate: 0.1
+  IL2:
+    initial_level: 0.0
+    diffusion_coeff: 1.0e-6
+    decay_rate: 0.05
+  TGF_beta:
+    initial_level: 0.05
+    diffusion_coeff: 8.0e-7
+    decay_rate: 0.08
+  PD_L1:
+    initial_level: 0.0
+    diffusion_coeff: 0
+    decay_rate: 0.2
+
+# 细胞基线消耗（非主要贡献者的兜底值）
+baseline_consumption:
+  oxygen: 0.0008    # 每细胞每步
+  glucose: 0.02
+
+# 迁移速度 fallback（格/步）
+migration_speeds_default:
+  Tumor: 0.1
+  CD8_T: 0.8
+  NK: 0.6
+  Treg: 0.5
+  Macrophage: 0.3
+  B_cell: 0.2
+
+# 语义阈值 fallback（通用，癌种可覆盖）
+semantic_thresholds_default:
+  oxygen:
+    severe_hypoxia: 0.01
+    hypoxia: 0.02
+    normoxia_min: 0.04
+    normoxia_max: 0.08
+  glucose:
+    depleted: 0.5
+    low: 1.5
+    normal_min: 3.0
+    normal_max: 5.5
+  IFN_gamma:
+    low: 0.02
+    active: 0.1
+    high: 0.3
+  TGF_beta:
+    low: 0.05
+    immunosuppressive: 0.15
+    high: 0.3
+  PD_L1:
+    negative: 0.05
+    low_expression: 0.15
+    high_expression: 0.3
+  IL2:
+    absent: 0.01
+    supportive: 0.05
+    proliferative: 0.15

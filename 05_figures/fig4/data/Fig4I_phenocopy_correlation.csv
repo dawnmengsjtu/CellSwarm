@@ -1,0 +1,4 @@
+ko,drug,pearson_r,ko_tumor_ratio,drug_tumor_ratio
+PD1_KO,anti_PD1,0.8625,0.6706,0.8311
+CTLA4_KO,anti_CTLA4,0.564,0.6293,0.9948
+TGFB1_KO,anti_TGFb,0.3136,1.0474,0.1754

@@ -1,0 +1,733 @@
+{
+  "source": "GSE176078",
+  "method": "CellChat-lite (Python, L-R co-expression)",
+  "n_cells": 997,
+  "cell_types": {
+    "Tumor": 321,
+    "Treg": 252,
+    "CD8_T": 171,
+    "Macrophage": 127,
+    "B_cell": 88,
+    "NK": 38
+  },
+  "pathways": {
+    "PD1_PDL1": {
+      "mean_score": 0.0187,
+      "max_score": 0.0362,
+      "n_active_pairs": 2,
+      "pairs": [
+        {
+          "ligand": "PDCD1LG2",
+          "receptor": "PDCD1",
+          "sender": "Macrophage",
+          "receiver": "CD8_T",
+          "lig_mean": 0.189,
+          "rec_mean": 0.386,
+          "lig_pct": 0.1339,
+          "rec_pct": 0.2105,
+          "comm_prob": 0.0362
+        },
+        {
+          "ligand": "CD274",
+          "receptor": "PDCD1",
+          "sender": "Tumor",
+          "receiver": "CD8_T",
+          "lig_mean": 0.0156,
+          "rec_mean": 0.386,
+          "lig_pct": 0.0156,
+          "rec_pct": 0.2105,
+          "comm_prob": 0.0012
+        }
+      ]
+    },
+    "CTLA4_CD80": {
+      "mean_score": 0.0675,
+      "max_score": 0.1982,
+      "n_active_pairs": 6,
+      "pairs": [
+        {
+          "ligand": "CD86",
+          "receptor": "CTLA4",
+          "sender": "Macrophage",
+          "receiver": "Treg",
+          "lig_mean": 1.0236,
+          "rec_mean": 0.75,
+          "lig_pct": 0.4567,
+          "rec_pct": 0.2262,
+          "comm_prob": 0.1982
+        },
+        {
+          "ligand": "CD86",
+          "receptor": "CTLA4",
+          "sender": "Macrophage",
+          "receiver": "CD8_T",
+          "lig_mean": 1.0236,
+          "rec_mean": 0.3743,
+          "lig_pct": 0.4567,
+          "rec_pct": 0.1813,
+          "comm_prob": 0.1122
+        },
+        {
+          "ligand": "CD80",
+          "receptor": "CTLA4",
+          "sender": "Macrophage",
+          "receiver": "Treg",
+          "lig_mean": 0.1575,
+          "rec_mean": 0.75,
+          "lig_pct": 0.1339,
+          "rec_pct": 0.2262,
+          "comm_prob": 0.046
+        },
+        {
+          "ligand": "CD80",
+          "receptor": "CTLA4",
+          "sender": "Macrophage",
+          "receiver": "CD8_T",
+          "lig_mean": 0.1575,
+          "rec_mean": 0.3743,
+          "lig_pct": 0.1339,
+          "rec_pct": 0.1813,
+          "comm_prob": 0.0325
+        },
+        {
+          "ligand": "CD86",
+          "receptor": "CTLA4",
+          "sender": "B_cell",
+          "receiver": "Treg",
+          "lig_mean": 0.0568,
+          "rec_mean": 0.75,
+          "lig_pct": 0.0455,
+          "rec_pct": 0.2262,
+          "comm_prob": 0.0094
+        },
+        {
+          "ligand": "CD86",
+          "receptor": "CTLA4",
+          "sender": "B_cell",
+          "receiver": "CD8_T",
+          "lig_mean": 0.0568,
+          "rec_mean": 0.3743,
+          "lig_pct": 0.0455,
+          "rec_pct": 0.1813,
+          "comm_prob": 0.0066
+        }
+      ]
+    },
+    "IFNg_signaling": {
+      "mean_score": 0.349,
+      "max_score": 0.4447,
+      "n_active_pairs": 4,
+      "pairs": [
+        {
+          "ligand": "IFNG",
+          "receptor": "IFNGR1",
+          "sender": "CD8_T",
+          "receiver": "Macrophage",
+          "lig_mean": 1.7135,
+          "rec_mean": 1.1575,
+          "lig_pct": 0.3158,
+          "rec_pct": 0.5433,
+          "comm_prob": 0.4447
+        },
+        {
+          "ligand": "IFNG",
+          "receptor": "IFNGR1",
+          "sender": "NK",
+          "receiver": "Macrophage",
+          "lig_mean": 1.8158,
+          "rec_mean": 1.1575,
+          "lig_pct": 0.2895,
+          "rec_pct": 0.5433,
+          "comm_prob": 0.4197
+        },
+        {
+          "ligand": "IFNG",
+          "receptor": "IFNGR1",
+          "sender": "NK",
+          "receiver": "Tumor",
+          "lig_mean": 1.8158,
+          "rec_mean": 0.5576,
+          "lig_pct": 0.2895,
+          "rec_pct": 0.2679,
+          "comm_prob": 0.2696
+        },
+        {
+          "ligand": "IFNG",
+          "receptor": "IFNGR1",
+          "sender": "CD8_T",
+          "receiver": "Tumor",
+          "lig_mean": 1.7135,
+          "rec_mean": 0.5576,
+          "lig_pct": 0.3158,
+          "rec_pct": 0.2679,
+          "comm_prob": 0.2619
+        }
+      ]
+    },
+    "TGFb_signaling": {
+      "mean_score": 0.024,
+      "max_score": 0.1052,
+      "n_active_pairs": 13,
+      "pairs": [
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR2",
+          "sender": "Treg",
+          "receiver": "Macrophage",
+          "lig_mean": 0.3373,
+          "rec_mean": 0.5984,
+          "lig_pct": 0.2341,
+          "rec_pct": 0.4016,
+          "comm_prob": 0.1052
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR1",
+          "sender": "Macrophage",
+          "receiver": "Tumor",
+          "lig_mean": 1.3622,
+          "rec_mean": 0.134,
+          "lig_pct": 0.5827,
+          "rec_pct": 0.109,
+          "comm_prob": 0.0466
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR2",
+          "sender": "Treg",
+          "receiver": "CD8_T",
+          "lig_mean": 0.3373,
+          "rec_mean": 0.1871,
+          "lig_pct": 0.2341,
+          "rec_pct": 0.1637,
+          "comm_prob": 0.0411
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR2",
+          "sender": "Tumor",
+          "receiver": "Macrophage",
+          "lig_mean": 0.2461,
+          "rec_mean": 0.5984,
+          "lig_pct": 0.0779,
+          "rec_pct": 0.4016,
+          "comm_prob": 0.0299
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR1",
+          "sender": "Treg",
+          "receiver": "Tumor",
+          "lig_mean": 0.3373,
+          "rec_mean": 0.134,
+          "lig_pct": 0.2341,
+          "rec_pct": 0.109,
+          "comm_prob": 0.0232
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR2",
+          "sender": "Tumor",
+          "receiver": "CD8_T",
+          "lig_mean": 0.2461,
+          "rec_mean": 0.1871,
+          "lig_pct": 0.0779,
+          "rec_pct": 0.1637,
+          "comm_prob": 0.0167
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR1",
+          "sender": "Tumor",
+          "receiver": "Tumor",
+          "lig_mean": 0.2461,
+          "rec_mean": 0.134,
+          "lig_pct": 0.0779,
+          "rec_pct": 0.109,
+          "comm_prob": 0.0141
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR1",
+          "sender": "Macrophage",
+          "receiver": "NK",
+          "lig_mean": 1.3622,
+          "rec_mean": 0.0526,
+          "lig_pct": 0.5827,
+          "rec_pct": 0.0526,
+          "comm_prob": 0.0141
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR1",
+          "sender": "Treg",
+          "receiver": "NK",
+          "lig_mean": 0.3373,
+          "rec_mean": 0.0526,
+          "lig_pct": 0.2341,
+          "rec_pct": 0.0526,
+          "comm_prob": 0.007
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR1",
+          "sender": "Tumor",
+          "receiver": "NK",
+          "lig_mean": 0.2461,
+          "rec_mean": 0.0526,
+          "lig_pct": 0.0779,
+          "rec_pct": 0.0526,
+          "comm_prob": 0.006
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR1",
+          "sender": "Macrophage",
+          "receiver": "CD8_T",
+          "lig_mean": 1.3622,
+          "rec_mean": 0.0234,
+          "lig_pct": 0.5827,
+          "rec_pct": 0.0234,
+          "comm_prob": 0.0042
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR1",
+          "sender": "Treg",
+          "receiver": "CD8_T",
+          "lig_mean": 0.3373,
+          "rec_mean": 0.0234,
+          "lig_pct": 0.2341,
+          "rec_pct": 0.0234,
+          "comm_prob": 0.0021
+        },
+        {
+          "ligand": "TGFB1",
+          "receptor": "TGFBR1",
+          "sender": "Tumor",
+          "receiver": "CD8_T",
+          "lig_mean": 0.2461,
+          "rec_mean": 0.0234,
+          "lig_pct": 0.0779,
+          "rec_pct": 0.0234,
+          "comm_prob": 0.0018
+        }
+      ]
+    },
+    "IL2_signaling": {
+      "mean_score": 0.0023,
+      "max_score": 0.0031,
+      "n_active_pairs": 2,
+      "pairs": [
+        {
+          "ligand": "IL2",
+          "receptor": "IL2RA",
+          "sender": "CD8_T",
+          "receiver": "Treg",
+          "lig_mean": 0.0643,
+          "rec_mean": 0.2778,
+          "lig_pct": 0.0234,
+          "rec_pct": 0.1032,
+          "comm_prob": 0.0031
+        },
+        {
+          "ligand": "IL2",
+          "receptor": "IL2RA",
+          "sender": "CD8_T",
+          "receiver": "CD8_T",
+          "lig_mean": 0.0643,
+          "rec_mean": 0.0585,
+          "lig_pct": 0.0234,
+          "rec_pct": 0.0292,
+          "comm_prob": 0.0014
+        }
+      ]
+    },
+    "TNF_signaling": {
+      "mean_score": 0.1134,
+      "max_score": 0.1714,
+      "n_active_pairs": 3,
+      "pairs": [
+        {
+          "ligand": "TNF",
+          "receptor": "TNFRSF1A",
+          "sender": "Macrophage",
+          "receiver": "Tumor",
+          "lig_mean": 0.7323,
+          "rec_mean": 0.8255,
+          "lig_pct": 0.2205,
+          "rec_pct": 0.3988,
+          "comm_prob": 0.1714
+        },
+        {
+          "ligand": "TNF",
+          "receptor": "TNFRSF1B",
+          "sender": "Macrophage",
+          "receiver": "CD8_T",
+          "lig_mean": 0.7323,
+          "rec_mean": 0.6784,
+          "lig_pct": 0.2205,
+          "rec_pct": 0.3626,
+          "comm_prob": 0.1554
+        },
+        {
+          "ligand": "TNF",
+          "receptor": "TNFRSF1A",
+          "sender": "NK",
+          "receiver": "Tumor",
+          "lig_mean": 0.0789,
+          "rec_mean": 0.8255,
+          "lig_pct": 0.0526,
+          "rec_pct": 0.3988,
+          "comm_prob": 0.0134
+        }
+      ]
+    },
+    "CXCL_chemokine": {
+      "mean_score": 0.1673,
+      "max_score": 0.5022,
+      "n_active_pairs": 8,
+      "pairs": [
+        {
+          "ligand": "CXCL10",
+          "receptor": "CXCR3",
+          "sender": "Macrophage",
+          "receiver": "CD8_T",
+          "lig_mean": 9.6063,
+          "rec_mean": 0.4152,
+          "lig_pct": 0.2992,
+          "rec_pct": 0.2515,
+          "comm_prob": 0.5022
+        },
+        {
+          "ligand": "CXCL10",
+          "receptor": "CXCR3",
+          "sender": "Macrophage",
+          "receiver": "NK",
+          "lig_mean": 9.6063,
+          "rec_mean": 0.2895,
+          "lig_pct": 0.2992,
+          "rec_pct": 0.1842,
+          "comm_prob": 0.3072
+        },
+        {
+          "ligand": "CXCL9",
+          "receptor": "CXCR3",
+          "sender": "Macrophage",
+          "receiver": "CD8_T",
+          "lig_mean": 2.8346,
+          "rec_mean": 0.4152,
+          "lig_pct": 0.2126,
+          "rec_pct": 0.2515,
+          "comm_prob": 0.2306
+        },
+        {
+          "ligand": "CXCL9",
+          "receptor": "CXCR3",
+          "sender": "Macrophage",
+          "receiver": "NK",
+          "lig_mean": 2.8346,
+          "rec_mean": 0.2895,
+          "lig_pct": 0.2126,
+          "rec_pct": 0.1842,
+          "comm_prob": 0.1669
+        },
+        {
+          "ligand": "CXCL12",
+          "receptor": "CXCR4",
+          "sender": "Tumor",
+          "receiver": "CD8_T",
+          "lig_mean": 0.1464,
+          "rec_mean": 5.4561,
+          "lig_pct": 0.0498,
+          "rec_pct": 0.7895,
+          "comm_prob": 0.0446
+        },
+        {
+          "ligand": "CXCL10",
+          "receptor": "CXCR3",
+          "sender": "Tumor",
+          "receiver": "CD8_T",
+          "lig_mean": 0.3769,
+          "rec_mean": 0.4152,
+          "lig_pct": 0.0779,
+          "rec_pct": 0.2515,
+          "comm_prob": 0.0308
+        },
+        {
+          "ligand": "CXCL12",
+          "receptor": "CXCR4",
+          "sender": "Tumor",
+          "receiver": "Macrophage",
+          "lig_mean": 0.1464,
+          "rec_mean": 2.4803,
+          "lig_pct": 0.0498,
+          "rec_pct": 0.5276,
+          "comm_prob": 0.03
+        },
+        {
+          "ligand": "CXCL10",
+          "receptor": "CXCR3",
+          "sender": "Tumor",
+          "receiver": "NK",
+          "lig_mean": 0.3769,
+          "rec_mean": 0.2895,
+          "lig_pct": 0.0779,
+          "rec_pct": 0.1842,
+          "comm_prob": 0.0257
+        }
+      ]
+    },
+    "CCL_chemokine": {
+      "mean_score": 0.0258,
+      "max_score": 0.0566,
+      "n_active_pairs": 4,
+      "pairs": [
+        {
+          "ligand": "CCL5",
+          "receptor": "CCR5",
+          "sender": "CD8_T",
+          "receiver": "Macrophage",
+          "lig_mean": 10.2456,
+          "rec_mean": 0.0787,
+          "lig_pct": 0.8947,
+          "rec_pct": 0.063,
+          "comm_prob": 0.0566
+        },
+        {
+          "ligand": "CCL5",
+          "receptor": "CCR5",
+          "sender": "CD8_T",
+          "receiver": "NK",
+          "lig_mean": 10.2456,
+          "rec_mean": 0.0526,
+          "lig_pct": 0.8947,
+          "rec_pct": 0.0526,
+          "comm_prob": 0.0386
+        },
+        {
+          "ligand": "CCL2",
+          "receptor": "CCR2",
+          "sender": "Tumor",
+          "receiver": "Macrophage",
+          "lig_mean": 0.1807,
+          "rec_mean": 0.0551,
+          "lig_pct": 0.0685,
+          "rec_pct": 0.0472,
+          "comm_prob": 0.0047
+        },
+        {
+          "ligand": "CCL22",
+          "receptor": "CCR4",
+          "sender": "Macrophage",
+          "receiver": "Treg",
+          "lig_mean": 0.2362,
+          "rec_mean": 0.0794,
+          "lig_pct": 0.0236,
+          "rec_pct": 0.0595,
+          "comm_prob": 0.0032
+        }
+      ]
+    },
+    "FAS_FASL": {
+      "mean_score": 0.0111,
+      "max_score": 0.013,
+      "n_active_pairs": 2,
+      "pairs": [
+        {
+          "ligand": "FASLG",
+          "receptor": "FAS",
+          "sender": "CD8_T",
+          "receiver": "Tumor",
+          "lig_mean": 0.2632,
+          "rec_mean": 0.1371,
+          "lig_pct": 0.1462,
+          "rec_pct": 0.0685,
+          "comm_prob": 0.013
+        },
+        {
+          "ligand": "FASLG",
+          "receptor": "FAS",
+          "sender": "NK",
+          "receiver": "Tumor",
+          "lig_mean": 0.1316,
+          "rec_mean": 0.1371,
+          "lig_pct": 0.1053,
+          "rec_pct": 0.0685,
+          "comm_prob": 0.0092
+        }
+      ]
+    },
+    "TRAIL": {
+      "mean_score": 0.0133,
+      "max_score": 0.0253,
+      "n_active_pairs": 3,
+      "pairs": [
+        {
+          "ligand": "TNFSF10",
+          "receptor": "TNFRSF10B",
+          "sender": "NK",
+          "receiver": "Tumor",
+          "lig_mean": 0.2368,
+          "rec_mean": 0.1931,
+          "lig_pct": 0.1579,
+          "rec_pct": 0.1184,
+          "comm_prob": 0.0253
+        },
+        {
+          "ligand": "TNFSF10",
+          "receptor": "TNFRSF10A",
+          "sender": "CD8_T",
+          "receiver": "Tumor",
+          "lig_mean": 0.2632,
+          "rec_mean": 0.0685,
+          "lig_pct": 0.1696,
+          "rec_pct": 0.0561,
+          "comm_prob": 0.0075
+        },
+        {
+          "ligand": "TNFSF10",
+          "receptor": "TNFRSF10A",
+          "sender": "NK",
+          "receiver": "Tumor",
+          "lig_mean": 0.2368,
+          "rec_mean": 0.0685,
+          "lig_pct": 0.1579,
+          "rec_pct": 0.0561,
+          "comm_prob": 0.0071
+        }
+      ]
+    },
+    "MHC_TCR": {
+      "mean_score": 4.2437,
+      "max_score": 6.4386,
+      "n_active_pairs": 4,
+      "pairs": [
+        {
+          "ligand": "B2M",
+          "receptor": "CD8A",
+          "sender": "Tumor",
+          "receiver": "CD8_T",
+          "lig_mean": 48.9688,
+          "rec_mean": 2.3333,
+          "lig_pct": 0.9751,
+          "rec_pct": 0.6023,
+          "comm_prob": 6.4386
+        },
+        {
+          "ligand": "HLA-A",
+          "receptor": "CD8A",
+          "sender": "Macrophage",
+          "receiver": "CD8_T",
+          "lig_mean": 18.9134,
+          "rec_mean": 2.3333,
+          "lig_pct": 0.9528,
+          "rec_pct": 0.6023,
+          "comm_prob": 4.0014
+        },
+        {
+          "ligand": "HLA-B",
+          "receptor": "CD8A",
+          "sender": "Tumor",
+          "receiver": "CD8_T",
+          "lig_mean": 14.1028,
+          "rec_mean": 2.3333,
+          "lig_pct": 0.6573,
+          "rec_pct": 0.6023,
+          "comm_prob": 3.4553
+        },
+        {
+          "ligand": "HLA-A",
+          "receptor": "CD8A",
+          "sender": "Tumor",
+          "receiver": "CD8_T",
+          "lig_mean": 11.2025,
+          "rec_mean": 2.3333,
+          "lig_pct": 0.6604,
+          "rec_pct": 0.6023,
+          "comm_prob": 3.0795
+        }
+      ]
+    },
+    "CD28_costim": {
+      "mean_score": 0.0218,
+      "max_score": 0.0438,
+      "n_active_pairs": 3,
+      "pairs": [
+        {
+          "ligand": "CD86",
+          "receptor": "CD28",
+          "sender": "Macrophage",
+          "receiver": "CD8_T",
+          "lig_mean": 1.0236,
+          "rec_mean": 0.152,
+          "lig_pct": 0.4567,
+          "rec_pct": 0.1111,
+          "comm_prob": 0.0438
+        },
+        {
+          "ligand": "CD80",
+          "receptor": "CD28",
+          "sender": "Macrophage",
+          "receiver": "CD8_T",
+          "lig_mean": 0.1575,
+          "rec_mean": 0.152,
+          "lig_pct": 0.1339,
+          "rec_pct": 0.1111,
+          "comm_prob": 0.0172
+        },
+        {
+          "ligand": "CD86",
+          "receptor": "CD28",
+          "sender": "B_cell",
+          "receiver": "CD8_T",
+          "lig_mean": 0.0568,
+          "rec_mean": 0.152,
+          "lig_pct": 0.0455,
+          "rec_pct": 0.1111,
+          "comm_prob": 0.0042
+        }
+      ]
+    },
+    "NKG2D": {
+      "mean_score": 0.005,
+      "max_score": 0.0087,
+      "n_active_pairs": 3,
+      "pairs": [
+        {
+          "ligand": "MICA",
+          "receptor": "KLRK1",
+          "sender": "Tumor",
+          "receiver": "CD8_T",
+          "lig_mean": 0.1495,
+          "rec_mean": 0.0877,
+          "lig_pct": 0.1121,
+          "rec_pct": 0.076,
+          "comm_prob": 0.0087
+        },
+        {
+          "ligand": "MICA",
+          "receptor": "KLRK1",
+          "sender": "Tumor",
+          "receiver": "NK",
+          "lig_mean": 0.1495,
+          "rec_mean": 0.0526,
+          "lig_pct": 0.1121,
+          "rec_pct": 0.0526,
+          "comm_prob": 0.0047
+        },
+        {
+          "ligand": "MICB",
+          "receptor": "KLRK1",
+          "sender": "Tumor",
+          "receiver": "NK",
+          "lig_mean": 0.0374,
+          "rec_mean": 0.0526,
+          "lig_pct": 0.0343,
+          "rec_pct": 0.0526,
+          "comm_prob": 0.0015
+        }
+      ]
+    }
+  }
+}

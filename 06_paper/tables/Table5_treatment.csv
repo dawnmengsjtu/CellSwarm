@@ -1,0 +1,9 @@
+Drug,Timing,Mode,Tumor Ratio (mean±SD),Reduction%,Clinical ORR%
+anti_PD1,early,deepseek,0.777±0.040,17.6%,~21
+anti_PD1,early,rules,0.731±0.032,13.9%,
+anti_PD1,late,deepseek,0.834±0.054,11.6%,
+anti_PD1,late,rules,0.757±0.018,10.9%,
+anti_CTLA4,early,deepseek,0.912±0.089,3.3%,~12
+anti_CTLA4,early,rules,0.764±0.052,10.0%,
+anti_CTLA4,late,deepseek,0.904±0.031,4.2%,
+anti_CTLA4,late,rules,0.777±0.024,8.5%,

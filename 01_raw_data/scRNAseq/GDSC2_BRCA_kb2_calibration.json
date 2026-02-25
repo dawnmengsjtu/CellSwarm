@@ -1,0 +1,100 @@
+{
+  "source": "GDSC2",
+  "version": "release 8.5 (Oct 2023)",
+  "cancer_type": "BRCA",
+  "total_brca_rows": 13106,
+  "total_brca_drugs": 286,
+  "kb2_drug_sensitivity": {
+    "Paclitaxel": {
+      "n_cell_lines": 50,
+      "ln_ic50_mean": -2.602,
+      "ln_ic50_std": 1.7161,
+      "auc_mean": 0.8555,
+      "cell_lines": [
+        "HCC1954",
+        "HCC1143",
+        "HCC1187",
+        "HCC1395",
+        "HCC1599"
+      ]
+    },
+    "Cisplatin": {
+      "n_cell_lines": 50,
+      "ln_ic50_mean": 4.4341,
+      "ln_ic50_std": 1.4575,
+      "auc_mean": 0.9644,
+      "cell_lines": [
+        "HCC1954",
+        "HCC1143",
+        "HCC1187",
+        "HCC1395",
+        "HCC1599"
+      ]
+    },
+    "Docetaxel": {
+      "n_cell_lines": 89,
+      "ln_ic50_mean": -2.7817,
+      "ln_ic50_std": 2.6294,
+      "auc_mean": 0.7471,
+      "cell_lines": [
+        "HCC1954",
+        "HCC1143",
+        "HCC1187",
+        "HCC1395",
+        "HCC1599"
+      ]
+    },
+    "Olaparib": {
+      "n_cell_lines": 50,
+      "ln_ic50_mean": 4.7818,
+      "ln_ic50_std": 1.0331,
+      "auc_mean": 0.9648,
+      "cell_lines": [
+        "HCC1954",
+        "HCC1143",
+        "HCC1187",
+        "HCC1395",
+        "HCC1599"
+      ]
+    },
+    "Alpelisib": {
+      "n_cell_lines": 50,
+      "ln_ic50_mean": 2.9878,
+      "ln_ic50_std": 1.5893,
+      "auc_mean": 0.8872,
+      "cell_lines": [
+        "HCC1954",
+        "HCC1143",
+        "HCC1187",
+        "HCC1395",
+        "HCC1599"
+      ]
+    },
+    "Gemcitabine": {
+      "n_cell_lines": 50,
+      "ln_ic50_mean": 2.3018,
+      "ln_ic50_std": 2.8822,
+      "auc_mean": 0.8601,
+      "cell_lines": [
+        "HCC1954",
+        "HCC1143",
+        "HCC1187",
+        "HCC1395",
+        "HCC1599"
+      ]
+    },
+    "Cyclophosphamide": {
+      "n_cell_lines": 50,
+      "ln_ic50_mean": 5.2796,
+      "ln_ic50_std": 0.9559,
+      "auc_mean": 0.9753,
+      "cell_lines": [
+        "HCC1954",
+        "HCC1143",
+        "HCC1187",
+        "HCC1395",
+        "HCC1599"
+      ]
+    }
+  }
+}

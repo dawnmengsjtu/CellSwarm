@@ -1,0 +1,7 @@
+Cancer,Tumor Ratio,CD8/Treg,CD8%,NK%,Macrophage%,Classification
+CRC_MSI_H,nan±nan,nan±nan,nan,nan,nan,Hot
+TNBC,0.929±0.085,4.03±0.05,24.6,8.1,15.3,Hot
+Melanoma,0.273±0.030,3.48±0.05,29.9,7.9,17.1,Hot
+NSCLC,0.232±0.014,1.43±0.00,18.7,6.3,24.1,Cold
+Ovarian,0.183±0.081,1.10±0.01,15.2,4.9,33.8,Cold
+CRC_MSS,nan±nan,nan±nan,nan,nan,nan,Cold

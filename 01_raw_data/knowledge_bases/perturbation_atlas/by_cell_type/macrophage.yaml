@@ -1,0 +1,450 @@
+meta:
+  schema_version: '1.0'
+  cell_type: Macrophage
+  total_entries: 12
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+perturbations:
+- id: CSF1R_INHIB_MAC
+  gene: CSF1R
+  gene_full_name: Colony Stimulating Factor 1 Receptor
+  perturbation_type: drug_inhibition
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: m2_polarization
+    direction: decrease
+    effect_size: -0.55
+    confidence: high
+  - parameter: tumor_associated_macrophage_density
+    direction: decrease
+    effect_size: -0.6
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: -0.2
+      phagocytose: 0.1
+      polarize: -0.15
+    state_changes:
+      polarization: -0.35
+      phagocytic_activity: 0.15
+  evidence:
+  - description: CSF1R inhibition reprograms TAMs. Ries et al. Cancer Cell 2014
+    pmid: '24898549'
+    verified: true
+  notes: CSF1R blockade depletes M2-like TAMs and reprograms remaining macrophages
+    toward M1
+- id: NOS2_OE_MAC
+  gene: NOS2
+  gene_full_name: Nitric Oxide Synthase 2 (iNOS)
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: m1_polarization
+    direction: increase
+    effect_size: 0.65
+    confidence: high
+  - parameter: tumoricidal_activity
+    direction: increase
+    effect_size: 0.55
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      phagocytose: 0.2
+      attack: 0.15
+      suppress: -0.15
+    state_changes:
+      polarization: -0.4
+      phagocytic_activity: 0.25
+  evidence:
+  - description: iNOS in M1 macrophage anti-tumor function. Murray et al. Immunity
+      2014
+    pmid: '24736562'
+    pmid_verified: true
+  notes: iNOS/NOS2 is the hallmark M1 enzyme; produces NO for direct tumor killing
+- id: ARG1_OE_MAC
+  gene: ARG1
+  gene_full_name: Arginase 1
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: t_cell_suppression
+    direction: increase
+    effect_size: 0.55
+    confidence: high
+  - parameter: m2_polarization
+    direction: increase
+    effect_size: 0.45
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: 0.25
+      phagocytose: -0.1
+    state_changes:
+      polarization: 0.3
+      phagocytic_activity: -0.1
+  evidence:
+  - description: Arginase in myeloid-mediated immunosuppression. Rodriguez et al.
+      Cancer Res 2004
+    pmid: '15313928'
+    pmid_verified: true
+  notes: ARG1 depletes arginine, suppressing T cell proliferation; hallmark of M2/MDSC
+- id: CD163_OE_MAC
+  gene: CD163
+  gene_full_name: CD163 Molecule
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: m2_polarization
+    direction: increase
+    effect_size: 0.5
+    confidence: high
+  - parameter: anti_inflammatory
+    direction: increase
+    effect_size: 0.45
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: 0.15
+      phagocytose: -0.05
+      polarize: 0.1
+    state_changes:
+      polarization: 0.3
+  evidence:
+  - description: CD163 as M2 macrophage marker in tumors. Komohara et al. Cancer Sci
+      2014
+    pmid: '24168081'
+    pmid_verified: true
+  notes: CD163 is the canonical M2 marker; high CD163+ TAMs correlate with poor prognosis
+- id: TGFB1_OE_MAC
+  gene: TGFB1
+  gene_full_name: Transforming Growth Factor Beta 1
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: immunosuppression
+    direction: increase
+    effect_size: 0.6
+    confidence: high
+  - parameter: fibrosis_promotion
+    direction: increase
+    effect_size: 0.5
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: 0.2
+      signal: 0.15
+    state_changes:
+      polarization: 0.25
+  evidence:
+  - description: TGF-beta in tumor immune evasion. Batlle & Massague. Immunity 2019
+    pmid: '30995507'
+    pmid_verified: true
+  notes: Macrophage-derived TGF-beta suppresses T cell function and promotes EMT
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 8859_TGFB1_P1P2_ENSG00000105329
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0023
+        max_effect: 0.1149
+        min_effect: -0.1065
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.043
+        max_effect: 0.1079
+        min_effect: -0.0583
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0321
+        max_effect: 0.0824
+        min_effect: 0.0029
+        n_markers: 3
+      migration:
+        mean_effect: 0.0086
+        max_effect: 0.0086
+        min_effect: 0.0086
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0059
+        max_effect: 0.0112
+        min_effect: 0.0007
+        n_markers: 2
+- id: IL10_OE_MAC
+  gene: IL10
+  gene_full_name: Interleukin 10
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: immunosuppression
+    direction: increase
+    effect_size: 0.5
+    confidence: high
+  - parameter: m2_polarization
+    direction: increase
+    effect_size: 0.4
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: 0.2
+      signal: 0.1
+      phagocytose: -0.05
+    state_changes:
+      polarization: 0.2
+  evidence:
+  - description: IL-10 in tumor-associated macrophage function. Ruffell et al. Cancer
+      Cell 2014
+    pmid: '25446896'
+    pmid_verified: true
+  notes: TAM-derived IL-10 suppresses DC function and anti-tumor immunity
+- id: STAT1_OE_MAC
+  gene: STAT1
+  gene_full_name: Signal Transducer And Activator Of Transcription 1
+  perturbation_type: overexpression
+  context: in_vitro
+  phenotype_changes:
+  - parameter: m1_polarization
+    direction: increase
+    effect_size: 0.7
+    confidence: high
+  - parameter: antigen_presentation
+    direction: increase
+    effect_size: 0.5
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      phagocytose: 0.15
+      signal: 0.1
+      suppress: -0.15
+    state_changes:
+      polarization: -0.4
+      phagocytic_activity: 0.2
+  evidence:
+  - description: STAT1 in M1 macrophage polarization. Lawrence & Natoli. Nat Rev Immunol
+      2011
+    pmid: '24736562'
+    pmid_verified: true
+  notes: STAT1 is the key transcription factor for IFN-gamma-driven M1 polarization
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 8494_STAT1_P1P2_ENSG00000115415
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0329
+        max_effect: 0.2064
+        min_effect: -0.2741
+        n_markers: 6
+      apoptosis:
+        mean_effect: -0.0001
+        max_effect: 0.2101
+        min_effect: -0.0974
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.012
+        max_effect: 0.1298
+        min_effect: -0.1241
+        n_markers: 3
+      migration:
+        mean_effect: -0.0347
+        max_effect: -0.0347
+        min_effect: -0.0347
+        n_markers: 1
+      inflammation:
+        mean_effect: -0.1098
+        max_effect: -0.0919
+        min_effect: -0.1277
+        n_markers: 2
+- id: STAT6_OE_MAC
+  gene: STAT6
+  gene_full_name: Signal Transducer And Activator Of Transcription 6
+  perturbation_type: overexpression
+  context: in_vitro
+  phenotype_changes:
+  - parameter: m2_polarization
+    direction: increase
+    effect_size: 0.65
+    confidence: high
+  - parameter: anti_inflammatory
+    direction: increase
+    effect_size: 0.5
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: 0.2
+      phagocytose: -0.1
+      polarize: 0.15
+    state_changes:
+      polarization: 0.4
+      phagocytic_activity: -0.1
+  evidence:
+  - description: STAT6 drives IL-4-mediated M2 polarization. Gordon & Martinez. Immunity
+      2010
+    pmid: '20510870'
+    pmid_verified: true
+  notes: STAT6 is activated by IL-4/IL-13 and drives the alternative activation program
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 8500_STAT6_P1P2_ENSG00000166888
+    pathway_effects:
+      proliferation:
+        mean_effect: -0.0436
+        max_effect: 0.2306
+        min_effect: -0.2476
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.1256
+        max_effect: 0.3996
+        min_effect: -0.4542
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0458
+        max_effect: 0.1368
+        min_effect: -0.0571
+        n_markers: 3
+      migration:
+        mean_effect: 1.493
+        max_effect: 1.493
+        min_effect: 1.493
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.3141
+        max_effect: 0.6593
+        min_effect: -0.0311
+        n_markers: 2
+- id: MRC1_OE_MAC
+  gene: MRC1
+  gene_full_name: Mannose Receptor C-Type 1 (CD206)
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: m2_polarization
+    direction: increase
+    effect_size: 0.4
+    confidence: medium
+  - parameter: phagocytosis
+    direction: increase
+    effect_size: 0.3
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      phagocytose: 0.1
+      suppress: 0.1
+    state_changes:
+      polarization: 0.2
+      phagocytic_activity: 0.1
+  evidence:
+  - description: CD206/MRC1 in M2 macrophage function. Martinez & Gordon. F1000Prime
+      Rep 2014
+    pmid: '20510870'
+    pmid_verified: true
+  notes: CD206 is an M2 marker involved in debris clearance; high expression correlates
+    with immunosuppression
+- id: SIRPA_KO_MAC
+  gene: SIRPA
+  gene_full_name: Signal Regulatory Protein Alpha
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: phagocytosis
+    direction: increase
+    effect_size: 0.65
+    confidence: high
+  - parameter: tumor_cell_engulfment
+    direction: increase
+    effect_size: 0.6
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      phagocytose: 0.3
+      attack: 0.1
+    state_changes:
+      phagocytic_activity: 0.35
+  evidence:
+  - description: CD47-SIRPa axis as phagocytosis checkpoint. Willingham et al. PNAS
+      2012
+    pmid: '22451913'
+    pmid_verified: true
+  notes: SIRPa receives the 'don't eat me' signal from CD47; KO unleashes macrophage
+    phagocytosis
+- id: MARCO_KO_MAC
+  gene: MARCO
+  gene_full_name: Macrophage Receptor With Collagenous Structure
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: m2_polarization
+    direction: decrease
+    effect_size: -0.35
+    confidence: medium
+  - parameter: t_cell_activation_support
+    direction: increase
+    effect_size: 0.3
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: -0.15
+      signal: 0.1
+    state_changes:
+      polarization: -0.2
+  evidence:
+  - description: MARCO+ TAMs suppress anti-tumor immunity. Georgoudaki et al. Cell
+      Rep 2016
+    pmid: '27210762'
+    pmid_verified: true
+  notes: MARCO marks immunosuppressive TAMs; anti-MARCO repolarizes macrophages toward
+    M1
+- id: PPARG_OE_MAC
+  gene: PPARG
+  gene_full_name: Peroxisome Proliferator Activated Receptor Gamma
+  perturbation_type: overexpression
+  context: in_vitro
+  phenotype_changes:
+  - parameter: m2_polarization
+    direction: increase
+    effect_size: 0.45
+    confidence: medium
+  - parameter: anti_inflammatory
+    direction: increase
+    effect_size: 0.4
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      suppress: 0.15
+      phagocytose: 0.05
+    state_changes:
+      polarization: 0.25
+  evidence:
+  - description: PPARgamma in alternative macrophage activation. Odegaard et al. Nature
+      2007
+    pmid: '17515919'
+    pmid_verified: true
+  notes: PPARgamma promotes M2 polarization via metabolic reprogramming toward oxidative
+    phosphorylation
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 6610_PPARG_P2_ENSG00000132170
+    pathway_effects:
+      proliferation:
+        mean_effect: -0.0137
+        max_effect: 0.3345
+        min_effect: -0.3231
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.0506
+        max_effect: 0.2124
+        min_effect: -0.0727
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.1464
+        max_effect: 0.2606
+        min_effect: 0.0419
+        n_markers: 3
+      migration:
+        mean_effect: -0.161
+        max_effect: -0.161
+        min_effect: -0.161
+        n_markers: 1
+      inflammation:
+        mean_effect: -0.0312
+        max_effect: -0.0055
+        min_effect: -0.0569
+        n_markers: 2

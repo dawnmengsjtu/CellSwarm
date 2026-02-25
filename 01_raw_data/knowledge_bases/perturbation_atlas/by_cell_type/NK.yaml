@@ -1,0 +1,194 @@
+meta:
+  schema_version: '1.0'
+  cell_type: NK
+  total_entries: 7
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+perturbations:
+- id: TIGIT_KO_NK
+  gene: TIGIT
+  gene_full_name: T Cell Immunoreceptor With Ig And ITIM Domains
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: cytotoxicity
+    direction: increase
+    effect_size: 0.45
+    confidence: high
+  - parameter: ifng_production
+    direction: increase
+    effect_size: 0.35
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      attack: 0.2
+      rest: -0.1
+    state_changes:
+      cytotoxicity: 0.25
+      activation: 0.15
+  evidence:
+  - description: TIGIT as NK cell checkpoint. Zhang et al. Nat Immunol 2018
+    pmid: '30364127'
+    pmid_verified: true
+  notes: TIGIT is a major inhibitory receptor on NK cells; blockade enhances anti-tumor NK activity
+- id: KLRD1_OE_NK
+  gene: KLRD1
+  gene_full_name: Killer Cell Lectin Like Receptor D1 (CD94)
+  perturbation_type: overexpression
+  context: in_vitro
+  phenotype_changes:
+  - parameter: inhibitory_signaling
+    direction: increase
+    effect_size: 0.4
+    confidence: medium
+  - parameter: cytotoxicity
+    direction: decrease
+    effect_size: -0.3
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      attack: -0.15
+      rest: 0.1
+    state_changes:
+      cytotoxicity: -0.15
+      activation: -0.1
+  evidence:
+  - description: CD94/NKG2A in NK cell inhibition. Braud et al. Nature 1998
+    pmid: '9486650'
+    pmid_verified: true
+  notes: CD94/NKG2A recognizes HLA-E; overexpression increases inhibitory threshold
+- id: NCR1_KO_NK
+  gene: NCR1
+  gene_full_name: Natural Cytotoxicity Triggering Receptor 1 (NKp46)
+  perturbation_type: knockout
+  context: in_vitro
+  phenotype_changes:
+  - parameter: cytotoxicity
+    direction: decrease
+    effect_size: -0.5
+    confidence: high
+  - parameter: tumor_recognition
+    direction: decrease
+    effect_size: -0.45
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      attack: -0.25
+      rest: 0.15
+    state_changes:
+      cytotoxicity: -0.3
+      activation: -0.15
+  evidence:
+  - description: NKp46 in NK cell-mediated tumor killing. Halfteck et al. J Immunol 2009
+    pmid: '19201876'
+    pmid_verified: true
+  notes: NKp46 is the most specific NK cell marker and a key activating receptor
+- id: KLRK1_OE_NK
+  gene: KLRK1
+  gene_full_name: Killer Cell Lectin Like Receptor K1 (NKG2D)
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: cytotoxicity
+    direction: increase
+    effect_size: 0.55
+    confidence: high
+  - parameter: stress_ligand_recognition
+    direction: increase
+    effect_size: 0.6
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      attack: 0.25
+      migrate: 0.05
+    state_changes:
+      cytotoxicity: 0.3
+      activation: 0.2
+  evidence:
+  - description: NKG2D in tumor immunosurveillance. Raulet et al. Annu Rev Immunol 2013
+    pmid: '14523385'
+    pmid_verified: true
+  notes: NKG2D recognizes stress ligands (MICA/B, ULBP) on tumor cells; key activating receptor
+- id: IFNG_OE_NK
+  gene: IFNG
+  gene_full_name: Interferon Gamma
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: macrophage_activation
+    direction: increase
+    effect_size: 0.6
+    confidence: high
+  - parameter: mhc_i_upregulation
+    direction: increase
+    effect_size: 0.5
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      signal: 0.2
+      attack: 0.1
+    state_changes:
+      activation: 0.2
+  evidence:
+  - description: NK cell IFN-gamma in anti-tumor immunity. Vivier et al. Nat Immunol 2008
+    pmid: '18425107'
+    pmid_verified: true
+  notes: NK-derived IFN-gamma activates macrophages and enhances antigen presentation
+- id: IL15_STIM_NK
+  gene: IL15
+  gene_full_name: Interleukin 15
+  perturbation_type: drug_inhibition
+  context: in_vitro
+  phenotype_changes:
+  - parameter: proliferation
+    direction: increase
+    effect_size: 0.75
+    confidence: high
+  - parameter: cytotoxicity
+    direction: increase
+    effect_size: 0.5
+    confidence: high
+  - parameter: survival
+    direction: increase
+    effect_size: 0.65
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      proliferate: 0.25
+      attack: 0.15
+      rest: -0.15
+    state_changes:
+      activation: 0.3
+      cytotoxicity: 0.2
+      energy: 0.25
+  evidence:
+  - description: IL-15 in NK cell homeostasis and activation. Fehniger & Caligiuri. Blood 2001
+    pmid: '11342442'
+    pmid_verified: true
+  notes: IL-15 is the primary NK cell survival and activation cytokine
+- id: KIR2DL1_OE_NK
+  gene: KIR2DL1
+  gene_full_name: Killer Cell Immunoglobulin Like Receptor Two Ig Domains Long Cytoplasmic Tail 1
+  perturbation_type: overexpression
+  context: in_vitro
+  phenotype_changes:
+  - parameter: inhibitory_signaling
+    direction: increase
+    effect_size: 0.5
+    confidence: medium
+  - parameter: cytotoxicity
+    direction: decrease
+    effect_size: -0.4
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      attack: -0.2
+      rest: 0.15
+    state_changes:
+      cytotoxicity: -0.2
+      activation: -0.15
+  evidence:
+  - description: KIR in NK cell education and tolerance. Anfossi et al. PLoS Med 2006
+    pmid: '16903903'
+    pmid_verified: true
+  notes: KIR2DL1 recognizes HLA-C group 2; overexpression increases inhibitory signaling

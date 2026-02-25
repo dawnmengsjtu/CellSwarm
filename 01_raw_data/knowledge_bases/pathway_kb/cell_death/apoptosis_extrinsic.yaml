@@ -1,0 +1,129 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: apoptosis_extrinsic
+pathway_name: Extrinsic (Death Receptor) Apoptosis
+category: cell_death
+kegg_id: hsa04210
+components:
+  receptors:
+  - FAS
+  - TNFRSF10A
+  - TNFRSF10B
+  - TNFRSF1A
+  ligands:
+  - FASLG
+  - TNFSF10
+  - TNF
+  downstream:
+  - FADD
+  - CASP8
+  - CASP10
+  - BID
+  - CASP3
+  transcription_factors: []
+  key_genes:
+  - FAS
+  - FASLG
+  - TNFSF10
+  - CASP8
+  - CFLAR
+  - XIAP
+signal_fields_affected:
+- IFN_gamma
+cell_type_effects:
+  CD8_T:
+    when_active: CD8 T cells use FasL and TRAIL to kill target cells. Also susceptible
+      to AICD via Fas/FasL.
+    behavioral_mapping:
+      attack: 0.2
+      apoptosis: 0.1
+      signal: 0.1
+    state_effects:
+      cytotoxicity: 0.2
+      aicd_susceptibility: 0.1
+  Tumor:
+    when_active: Death receptor signaling triggers tumor apoptosis. Tumors often downregulate
+      Fas or overexpress FLIP to resist.
+    behavioral_mapping:
+      apoptosis: 0.3
+      evade: -0.1
+      proliferate: -0.15
+    state_effects:
+      survival: -0.25
+  Treg:
+    when_active: Tregs can kill effector T cells via FasL-mediated apoptosis as a
+      suppressive mechanism.
+    behavioral_mapping:
+      suppress: 0.15
+      signal: 0.1
+    state_effects:
+      suppressive_activity: 0.1
+  Macrophage:
+    when_active: TRAIL expression on macrophages contributes to tumor cell killing.
+      Macrophages clear apoptotic bodies.
+    behavioral_mapping:
+      phagocytose: 0.15
+      signal: 0.1
+    state_effects:
+      tumoricidal_activity: 0.15
+  NK:
+    when_active: NK cells express FasL and TRAIL as major killing mechanisms alongside
+      perforin/granzyme.
+    behavioral_mapping:
+      attack: 0.25
+      signal: 0.05
+    state_effects:
+      cytotoxicity: 0.2
+  B_cell:
+    when_active: B cells express Fas and are susceptible to FasL-mediated deletion
+      during germinal center reactions.
+    behavioral_mapping:
+      apoptosis: 0.15
+    state_effects:
+      survival: -0.15
+crosstalk:
+- pathway: apoptosis_intrinsic
+  type: amplifying
+  description: Caspase-8 cleaves BID to tBID, amplifying signal through mitochondrial
+    pathway
+- pathway: TNF_NFKB
+  type: competing
+  description: TNF-TNFR1 can activate either NF-kB survival or caspase-8 death; FLIP
+    determines outcome
+- pathway: IFNG_JAK_STAT
+  type: synergistic
+  description: IFN-gamma upregulates Fas and TRAIL receptors, sensitizing cells to
+    extrinsic apoptosis
+targeted_by: []
+references:
+- description: 'Death receptors: signaling and modulation. Ashkenazi & Dixit. Science
+    1998'
+  pmid: '9721089'
+  pmid_verified: true
+- description: TRAIL signaling in cancer. Johnstone et al. Nat Rev Cancer 2008
+  pmid: '18813321'
+  pmid_verified: true
+additional_agents:
+- drug_id: trail_agonist
+  mechanism: Recombinant TRAIL or DR4/DR5 agonist antibodies
+  in_drug_library: false
+data_calibration:
+  source: GSE176078 TNBC scRNA-seq (CellChat-lite)
+  n_cells: 997
+  communication_strength: 0.0111
+  max_communication_strength: 0.013
+  n_active_pairs: 2
+  top_interactions:
+  - sender: CD8_T
+    receiver: Tumor
+    ligand: FASLG
+    receptor: FAS
+    probability: 0.013
+  - sender: NK
+    receiver: Tumor
+    ligand: FASLG
+    receptor: FAS
+    probability: 0.0092

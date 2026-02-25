@@ -1,0 +1,72 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+combination_id: nivo_ipi
+components:
+- nivolumab
+- ipilimumab
+clinical_trial: CheckMate-067
+indication: Melanoma
+interaction_model: loewe
+synergy_rules:
+  CD8_T:
+    synergy_factor: 1.5
+    affected_parameters:
+    - activation
+    - exhaustion
+    - cytotoxicity
+    notes: 'Dual checkpoint blockade: PD-1 restores exhausted T cells, CTLA-4 enhances priming'
+  Tumor:
+    synergy_factor: 1.3
+    affected_parameters:
+    - apoptosis_susceptibility
+    - immune_evasion
+  Treg:
+    synergy_factor: 1.4
+    affected_parameters:
+    - suppressive_activity
+    notes: Ipilimumab depletes Tregs via ADCC
+  Macrophage:
+    synergy_factor: 1.2
+    affected_parameters:
+    - polarization
+    - phagocytic_activity
+  NK:
+    synergy_factor: 1.2
+    affected_parameters:
+    - activation
+    - cytotoxicity
+  B_cell:
+    synergy_factor: 1.1
+    affected_parameters:
+    - activation
+toxicity_interaction:
+  irAE_probability: 0.55
+  dose_adjustment: 0.75
+  notes: 'High irAE rate: grade 3-4 in ~55%'
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.6
+    notes: Not standard
+  Melanoma:
+    efficacy_modifier: 1.5
+    notes: 'CheckMate-067: 10yr OS ~49%'
+  NSCLC:
+    efficacy_modifier: 1.0
+    notes: CheckMate-227
+  CRC-MSI-H:
+    efficacy_modifier: 1.2
+    notes: CheckMate-142
+  CRC-MSS:
+    efficacy_modifier: 0.2
+    notes: Ineffective
+  Ovarian:
+    efficacy_modifier: 0.4
+    notes: Limited data
+references:
+- description: 'CheckMate-067 10yr: Nivo+Ipi in melanoma. Wolchok et al. NEJM 2025'
+  pmid: '39282897'
+  verified: true
+- description: 'CheckMate-142: Nivo+Ipi in MSI-H CRC. Overman et al. J Clin Oncol 2018'
+  pmid: '29355075'
+  verified: true

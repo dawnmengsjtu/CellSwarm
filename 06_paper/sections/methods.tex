@@ -1,0 +1,121 @@
+% STAR Methods — CellSwarm v2
+
+\subsection*{Resource Availability}
+
+\subsubsection*{Lead Contact}
+Further information and requests for resources should be directed to and will be fulfilled by the lead contact, Lianghua Wang (\texttt{lhwang@smmu.edu.cn}).
+
+\subsubsection*{Materials Availability}
+This study did not generate new reagents or biological materials.
+
+\subsubsection*{Data and Code Availability}
+\begin{itemize}[nosep]
+\item All simulation source code, knowledge base YAML files, and analysis scripts are available at \url{https://github.com/dawnmengsjtu/cellswarm}.
+\item Simulation output data and intermediate results have been deposited at Zenodo (DOI will be provided upon publication).
+\item The TNBC single-cell reference dataset is publicly available at GEO: GSE176078 \citep{Wu2021}.
+\item No original code beyond that described above was generated for this study.
+\end{itemize}
+
+% ============================================================
+\subsection*{Method Details}
+% ============================================================
+
+\subsubsection*{Cell Agent Architecture}
+
+Each cell in \cellswarm{} is modeled as an autonomous agent with four architectural layers.
+
+\textit{Persistent state.}
+Every agent maintains a mutable state vector comprising: \texttt{cell\_type} (one of CD8$^+$ T, Tumor, Treg, Macrophage, NK, B cell), two-dimensional grid position, energy (consumed by actions and replenished by glucose uptake), activation level, exhaustion level, proliferation rate, immune evasion score, suppressive activity, and polarization state. These scalar attributes are updated deterministically each simulation step before the decision phase.
+
+\textit{Pathway state.}
+Each agent carries a 14-dimensional signaling vector where every pathway takes a continuous value in $[0,1]$. The pathways are organized into five functional modules: immune activation (TCR, CD28), immune checkpoints (PD-1, CTLA-4), metabolism (mTOR, AMPK, HIF-1$\alpha$), cytokine signaling (IFN-$\gamma$/JAK-STAT1, IL-2/JAK-STAT5, TGF-$\beta$/SMAD, NF-$\kappa$B), proliferation and cell death (PI3K/AKT, MAPK/ERK, caspase). Pathway values are computed each step via a sigmoid activation function $\sigma(x) = 1/(1+e^{-x})$ applied to a weighted sum of environmental signals and internal state variables. For example, in a CD8$^+$ T cell: $\text{TCR} = \sigma(0.5 \cdot \text{tumor\_nearby} + 0.3 \cdot \text{activation})$ and $\text{PD-1} = \sigma(1.2 \cdot \text{PD\text{-}L1\_local} + 0.5 \cdot \text{exhaustion})$. Weights are cell-type-specific and defined in the Pathway Knowledge Base.
+
+\textit{Cell memory.}
+Each agent maintains a two-tier memory stream: 5 short-term slots storing the most recent simulation steps (action taken, outcome, local environment snapshot) and 20 long-term slots reserved for salient events (e.g., first antigen encounter, onset of exhaustion, successful kill). Long-term memories are retained across the full simulation and provide episodic context to the LLM decision core in agent mode.
+
+\textit{Cell cycle.}
+Proliferation-competent cells follow a five-phase cycle: G0 (quiescent) $\rightarrow$ G1 (8\,h) $\rightarrow$ S (6\,h) $\rightarrow$ G2 (4\,h) $\rightarrow$ M (1\,h) $\rightarrow$ G0, with each simulation step corresponding to approximately 1\,h. Cells may also transition to apoptosis (triggered when caspase $> 0.6$) or senescence (after exceeding a cell-type-specific division count). Division at M phase produces a daughter cell placed in an adjacent empty grid position.
+
+\subsubsection*{Knowledge Bases}
+
+\cellswarm{} draws on five structured knowledge bases, all stored as human-readable YAML files.
+
+\textit{(1) Cancer Atlas} (6 files).
+Each file specifies a cancer type---TNBC, CRC-MSI-H, CRC-MSS, Melanoma, NSCLC, and Ovarian---and contains cell-type proportions, tumor growth rates, and immune infiltration parameters. TNBC parameters were derived from the GSE176078 single-cell RNA-seq dataset \citep{Wu2021}; parameters for the remaining five cancer types were curated from the tumor microenvironment classification of Bagaev et al.\ \citep{Bagaev2021}.
+
+\textit{(2) Drug Library} (22 monotherapies + 5 combinations).
+Each drug entry specifies: mechanism of action, target pathway(s), environment-level effects (e.g., signal field clearance), cell-level effects (e.g., pathway value modifiers), and cancer-specific dose modifiers. The library covers approved and investigational agents including pembrolizumab, nivolumab, atezolizumab, ipilimumab, and galunisertib.
+
+\textit{(3) Pathway KB} (15 files).
+Organized into five categories: immune activation (TCR signaling, antigen presentation), immune checkpoints (PD-1/PD-L1, CTLA-4/CD28, TIGIT/CD226), cytokine signaling (IFN-$\gamma$/JAK-STAT, IL-2/STAT5, TGF-$\beta$/SMAD, TNF/NF-$\kappa$B), proliferation (PI3K/AKT/mTOR, RAS/MAPK, Wnt/$\beta$-catenin), and cell death (extrinsic apoptosis, intrinsic apoptosis, ferroptosis). Multiple KB files may map to the same signaling dimension (e.g., extrinsic and intrinsic apoptosis both feed into the caspase pathway value), yielding 15 knowledge base entries for 14 signaling dimensions. Each file defines upstream activators, downstream targets, and cross-talk edges used to construct the per-cell-type sigmoid weight matrices.
+
+\textit{(4) Perturbation Atlas} (6 files, one per cell type).
+Each file maps gene names to affected pathways and effect sizes: PDCD1 $\rightarrow$ PD-1 (set to 0), CTLA4 $\rightarrow$ CTLA-4 (set to 0), TGFB1 $\rightarrow$ TGF-$\beta$/SMAD (set to 0), TP53 $\rightarrow$ caspase ($\times 0.5$), IFNG $\rightarrow$ IFN-$\gamma$/JAK-STAT1 (set to 0), BRCA1 $\rightarrow$ caspase ($\times 0.7$), and IL2 $\rightarrow$ IL-2/JAK-STAT5 (set to 0).
+
+\textit{(5) TME Parameters} (6 cancer-specific + 1 shared default).
+These files specify grid dimensions, diffusion coefficients for each signal field, signal decay rates ($\lambda$), and blood vessel positions for nutrient supply.
+
+\subsubsection*{Simulation Environment}
+
+The tumor microenvironment is modeled on a two-dimensional square grid whose size is dynamically adjusted to maintain a target cell density of 0.2 cells per grid point. Six diffusible signal fields are maintained: O$_2$, glucose, IFN-$\gamma$, IL-2, TGF-$\beta$, and PD-L1. Signal dynamics follow a reaction-diffusion equation discretized via a 5-point Laplacian finite-difference stencil:
+\begin{equation}
+\frac{\Delta f}{\Delta t} = D \nabla^2 f - \lambda f + S - C
+\end{equation}
+where $D$ is the diffusion coefficient, $\lambda$ the decay rate, $S$ the local secretion, and $C$ the local consumption. Tumor cells consume O$_2$ at 0.002 per step; immune cells consume at 0.001 per step. Secretion rates are action-dependent: a CD8$^+$ T cell attack deposits IFN-$\gamma$ at $+0.05$; tumor cells secrete PD-L1 at $+0.02 \times \text{immune\_evasion}$; Tregs secrete TGF-$\beta$ at $+0.04 \times \text{suppressive\_activity}$. Blood vessels at predefined grid positions supply O$_2 = 0.08$ and glucose $= 5.0$ each step. Immune cells exhibit chemotaxis, biasing migration toward the nearest tumor cell.
+
+Simulations were initialized with 500 cells (200 tumor, 120 CD8$^+$ T, 80 macrophage, 40 NK, 30 Treg, 30 B cell) and run for 30 time steps unless otherwise noted.
+
+\subsubsection*{Decision Modes}
+
+Three decision-making modes were compared, all operating on identical environment dynamics and pathway computations.
+
+\textit{Agent mode.}
+An LLM is queried to select each cell's action. To optimize computational cost, LLM calls are gated by a complexity score defined as the fraction of pathways with activation $> 0.4$ plus the variance across all 14 pathway values. Cells with complexity $\leq 0.3$ use a simplified rule-based decision pathway, as their low pathway variance indicates a microenvironmental context that does not require full LLM reasoning. This efficiency optimization reduces API calls by approximately 40\% without affecting simulation fidelity (see ablation in Result~5). For qualifying cells, the LLM prompt comprises the cell's persistent state, all 14 pathway values, memory context (short- and long-term), relevant KB entries, and a snapshot of the local $5 \times 5$ environment. The model returns a structured JSON object specifying \texttt{action} (one of: proliferate, migrate, attack, secrete, apoptose, quiesce), \texttt{params} (action-specific parameters), and \texttt{secretion} (cytokine outputs). Calls are batched and dispatched via a thread pool for concurrent execution.
+
+\textit{Rules mode.}
+Decisions are made by deterministic if-else rules applied to the same pathway values. For CD8$^+$ T cells: net activation $=$ TCR $+$ CD28 $-$ PD-1 $-$ CTLA-4; if $> 0.5$, attack; otherwise quiesce or migrate. For tumor cells: MAPK/ERK $> 0.5 \rightarrow$ proliferate; caspase $> 0.6 \rightarrow$ apoptosis; HIF-1$\alpha$ $> 0.5 \rightarrow$ migrate toward higher O$_2$.
+
+\textit{Random mode.}
+Actions are selected uniformly at random from the available action set, serving as a null baseline.
+
+\subsubsection*{Combat Resolution}
+
+When an immune cell selects the attack action, it searches for tumor targets within Manhattan distance $\leq 5$. The kill probability is computed as:
+\begin{equation}
+p_{\text{kill}} = \text{clamp}\!\left( r_{\text{base}} \times \text{cytotoxicity} \times (1 - \text{target.immune\_evasion}),\; 0.05,\; 0.8 \right)
+\end{equation}
+where $r_{\text{base}} = 0.3$. A Bernoulli draw determines whether the target is eliminated. Successful kills increment the attacker's activation and deposit IFN-$\gamma$ locally; failed attacks increment exhaustion.
+
+\subsubsection*{Treatment Simulation}
+
+Drug treatments are applied at either step 5 (early) or step 15 (late). Drug effects operate at two levels. First, \textit{environment effects} modify signal fields directly (e.g., anti-PD-1 clears the PD-L1 field by a fraction proportional to drug strength). Second, \textit{pathway effects} are applied after \texttt{compute\_pathways()}: for anti-PD-1, the PD-1 pathway value is scaled as PD-1 $\leftarrow$ PD-1 $\times (1 - \text{strength})^2$. Drug parameters are read from the Drug Library KB when available, with hard-coded fallback values otherwise. Three monotherapies were systematically evaluated: anti-PD-1, anti-CTLA-4, and anti-TGF-$\beta$.
+
+\subsubsection*{Perturbation Simulation}
+
+Seven single-gene knockouts were simulated: \textit{PDCD1}, \textit{CTLA4}, \textit{IFNG}, \textit{TGFB1}, \textit{TP53}, \textit{BRCA1}, and \textit{IL2}. Perturbations are configured at initialization and enforced every step by calling \texttt{\_apply\_perturbations()} after pathway computation, which clamps or scales the mapped pathway value according to the Perturbation Atlas. Knockouts fall into two categories: \textit{direct} KOs (\textit{PDCD1}, \textit{CTLA4}) alter pathways that appear explicitly in rule-based decision thresholds (e.g., PD-1 and CTLA-4 in the CD8$^+$ T cell net-activation formula), and \textit{indirect} KOs (\textit{IFNG}, \textit{TGFB1}, \textit{TP53}, \textit{BRCA1}, \textit{IL2}) affect pathways outside the rule decision boundary, making their downstream effects accessible only to LLM-driven agents that can reason over the full pathway context.
+
+\subsubsection*{Phenocopy Analysis}
+
+To assess whether genetic perturbations recapitulate pharmacological interventions, we compared the final cell-type proportion vectors from knockout simulations with those from the corresponding drug treatments. Similarity was quantified by Pearson correlation across the six cell-type fractions. Observed correlations were: \textit{PDCD1} KO vs.\ anti-PD-1 ($r = 0.86$), \textit{CTLA4} KO vs.\ anti-CTLA-4 ($r = 0.56$), and \textit{TGFB1} KO vs.\ anti-TGF-$\beta$ ($r = 0.31$), consistent with the expectation that direct-pathway knockouts produce stronger phenocopies than indirect ones.
+
+\subsubsection*{Ablation Experiments}
+
+Each ablation removed one knowledge base component (Cancer Atlas, Drug Library, Pathway KB, Perturbation Atlas, or TME Parameters) while keeping the remaining four intact. Simulations were run with the DeepSeek backbone and 3 independent seeds per condition. Performance was assessed by JS divergence to the reference cell-type distribution.
+
+\subsubsection*{Computational Resources}
+
+Eight LLM backends were benchmarked: DeepSeek, GLM-4-Flash, Qwen-Turbo, Qwen-Plus, Qwen-Max, and Kimi-K2.5, plus the non-LLM Rules and Random baselines. A single 30-step simulation with 500 initial cells consumed approximately 2.8\,M tokens in agent mode. Wall-clock runtime ranged from 8 to 50 minutes depending on the model backend. All simulations were executed on a single Apple MacBook Air (M1, 16\,GB RAM) without GPU acceleration.
+
+% ============================================================
+\subsection*{Quantification and Statistical Analysis}
+% ============================================================
+
+Four metrics were used to evaluate simulation outcomes:
+\begin{itemize}[nosep]
+\item \textbf{JS divergence}: Jensen--Shannon divergence between the simulated and reference (GSE176078; \citealt{Wu2021}) cell-type proportion vectors, measuring compositional fidelity.
+\item \textbf{Tumor ratio}: Final tumor cell count divided by initial tumor cell count, quantifying net tumor growth or regression.
+\item \textbf{Shannon diversity}: $H' = -\sum_{i} p_i \ln p_i$ computed over the six cell types, capturing ecosystem heterogeneity.
+\item \textbf{CV}: Coefficient of variation (standard deviation / mean) of tumor ratio across seeds, measuring reproducibility.
+\end{itemize}
+
+Statistical comparisons used two-sided Welch's $t$-tests. No correction for multiple comparisons was applied, as comparisons were pre-planned and limited in number. Throughout, $n$ denotes the number of independent simulations initialized with distinct random seeds.

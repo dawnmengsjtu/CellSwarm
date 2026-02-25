@@ -1,0 +1,157 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: TCR_signaling
+pathway_name: T Cell Receptor (TCR) Signaling
+category: immune_activation
+kegg_id: hsa04660
+components:
+  receptors:
+  - TRA
+  - TRB
+  - CD3E
+  - CD3D
+  - CD3G
+  - CD247
+  ligands:
+  - MHC_I_peptide
+  - MHC_II_peptide
+  downstream:
+  - LCK
+  - ZAP70
+  - LAT
+  - SLP76
+  - PLCG1
+  - ITK
+  transcription_factors:
+  - NFAT
+  - AP1
+  - NFKB1
+  - IRF4
+  - BATF
+  key_genes:
+  - LCK
+  - ZAP70
+  - LAT
+  - PLCG1
+  - CD28
+  - ICOS
+  - CTLA4
+  - PDCD1
+signal_fields_affected:
+- IFN_gamma
+- IL2
+cell_type_effects:
+  CD8_T:
+    when_active: TCR engagement is the primary activation signal. Strength and duration
+      determine effector vs exhaustion fate. Co-stimulation (CD28) required for full
+      activation.
+    behavioral_mapping:
+      attack: 0.3
+      proliferate: 0.25
+      signal: 0.2
+      migrate: -0.1
+    state_effects:
+      activation: 0.35
+      cytotoxicity: 0.25
+      cytokine_production: 0.2
+  Tumor:
+    when_active: Tumors are targets of TCR-mediated killing. Neoantigen presentation
+      determines immunogenicity. MHC-I downregulation enables escape.
+    behavioral_mapping:
+      apoptosis: 0.2
+      evade: 0.15
+    state_effects:
+      immune_pressure: 0.25
+  Treg:
+    when_active: TCR signaling is required for Treg activation and suppressive function.
+      Tregs recognize self-antigens in TME.
+    behavioral_mapping:
+      suppress: 0.2
+      proliferate: 0.1
+    state_effects:
+      activation: 0.2
+      suppressive_activity: 0.15
+  Macrophage:
+    when_active: Macrophages present antigens to T cells via MHC-II, initiating TCR
+      signaling. Not directly affected by TCR.
+    behavioral_mapping:
+      signal: 0.1
+    state_effects:
+      antigen_presentation: 0.1
+  NK:
+    when_active: NK cells lack TCR. Not directly affected. Benefit from T cell-derived
+      cytokines.
+    behavioral_mapping:
+      attack: 0.05
+    state_effects:
+      activation: 0.05
+  B_cell:
+    when_active: B cells present antigens to T cells and receive T cell help via CD40L.
+      TCR signaling indirectly supports B cell responses.
+    behavioral_mapping:
+      signal: 0.1
+      proliferate: 0.05
+    state_effects:
+      t_cell_help: 0.15
+crosstalk:
+- pathway: PD1_PDL1
+  type: antagonistic
+  description: PD-1 recruits SHP2 to dephosphorylate proximal TCR signaling molecules
+- pathway: CTLA4_CD28
+  type: modulatory
+  description: CD28 co-stimulation amplifies TCR signal; CTLA-4 competes to dampen
+    it
+- pathway: PI3K_AKT_mTOR
+  type: downstream
+  description: TCR/CD28 activates PI3K, linking antigen recognition to metabolic reprogramming
+- pathway: RAS_MAPK
+  type: downstream
+  description: TCR activates RAS/ERK via RasGRP1, driving proliferation and effector
+    genes
+targeted_by: []
+references:
+- description: TCR signaling in T cell development and function. Smith-Garvin et al.
+    Annu Rev Immunol 2009
+  pmid: '19132916'
+  pmid_verified: true
+- description: Molecular mechanisms of T cell co-stimulation and co-inhibition. Chen
+    & Flies. Nat Rev Immunol 2013
+  pmid: '23470321'
+  pmid_verified: true
+additional_agents:
+- drug_id: anti_CD3
+  mechanism: Anti-CD3 antibodies (e.g., blinatumomab BiTE engages CD3)
+  in_drug_library: false
+- drug_id: cyclosporine
+  mechanism: Calcineurin inhibitor, blocks NFAT activation downstream of TCR
+  in_drug_library: false
+data_calibration:
+  source: GSE176078 TNBC scRNA-seq (CellChat-lite)
+  n_cells: 997
+  communication_strength: 4.2437
+  max_communication_strength: 6.4386
+  n_active_pairs: 4
+  top_interactions:
+  - sender: Tumor
+    receiver: CD8_T
+    ligand: B2M
+    receptor: CD8A
+    probability: 6.4386
+  - sender: Macrophage
+    receiver: CD8_T
+    ligand: HLA-A
+    receptor: CD8A
+    probability: 4.0014
+  - sender: Tumor
+    receiver: CD8_T
+    ligand: HLA-B
+    receptor: CD8A
+    probability: 3.4553
+  - sender: Tumor
+    receiver: CD8_T
+    ligand: HLA-A
+    receptor: CD8A
+    probability: 3.0795

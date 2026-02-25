@@ -1,0 +1,90 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: erlotinib
+generic_name: Erlotinib
+brand_name: Tarceva
+drug_class: targeted_therapy
+subclass: EGFR_TKI
+molecular_type: small_molecule
+fda_status: approved
+approved_indications:
+- NSCLC
+targets:
+- name: EGFR
+  gene: EGFR
+  type: kinase
+  action: inhibitor
+  selectivity: moderate
+cell_effects:
+  CD8_T:
+    direct: false
+    state_effects: []
+    notes: Minimal direct immune effect
+  Tumor:
+    direct: true
+    state_effects:
+    - parameter: proliferation_rate
+      direction: decrease
+      rate_per_step: 0.15
+      condition: EGFR_mutant
+    - parameter: apoptosis_susceptibility
+      direction: increase
+      rate_per_step: 0.1
+      condition: EGFR_mutant
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.05
+  Treg:
+    direct: false
+    state_effects: []
+  Macrophage:
+    direct: false
+    state_effects: []
+  NK:
+    direct: false
+    state_effects: []
+  B_cell:
+    direct: false
+    state_effects: []
+environment_effects: []
+pharmacokinetics:
+  administration: oral
+  standard_dose: 150 mg daily
+  onset_steps: 1
+  peak_steps: 1
+  half_life_steps: 1.5
+  concentration_curve: exponential_decay
+  steady_state_fraction: 0.75
+dose_response:
+  model: hill
+  ec50: 0.3
+  hill_coefficient: 2.0
+  max_effect: 1.0
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.2
+    notes: Some EGFR expression but not driver
+  Melanoma:
+    efficacy_modifier: 0.05
+    notes: Not relevant
+  NSCLC:
+    efficacy_modifier: 0.9
+    notes: EGFR-mutant NSCLC primary indication
+  CRC-MSI-H:
+    efficacy_modifier: 0.1
+    notes: Not standard
+  CRC-MSS:
+    efficacy_modifier: 0.3
+    notes: KRAS-wt CRC with cetuximab class
+  Ovarian:
+    efficacy_modifier: 0.1
+    notes: Not standard
+resistance:
+- mechanism: T790M secondary EGFR mutation
+  onset_steps: 15
+  probability: 0.25
+references:
+- description: Erlotinib in EGFR-mutant NSCLC. Rosell et al. Lancet Oncol 2012
+  pmid: '22285168'
+  verified: true

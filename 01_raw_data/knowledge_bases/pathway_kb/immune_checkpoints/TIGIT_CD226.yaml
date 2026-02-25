@@ -1,0 +1,113 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: TIGIT_CD226
+pathway_name: TIGIT/CD226 Co-inhibitory Axis
+category: immune_checkpoint
+kegg_id: null
+components:
+  receptors:
+  - TIGIT
+  - CD226
+  - CD96
+  ligands:
+  - PVR
+  - PVRL2
+  downstream:
+  - ITT
+  - ITIM
+  - SHP1
+  - SHP2
+  transcription_factors: []
+  key_genes:
+  - TIGIT
+  - CD226
+  - PVR
+  - NECTIN2
+signal_fields_affected:
+- PD_L1
+cell_type_effects:
+  CD8_T:
+    when_active: TIGIT competes with CD226 for PVR binding, delivering inhibitory
+      signals. Suppresses T cell effector function.
+    behavioral_mapping:
+      attack: -0.2
+      proliferate: -0.1
+      rest: 0.15
+    state_effects:
+      exhaustion: 0.1
+      cytotoxicity: -0.15
+  NK:
+    when_active: TIGIT is a major NK cell checkpoint. Engagement reduces NK cytotoxicity
+      and IFN-gamma production.
+    behavioral_mapping:
+      attack: -0.25
+      signal: -0.15
+    state_effects:
+      cytotoxicity: -0.2
+      activation: -0.15
+  Treg:
+    when_active: TIGIT+ Tregs are highly suppressive and produce IL-10 and fibrinogen-like
+      protein 2.
+    behavioral_mapping:
+      suppress: 0.2
+    state_effects:
+      suppressive_activity: 0.15
+  Tumor:
+    when_active: Tumor PVR expression engages TIGIT on immune cells, promoting immune
+      evasion.
+    behavioral_mapping:
+      evade: 0.15
+    state_effects:
+      immune_evasion: 0.1
+  Macrophage:
+    when_active: Limited direct effect.
+    behavioral_mapping: {}
+    state_effects: {}
+  B_cell:
+    when_active: Limited direct effect.
+    behavioral_mapping: {}
+    state_effects: {}
+crosstalk:
+- pathway: PD1_PDL1
+  type: synergistic_inhibition
+  description: TIGIT and PD-1 co-expression marks terminally exhausted T cells; dual
+    blockade shows synergy
+- pathway: CTLA4_CD28
+  type: parallel_inhibition
+  description: Both are co-inhibitory receptors but act through distinct ligand systems
+targeted_by:
+- drug_id: tiragolumab
+  mechanism: Anti-TIGIT monoclonal antibody (investigational)
+references:
+- description: TIGIT regulates antitumor CD8+ T cell effector function. Johnston et
+    al. Cancer Cell 2014
+  pmid: '25465800'
+  pmid_verified: true
+- description: TIGIT as NK cell checkpoint. Zhang et al. Nat Immunol 2018
+  pmid: '30364127'
+  pmid_verified: true
+data_calibration:
+  source: GSE176078 TNBC scRNA-seq (CellChat-lite)
+  n_cells: 997
+  communication_strength: 0.005
+  max_communication_strength: 0.0087
+  n_active_pairs: 3
+  top_interactions:
+  - sender: Tumor
+    receiver: CD8_T
+    ligand: MICA
+    receptor: KLRK1
+    probability: 0.0087
+  - sender: Tumor
+    receiver: NK
+    ligand: MICA
+    receptor: KLRK1
+    probability: 0.0047
+  - sender: Tumor
+    receiver: NK
+    ligand: MICB
+    receptor: KLRK1
+    probability: 0.0015

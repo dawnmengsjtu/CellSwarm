@@ -1,0 +1,37 @@
+% CellSwarm — Supplementary Information (standalone)
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{caption}
+
+\doublespacing
+\graphicspath{{figures/}}
+\captionsetup{font=small,labelfont=bf}
+
+% S-prefix numbering from the start
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+
+% Convenience commands (match main.tex)
+\newcommand{\cellswarm}{\textsc{CellSwarm}}
+
+\title{\cellswarm{}: Supplementary Information}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\input{sections/supplementary_body}
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}

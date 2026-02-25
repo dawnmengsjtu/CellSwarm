@@ -1,0 +1,409 @@
+meta:
+  schema_version: '1.0'
+  generated_by: CellSwarm Cancer Atlas Builder
+  generated_at: '2026-02-13'
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+cancer_id: Melanoma
+full_name: Cutaneous Melanoma
+tissue: Skin
+icd_code: C43.9
+tme_phenotype: immune_hot
+cell_types:
+  Tumor:
+    proportion:
+    - 0.4
+    - 0.6
+    subtypes:
+    - BRAF-mutant
+    - NRAS-mutant
+    - NF1-mutant
+    - Triple wild-type
+    key_markers:
+    - SOX10
+    - S100
+    - MLANA
+    - PMEL
+    - BRAF_V600E
+    doubling_time_hours:
+    - 24
+    - 48
+    functional_states:
+    - high_mutational_burden
+    - UV_signature_mutations
+    - EMT_program_activatable
+    - antigen_presentation_competent
+    initial_state:
+      energy:
+      - 0.7
+      - 0.9
+      immune_evasion:
+      - 0.3
+      - 0.5
+      proliferation_rate:
+      - 0.8
+      - 0.95
+      apoptosis_susceptibility:
+      - 0.25
+      - 0.45
+    behavior_mapping:
+      proliferate: 0.45
+      migrate: 0.15
+      signal: 0.15
+      rest: 0.1
+      apoptosis: 0.05
+      evade: 0.1
+    notes: Melanoma has one of the highest mutational burdens. UV-induced mutations create strong neoantigens. BRAF V600E
+      in ~50% of cases.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  CD8_T:
+    proportion:
+    - 0.12
+    - 0.25
+    subtypes:
+    - Effector memory
+    - Exhausted
+    - Progenitor exhausted
+    - Terminally exhausted
+    key_markers:
+    - CD8A
+    - CD8B
+    - GZMB
+    - PRF1
+    - PDCD1
+    - LAG3
+    - TIGIT
+    - TOX
+    functional_states:
+    - highly_cytotoxic
+    - exhausted_in_chronic_antigen
+    - stem_like_progenitor
+    - clonal_expansion
+    initial_state:
+      energy:
+      - 0.55
+      - 0.75
+      activation:
+      - 0.7
+      - 0.9
+      exhaustion:
+      - 0.5
+      - 0.7
+      cytotoxicity:
+      - 0.7
+      - 0.9
+    behavior_mapping:
+      attack: 0.45
+      migrate: 0.15
+      proliferate: 0.15
+      rest: 0.1
+      signal: 0.1
+      apoptosis: 0.05
+    notes: High CD8+ T cell infiltration but significant exhaustion. Progenitor exhausted T cells maintain response to immunotherapy.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  Treg:
+    proportion:
+    - 0.03
+    - 0.08
+    subtypes:
+    - Effector Treg
+    - Th1-like Treg
+    key_markers:
+    - FOXP3
+    - CD25
+    - CTLA4
+    - ICOS
+    - OX40
+    functional_states:
+    - immunosuppressive
+    - ICOS_high
+    - IL10_producing
+    initial_state:
+      energy:
+      - 0.55
+      - 0.75
+      suppressive_activity:
+      - 0.65
+      - 0.85
+      activation:
+      - 0.6
+      - 0.8
+    behavior_mapping:
+      suppress: 0.4
+      migrate: 0.15
+      signal: 0.2
+      proliferate: 0.1
+      rest: 0.1
+      apoptosis: 0.05
+    notes: ICOS+ Tregs are enriched in melanoma. High Treg infiltration correlates with poor immunotherapy response.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  Macrophage:
+    proportion:
+    - 0.08
+    - 0.15
+    subtypes:
+    - M1-like
+    - M2-like
+    - TAM
+    key_markers:
+    - CD68
+    - CD163
+    - CD206
+    - VSIG4
+    - MERTK
+    functional_states:
+    - phagocytic
+    - M2_polarized
+    - melanin_containing
+    initial_state:
+      energy:
+      - 0.55
+      - 0.75
+      polarization:
+      - 0.5
+      - 0.7
+      phagocytic_activity:
+      - 0.5
+      - 0.7
+    m1_m2_ratio:
+    - 0.3
+    - 0.45
+    behavior_mapping:
+      phagocytose: 0.3
+      signal: 0.15
+      migrate: 0.15
+      polarize: 0.1
+      rest: 0.2
+      apoptosis: 0.1
+    notes: Melanophages (melanin-laden macrophages) are characteristic. Mixed M1/M2 polarization in immune-hot melanoma. M1:M2
+      ratio approximately 1:1.5 to 1:2.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  NK:
+    proportion:
+    - 0.03
+    - 0.07
+    subtypes:
+    - CD56bright
+    - CD56dim
+    key_markers:
+    - NCAM1
+    - NKG2D
+    - DNAM1
+    - NKp30
+    - NKp46
+    functional_states:
+    - cytotoxic
+    - ADCC_active
+    initial_state:
+      energy:
+      - 0.5
+      - 0.7
+      activation:
+      - 0.6
+      - 0.8
+      cytotoxicity:
+      - 0.65
+      - 0.85
+    behavior_mapping:
+      attack: 0.45
+      migrate: 0.15
+      signal: 0.1
+      rest: 0.2
+      apoptosis: 0.05
+      proliferate: 0.05
+    notes: NK cells show better preservation of function compared to other cancers. Important for anti-CTLA4 response.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  B_cell:
+    proportion:
+    - 0.05
+    - 0.12
+    subtypes:
+    - Naive B
+    - Memory B
+    - Plasma cells
+    key_markers:
+    - CD19
+    - CD20
+    - CD138
+    - IGHG
+    - IGKC
+    functional_states:
+    - antibody_secreting
+    - TLS_formation
+    - antigen_presenting
+    initial_state:
+      energy:
+      - 0.55
+      - 0.75
+      activation:
+      - 0.55
+      - 0.75
+      antibody_secretion:
+      - 0.45
+      - 0.65
+    behavior_mapping:
+      signal: 0.3
+      migrate: 0.15
+      proliferate: 0.15
+      rest: 0.15
+      apoptosis: 0.1
+      attack: 0.15
+    notes: B cells and TLS strongly associated with immunotherapy response. IgG plasma cells abundant.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+spatial_distribution:
+  tumor_core:
+    Tumor: 0.7
+    CD8_T: 0.08
+    Treg: 0.05
+    Macrophage: 0.1
+    NK: 0.02
+    B_cell: 0.05
+  tumor_margin:
+    Tumor: 0.4
+    CD8_T: 0.25
+    Treg: 0.06
+    Macrophage: 0.12
+    NK: 0.07
+    B_cell: 0.1
+  stroma:
+    Tumor: 0.05
+    CD8_T: 0.2
+    Treg: 0.05
+    Macrophage: 0.18
+    NK: 0.15
+    B_cell: 0.37
+cancer_specific_features:
+- Highest tumor mutational burden among common cancers
+- UV signature mutations (C>T transitions)
+- Strong immunogenicity due to high neoantigen load
+- BRAF V600E mutation in ~50% of cases
+- MAPK pathway activation in majority
+- High baseline immune infiltration
+immunotherapy_relevance:
+  approved_agents:
+  - Ipilimumab (CTLA-4 inhibitor)
+  - Nivolumab (PD-1 inhibitor)
+  - Pembrolizumab (PD-1 inhibitor)
+  - Dostarlimab (PD-1 inhibitor)
+  - Relatlimab + Nivolumab (LAG-3 + PD-1)
+  - Talimogene laherparepvec (T-VEC, oncolytic virus)
+  response_rate: 40-60% for anti-PD-1 monotherapy; 50-70% for combination ipi+nivo
+  biomarkers:
+  - PD-L1 expression (CPS)
+  - Tumor mutational burden (high in most cases)
+  - Microsatellite instability (rare)
+  - Neoantigen burden
+  - T cell infiltration levels
+immune_escape_mechanisms:
+- T cell exhaustion via chronic antigen exposure
+- Upregulation of multiple inhibitory receptors (PD-1, LAG-3, TIGIT)
+- Loss of antigen presentation (B2M, HLA mutations)
+- IFN-gamma pathway defects (JAK1/2 mutations)
+- WNT/beta-catenin pathway activation (T cell exclusion)
+- CDK4/6-driven resistance program
+simulation_defaults:
+  total_cells: 1000
+  grid_size:
+  - 50
+  - 50
+  recommended_steps: 30
+  step_time_mapping: 1 step ≈ 1 day of tumor-immune interaction
+  key_signals:
+  - PD_L1
+  - TGF_beta
+  - IFN_gamma
+  - IL2
+  - oxygen
+  - glucose
+references:
+- pmid: 34019806
+  description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+  verified: true
+- pmid: 30127393
+  description: Jiang et al. TIDE signatures. Nat Med 2018
+  verified: true
+- pmid: 29628290
+  description: Thorsson et al. The Immune Landscape of Cancer. Immunity 2018
+  verified: true
+- pmid: 30388455
+  description: Jerby-Arnon et al. Cancer cell program promotes T cell exclusion. Cell 2018
+  verified: true
+- pmid: 30388456
+  description: Sade-Feldman et al. T cell states and checkpoint immunotherapy in melanoma. Cell 2018
+  verified: true
+- pmid: 27124452
+  description: Tirosh et al. Dissecting melanoma ecosystem by scRNA-seq. Science 2016
+  verified: true
+- pmid: 39282897
+  description: 'Wolchok et al. CheckMate-067: 10-year outcomes nivo+ipi in melanoma. NEJM 2025'
+  verified: true
+- pmid: 34986285
+  description: 'Tawbi et al. RELATIVITY-047: relatlimab + nivolumab in melanoma. NEJM 2022'
+  verified: true
+- pmid: 39306585
+  description: 'Long et al. KEYNOTE-006: pembrolizumab vs ipilimumab 10-year. Ann Oncol 2024'
+  verified: true
+- pmid: 31942075
+  description: Helmink et al. B cells and TLS promote immunotherapy response. Nature 2020
+  verified: true
+- pmid: 31942071
+  description: Cabrita et al. TLS improve immunotherapy and survival in melanoma. Nature 2020
+  verified: true
+- pmid: 30154148
+  description: Thrane et al. Spatially resolved transcriptomics in melanoma. Cancer Res 2018
+  verified: true
+- pmid: 30635339
+  description: Luke et al. WNT/beta-catenin correlates with immune exclusion. Clin Cancer Res 2019
+  verified: true
+- pmid: 29942093
+  description: Barry et al. NK-DC axis defines checkpoint therapy-responsive TME. Nat Med 2018
+  verified: true
+- pmid: 28117416
+  description: Mantovani et al. TAMs as treatment targets. Nat Rev Clin Oncol 2017
+  verified: true
+visualization:
+  cell_colors:
+    Tumor: '#C44E52'
+    CD8_T: '#4C72B0'
+    Treg: '#DD8452'
+    Macrophage: '#55A868'
+    NK: '#8172B3'
+    B_cell: '#CCB974'
+  abbreviation: MEL
+  icon: skin

@@ -1,0 +1,88 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+  calibrated_from: GSE169246 (Zhang et al. 2021) + GDSC2
+  calibration_date: '2026-02-13'
+combination_id: atezo_nabpaclitaxel
+components:
+- atezolizumab
+- nab_paclitaxel
+clinical_trial: IMpassion130
+indication: TNBC
+interaction_model: bliss_independence
+synergy_rules:
+  CD8_T:
+    synergy_factor: 1.25
+    affected_parameters:
+    - activation
+    - exhaustion
+    notes: Nab-paclitaxel ICD + PD-L1 blockade
+  Tumor:
+    synergy_factor: 1.2
+    affected_parameters:
+    - apoptosis_susceptibility
+    - immune_evasion
+  Treg:
+    synergy_factor: 1.1
+    affected_parameters:
+    - suppressive_activity
+  Macrophage:
+    synergy_factor: 1.15
+    affected_parameters:
+    - polarization
+    - phagocytic_activity
+  NK:
+    synergy_factor: 1.1
+    affected_parameters:
+    - activation
+  B_cell:
+    synergy_factor: 1.0
+    affected_parameters: []
+toxicity_interaction:
+  irAE_probability: 0.28
+  dose_adjustment: 0.85
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 1.15
+    notes: IMpassion130 PD-L1+ IC>=1% PFS benefit
+  Melanoma:
+    efficacy_modifier: 0.7
+    notes: Not standard
+  NSCLC:
+    efficacy_modifier: 0.8
+    notes: IMpower150 uses different backbone
+  CRC-MSI-H:
+    efficacy_modifier: 0.6
+    notes: ICI preferred alone
+  CRC-MSS:
+    efficacy_modifier: 0.3
+    notes: Limited benefit
+  Ovarian:
+    efficacy_modifier: 0.5
+    notes: Investigational
+references:
+- description: 'IMpassion130: Atezo+nab-paclitaxel in TNBC. Schmid et al. NEJM 2018'
+  pmid: '30345906'
+  verified: true
+clinical_validation:
+  source: GSE169246
+  n_patients: 22
+  pre_post_cell_changes:
+    Tumor:
+      fold_change: 1.1651
+      direction: increase
+    CD8_T:
+      fold_change: 0.9677
+      direction: decrease
+    Treg:
+      fold_change: 0.87
+      direction: decrease
+    Macrophage:
+      fold_change: 0.9269
+      direction: decrease
+    NK:
+      fold_change: 1.2805
+      direction: increase
+    B_cell:
+      fold_change: 0.7024
+      direction: decrease

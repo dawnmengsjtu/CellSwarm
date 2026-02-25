@@ -1,0 +1,124 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: RAS_MAPK
+pathway_name: RAS/MAPK (ERK) Signaling
+category: proliferation
+kegg_id: hsa04010
+components:
+  receptors:
+  - EGFR
+  - ERBB2
+  - FGFR1
+  - MET
+  ligands:
+  - EGF
+  - FGF2
+  - HGF
+  downstream:
+  - KRAS
+  - NRAS
+  - HRAS
+  - BRAF
+  - MAP2K1
+  - MAP2K2
+  - MAPK1
+  - MAPK3
+  transcription_factors:
+  - MYC
+  - FOS
+  - JUN
+  - ELK1
+  - ETS1
+  key_genes:
+  - KRAS
+  - BRAF
+  - MAP2K1
+  - MAPK1
+  - MAPK3
+  - NF1
+  - DUSP6
+signal_fields_affected:
+- glucose
+cell_type_effects:
+  CD8_T:
+    when_active: MAPK/ERK is activated downstream of TCR. Promotes T cell proliferation,
+      cytokine production, and effector differentiation.
+    behavioral_mapping:
+      proliferate: 0.2
+      attack: 0.1
+      signal: 0.15
+    state_effects:
+      activation: 0.2
+      cytokine_production: 0.15
+  Tumor:
+    when_active: RAS/MAPK is mutated in ~30% of cancers. KRAS/BRAF mutations drive
+      uncontrolled proliferation, survival, and immune evasion.
+    behavioral_mapping:
+      proliferate: 0.3
+      evade: 0.15
+      migrate: 0.1
+    state_effects:
+      growth_rate: 0.3
+      immune_evasion: 0.15
+  Treg:
+    when_active: ERK signaling supports Treg differentiation and FOXP3 expression.
+    behavioral_mapping:
+      suppress: 0.1
+      proliferate: 0.1
+    state_effects:
+      foxp3_stability: 0.1
+  Macrophage:
+    when_active: MAPK signaling drives macrophage activation and cytokine production.
+      ERK promotes M2, p38/JNK promote M1.
+    behavioral_mapping:
+      polarize: 0.15
+      signal: 0.15
+    state_effects:
+      cytokine_production: 0.15
+  NK:
+    when_active: ERK signaling downstream of activating receptors promotes NK cell
+      cytotoxicity and degranulation.
+    behavioral_mapping:
+      attack: 0.15
+    state_effects:
+      cytotoxicity: 0.1
+      degranulation: 0.1
+  B_cell:
+    when_active: MAPK/ERK is activated by BCR signaling. Promotes B cell proliferation
+      and differentiation.
+    behavioral_mapping:
+      proliferate: 0.15
+      signal: 0.1
+    state_effects:
+      activation: 0.1
+crosstalk:
+- pathway: PI3K_AKT_mTOR
+  type: parallel
+  description: Co-activated by RTKs; compensatory activation when one is inhibited
+- pathway: TNF_NFKB
+  type: cross_activation
+  description: RAS can activate NF-kB via TRAF2/MEKK1
+- pathway: IFNG_JAK_STAT
+  type: modulating
+  description: ERK can modulate STAT1 signaling and IFN-gamma responses
+targeted_by: []
+references:
+- description: Targeting RAS-driven cancers. Prior et al. Nat Rev Drug Discov 2020
+  pmid: '32209560'
+  pmid_verified: true
+- description: MAPK pathway in cancer. Dhillon et al. Oncogene 2007
+  pmid: '17496922'
+  pmid_verified: true
+additional_agents:
+- drug_id: trametinib
+  mechanism: MEK1/2 inhibitor
+  in_drug_library: false
+- drug_id: sotorasib
+  mechanism: KRAS G12C covalent inhibitor
+  in_drug_library: false
+- drug_id: dabrafenib
+  mechanism: BRAF V600E inhibitor
+  in_drug_library: false

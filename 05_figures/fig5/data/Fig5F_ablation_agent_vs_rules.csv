@@ -1,0 +1,14 @@
+experiment,condition,mode,seed,tumor_ratio,final_tumor,alive,js_divergence
+ablation_rules,no_cancer_atlas,rules,42,0.1581,34,334,0.3135
+ablation_rules,no_drug_library,rules,42,0.8679,184,484,0.1601
+ablation_rules,no_pathway_kb,rules,42,0.8679,184,484,0.1601
+ablation_rules,no_perturbation_atlas,rules,42,0.8679,184,484,0.1601
+ablation_rules,no_tme_parameters,rules,42,1.1962,250,550,0.1547
+ablation_agent,no_cancer_atlas,deepseek,123,0.2632,55,357,0.2703
+ablation_agent,no_cancer_atlas,deepseek,42,0.1256,27,329,0.3332
+ablation_agent,no_cancer_atlas,deepseek,456,0.2679,56,353,0.2661
+ablation_agent,no_drug_library,deepseek,123,0.9858,208,500,0.1547
+ablation_agent,no_drug_library,deepseek,42,0.9387,199,498,0.1574
+ablation_agent,no_drug_library,deepseek,456,1.0571,222,518,0.1542
+ablation_agent,no_pathway_kb,deepseek,123,0.9384,198,494,0.1564
+ablation_agent,no_pathway_kb,deepseek,42,0.8302,176,474,0.1617

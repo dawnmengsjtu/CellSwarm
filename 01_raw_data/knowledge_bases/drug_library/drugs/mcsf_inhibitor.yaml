@@ -1,0 +1,108 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: mcsf_inhibitor
+generic_name: Pexidartinib
+brand_name: Turalio
+drug_class: immunomodulator
+subclass: CSF1R_inhibitor
+molecular_type: small_molecule
+fda_status: approved
+approved_indications:
+- TGCT
+targets:
+- name: CSF1R
+  gene: CSF1R
+  type: kinase
+  action: inhibitor
+  selectivity: moderate
+cell_effects:
+  CD8_T:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.04
+    notes: Reduced immunosuppressive TAMs
+  Tumor:
+    direct: false
+    state_effects:
+    - parameter: immune_evasion
+      direction: decrease
+      rate_per_step: 0.04
+  Treg:
+    direct: false
+    state_effects:
+    - parameter: suppressive_activity
+      direction: decrease
+      rate_per_step: 0.02
+  Macrophage:
+    direct: true
+    state_effects:
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.1
+    - parameter: phagocytic_activity
+      direction: increase
+      rate_per_step: 0.06
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.05
+    functional_effects:
+    - action: phagocytose
+      probability_modifier: 0.15
+    notes: Depletes M2 TAMs and reprograms remaining to M1
+  NK:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.03
+  B_cell:
+    direct: false
+    state_effects: []
+environment_effects:
+- field: TGF_beta
+  action: deplete
+  magnitude: 0.15
+  notes: Reduced M2-derived TGF-beta
+pharmacokinetics:
+  administration: oral
+  standard_dose: 400 mg BID
+  onset_steps: 2
+  peak_steps: 3
+  half_life_steps: 1
+  concentration_curve: exponential_decay
+  steady_state_fraction: 0.75
+dose_response:
+  model: hill
+  ec50: 0.4
+  hill_coefficient: 2.0
+  max_effect: 0.85
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.6
+    notes: High TAM infiltration
+  Melanoma:
+    efficacy_modifier: 0.5
+    notes: Moderate TAM role
+  NSCLC:
+    efficacy_modifier: 0.5
+    notes: TAM-rich tumors
+  CRC-MSI-H:
+    efficacy_modifier: 0.4
+    notes: Less TAM-dependent
+  CRC-MSS:
+    efficacy_modifier: 0.7
+    notes: High M2 TAM infiltration
+  Ovarian:
+    efficacy_modifier: 0.7
+    notes: Ascites-associated TAMs
+resistance:
+- mechanism: Compensatory myeloid recruitment via CCL2/CXCL12
+  onset_steps: 12
+  probability: 0.2
+references:
+- description: CSF1R inhibition in solid tumors. Ries et al. Cancer Cell 2014
+  pmid: '24898549'
+  verified: true

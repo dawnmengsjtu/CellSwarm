@@ -1,0 +1,13 @@
+drug,timing,seed,tumor_ratio
+anti_PD1,early,42,0.7217
+anti_PD1,early,123,0.8152
+anti_PD1,early,456,0.7952
+anti_PD1,late,42,0.8774
+anti_PD1,late,123,0.7583
+anti_PD1,late,456,0.8667
+anti_CTLA4,early,42,0.8538
+anti_CTLA4,early,123,0.8436
+anti_CTLA4,early,456,1.0381
+anti_CTLA4,late,42,0.9104
+anti_CTLA4,late,123,0.8626
+anti_CTLA4,late,456,0.9381

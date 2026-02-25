@@ -1,0 +1,64 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+combination_id: durva_treme
+components:
+- durvalumab
+- tremelimumab
+clinical_trial: POSEIDON
+indication: NSCLC
+interaction_model: bliss_independence
+synergy_rules:
+  CD8_T:
+    synergy_factor: 1.35
+    affected_parameters:
+    - activation
+    - exhaustion
+    notes: PD-L1 + CTLA-4 dual blockade
+  Tumor:
+    synergy_factor: 1.2
+    affected_parameters:
+    - immune_evasion
+  Treg:
+    synergy_factor: 1.3
+    affected_parameters:
+    - suppressive_activity
+    notes: Tremelimumab depletes Tregs
+  Macrophage:
+    synergy_factor: 1.15
+    affected_parameters:
+    - polarization
+  NK:
+    synergy_factor: 1.15
+    affected_parameters:
+    - activation
+  B_cell:
+    synergy_factor: 1.05
+    affected_parameters:
+    - activation
+toxicity_interaction:
+  irAE_probability: 0.4
+  dose_adjustment: 0.8
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.5
+    notes: Not standard
+  Melanoma:
+    efficacy_modifier: 0.8
+    notes: Nivo+Ipi preferred
+  NSCLC:
+    efficacy_modifier: 1.1
+    notes: 'POSEIDON: Durva+Treme+chemo'
+  CRC-MSI-H:
+    efficacy_modifier: 0.8
+    notes: Dual ICI rationale
+  CRC-MSS:
+    efficacy_modifier: 0.2
+    notes: Ineffective
+  Ovarian:
+    efficacy_modifier: 0.4
+    notes: Limited data
+references:
+- description: 'POSEIDON: Durva+Treme+chemo in NSCLC. Johnson et al. J Clin Oncol 2023'
+  pmid: '36327426'
+  verified: true

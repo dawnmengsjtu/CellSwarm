@@ -1,0 +1,16 @@
+mode,seed,tumor_ratio
+deepseek,42,0.8868
+deepseek,123,0.8531
+deepseek,456,1.0476
+deepseek,789,0.9043
+deepseek,1024,1.0243
+rules,42,0.8679
+rules,123,0.8199
+rules,456,0.8667
+rules,789,0.8086
+rules,1024,0.8835
+random,42,1.3147
+random,123,1.2178
+random,456,1.2935
+random,789,1.1089
+random,1024,1.1429

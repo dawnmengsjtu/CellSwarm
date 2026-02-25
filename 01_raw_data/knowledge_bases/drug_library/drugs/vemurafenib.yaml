@@ -1,0 +1,110 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: vemurafenib
+generic_name: Vemurafenib
+brand_name: Zelboraf
+drug_class: targeted_therapy
+subclass: BRAF_inhibitor
+molecular_type: small_molecule
+fda_status: approved
+approved_indications:
+- melanoma
+targets:
+- name: BRAF V600E
+  gene: BRAF
+  type: kinase
+  action: inhibitor
+  selectivity: high
+cell_effects:
+  CD8_T:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.04
+    notes: BRAF inhibition increases tumor antigen presentation and T cell infiltration
+  Tumor:
+    direct: true
+    state_effects:
+    - parameter: proliferation_rate
+      direction: decrease
+      rate_per_step: 0.2
+      condition: BRAF_V600E
+    - parameter: apoptosis_susceptibility
+      direction: increase
+      rate_per_step: 0.15
+      condition: BRAF_V600E
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.08
+  Treg:
+    direct: false
+    state_effects:
+    - parameter: suppressive_activity
+      direction: decrease
+      rate_per_step: 0.02
+  Macrophage:
+    direct: false
+    state_effects:
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.03
+    notes: Reduced tumor-derived M2 signals
+  NK:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.03
+  B_cell:
+    direct: false
+    state_effects: []
+environment_effects:
+- field: IFN_gamma
+  action: amplify
+  magnitude: 0.1
+  notes: Increased antigen presentation
+pharmacokinetics:
+  administration: oral
+  standard_dose: 960 mg BID
+  onset_steps: 1
+  peak_steps: 1
+  half_life_steps: 2
+  concentration_curve: exponential_decay
+  steady_state_fraction: 0.8
+dose_response:
+  model: hill
+  ec50: 0.2
+  hill_coefficient: 3.0
+  max_effect: 1.0
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.05
+    notes: BRAF V600E extremely rare
+  Melanoma:
+    efficacy_modifier: 1.0
+    notes: BRAF V600E in ~50% of melanoma
+  NSCLC:
+    efficacy_modifier: 0.3
+    notes: BRAF V600E in ~2% of NSCLC
+  CRC-MSI-H:
+    efficacy_modifier: 0.2
+    notes: BRAF V600E in ~10% but poor response
+  CRC-MSS:
+    efficacy_modifier: 0.15
+    notes: BRAF V600E rare, poor response
+  Ovarian:
+    efficacy_modifier: 0.05
+    notes: BRAF V600E extremely rare
+resistance:
+- mechanism: MAPK pathway reactivation (MEK, NRAS)
+  onset_steps: 10
+  probability: 0.3
+- mechanism: Paradoxical MAPK activation in BRAF-wt cells
+  onset_steps: 8
+  probability: 0.15
+references:
+- description: Vemurafenib in BRAF V600E melanoma. Chapman et al. NEJM 2011
+  pmid: '21639808'
+  verified: true

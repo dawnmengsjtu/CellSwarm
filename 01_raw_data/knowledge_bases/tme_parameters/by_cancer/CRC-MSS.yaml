@@ -1,0 +1,193 @@
+meta:
+  schema_version: '1.0'
+  cancer_id: CRC-MSS
+  full_name: Colorectal Cancer (MSS)
+  tissue: colon
+  tme_phenotype: immune_altered_immunosuppressed
+  generated_at: '2026-02-13'
+  generated_by: Dawn (literature curation)
+  compatible_engine: cellswarm>=2.0
+engine_params:
+  grid:
+    size:
+    - 200
+    - 200
+    resolution: 10
+  vessels:
+    density: medium
+    concentration:
+      oxygen: 0.07
+      glucose: 5.0
+  fields:
+    oxygen:
+      initial_level: 0.05
+      diffusion_coeff: 2.0e-05
+      decay_rate: 0.01
+      consumption:
+        Tumor: 0.003
+        Macrophage: 0.001
+      sensitivity_range:
+      - 0.8
+      - 1.2
+      reference:
+        pmid: '30643250'
+        note: Bhandari 2019 - tumor hypoxia landmarks
+    glucose:
+      initial_level: 4.5
+      diffusion_coeff: 1.0e-05
+      decay_rate: 0.005
+      consumption:
+        Tumor: 0.12
+        CD8_T: 0.04
+      sensitivity_range:
+      - 0.7
+      - 1.3
+      reference:
+        pmid: '27386546'
+        note: DeBerardinis 2016 - cancer metabolism
+    IFN_gamma:
+      initial_level: 0.0
+      diffusion_coeff: 1.0e-06
+      decay_rate: 0.1
+      secretion:
+        CD8_T:
+          rate: 0.02
+          condition: action==attack
+        NK:
+          rate: 0.015
+          condition: action==attack
+      reference:
+        pmid: '29686425'
+        note: Binnewies 2018 - TIME review
+    IL2:
+      initial_level: 0.0
+      diffusion_coeff: 1.0e-06
+      decay_rate: 0.05
+      secretion:
+        CD8_T:
+          rate: 0.02
+      consumption:
+        Treg: 0.04
+      reference:
+        pmid: '29686425'
+        note: Binnewies 2018 - TIME review
+    TGF_beta:
+      initial_level: 0.08
+      diffusion_coeff: 8.0e-07
+      decay_rate: 0.08
+      secretion:
+        Treg:
+          rate: 0.035
+        Tumor:
+          rate: 0.025
+          condition: HIF1a>0.5
+        Macrophage:
+          rate: 0.02
+          condition: polarization>=0.6
+      reference:
+        pmid: '32710082'
+        note: Derynck 2021 - TGFβ in cancer
+    PD_L1:
+      initial_level: 0.0
+      diffusion_coeff: 0
+      decay_rate: 0.2
+      secretion:
+        Tumor:
+          rate: 0.01
+      ifng_induction: 0.04
+      reference:
+        pmid: '33580222'
+        note: Doroshow 2021 - PD-L1 biomarker
+  migration_speeds:
+    Tumor: 0.1
+    CD8_T: 0.6
+    NK: 0.5
+    Treg: 0.4
+    Macrophage: 0.3
+    B_cell: 0.2
+  cell_composition:
+    total_cells: 100
+    proportions:
+      Tumor: 0.5
+      CD8_T: 0.08
+      Macrophage: 0.2
+      NK: 0.04
+      Treg: 0.13
+      B_cell: 0.05
+    spawn_regions:
+      Tumor: center
+      CD8_T: border
+      NK: border
+      Treg: stroma
+      Macrophage: distributed
+      B_cell: stroma
+semantic_thresholds:
+  oxygen:
+    severe_hypoxia: 0.01
+    hypoxia: 0.02
+    normoxia:
+    - 0.04
+    - 0.07
+    display_unit: mM
+  glucose:
+    depleted: 0.5
+    low: 1.5
+    normal:
+    - 3.0
+    - 5.5
+  IFN_gamma:
+    low: 0.02
+    active: 0.08
+    high: 0.25
+  TGF_beta:
+    low: 0.04
+    immunosuppressive: 0.12
+    high: 0.25
+  PD_L1:
+    negative: 0.05
+    low_expression: 0.12
+    high_expression: 0.2
+  IL2:
+    absent: 0.01
+    supportive: 0.05
+    proliferative: 0.15
+cancer_profile:
+  immune_context: immune_cold, microsatellite stable
+  infiltration_pattern: 免疫荒漠或免疫排斥，T 细胞浸润极低
+  key_immune_features:
+  - MSI-H/dMMR 亚型突变负荷高，新抗原丰富，免疫治疗敏感
+  - MSS 亚型免疫浸润低，Treg 和 M2 巨噬细胞主导
+  - Wnt/β-catenin 通路激活驱动免疫排斥
+  - 肠道微生物组影响免疫治疗响应
+  metabolic_features:
+  - 中度缺氧
+  - Warburg effect 中等
+  - KRAS 突变影响代谢重编程
+  stroma_features:
+  - CMS4 亚型基质丰富，TGF-β 驱动
+  - 中等血管密度
+  therapeutic_context:
+  - 'Pembrolizumab (KEYNOTE-177): MSI-H/dMMR 一线标准'
+  - MSS 亚型免疫治疗效果差，联合策略探索中
+  - 抗 VEGF (bevacizumab) + 化疗是 MSS 标准
+references:
+- pmid: '33264544'
+  description: André T et al. Pembrolizumab in microsatellite-instability-high advanced
+    colorectal cancer (KEYNOTE-177). N Engl J Med. 2020
+  verified: true
+- pmid: '25970248'
+  description: Spranger S et al. β-catenin signalling prevents anti-tumour immunity.
+    Nature. 2015
+  verified: true
+- pmid: '30886395'
+  description: 'Ganesh K et al. Immunotherapy in colorectal cancer: rationale, challenges
+    and potential. Nat Rev Gastroenterol Hepatol. 2019'
+  verified: true
+- pmid: '21376230'
+  description: 'Hanahan D, Weinberg RA. Hallmarks of cancer: the next generation.
+    Cell. 2011'
+  verified: true
+- pmid: '29686425'
+  description: Binnewies M et al. Understanding the tumor immune microenvironment
+    (TIME) for effective immunotherapy. Nat Med. 2018
+  verified: true

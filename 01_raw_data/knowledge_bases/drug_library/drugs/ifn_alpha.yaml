@@ -1,0 +1,104 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: ifn_alpha
+generic_name: Interferon alfa-2b
+brand_name: Intron A
+drug_class: immunomodulator
+subclass: cytokine
+molecular_type: cytokine
+fda_status: approved
+approved_indications:
+- melanoma
+targets:
+- name: IFNAR
+  gene: IFNAR1
+  type: receptor
+  action: agonist
+  selectivity: moderate
+cell_effects:
+  CD8_T:
+    direct: true
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.05
+    - parameter: cytotoxicity
+      direction: increase
+      rate_per_step: 0.04
+  Tumor:
+    direct: true
+    state_effects:
+    - parameter: proliferation_rate
+      direction: decrease
+      rate_per_step: 0.06
+    - parameter: apoptosis_susceptibility
+      direction: increase
+      rate_per_step: 0.04
+    notes: Direct antiproliferative + enhanced antigen presentation
+  Treg:
+    direct: false
+    state_effects: []
+  Macrophage:
+    direct: true
+    state_effects:
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.05
+    notes: Promotes M1 polarization
+  NK:
+    direct: true
+    state_effects:
+    - parameter: cytotoxicity
+      direction: increase
+      rate_per_step: 0.06
+  B_cell:
+    direct: true
+    state_effects:
+    - parameter: antibody_secretion
+      direction: increase
+      rate_per_step: 0.04
+environment_effects:
+- field: IFN_gamma
+  action: amplify
+  magnitude: 0.15
+pharmacokinetics:
+  administration: SC
+  standard_dose: 10 MU/m2 5x/week
+  onset_steps: 1
+  peak_steps: 2
+  half_life_steps: 0.3
+  concentration_curve: pulse
+  steady_state_fraction: 0.6
+dose_response:
+  model: hill
+  ec50: 0.5
+  hill_coefficient: 1.5
+  max_effect: 0.8
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.3
+    notes: Not standard
+  Melanoma:
+    efficacy_modifier: 0.6
+    notes: Adjuvant setting
+  NSCLC:
+    efficacy_modifier: 0.2
+    notes: Not standard
+  CRC-MSI-H:
+    efficacy_modifier: 0.3
+    notes: Not standard
+  CRC-MSS:
+    efficacy_modifier: 0.1
+    notes: Ineffective
+  Ovarian:
+    efficacy_modifier: 0.2
+    notes: Not standard
+resistance:
+- mechanism: IFNAR downregulation
+  onset_steps: 10
+  probability: 0.15
+references:
+- description: IFN-alpha adjuvant in melanoma. Kirkwood et al. J Clin Oncol 1996
+  pmid: '8558223'
+  verified: true

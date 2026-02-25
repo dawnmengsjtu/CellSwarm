@@ -1,0 +1,232 @@
+{
+  "source": "GSE176078",
+  "reference": "Wu et al. Nature Genetics 2021",
+  "pmid": "34493872",
+  "cancer_type": "TNBC",
+  "total_cells": 27011,
+  "type_counts": {
+    "B_cell": 4643,
+    "CD8_T": 4621,
+    "Treg": 1710,
+    "NK": 1113,
+    "Macrophage": 4088,
+    "Tumor": 10836
+  },
+  "proportions": {
+    "B_cell": 0.1719,
+    "CD8_T": 0.1711,
+    "Treg": 0.0633,
+    "NK": 0.0412,
+    "Macrophage": 0.1513,
+    "Tumor": 0.4012
+  },
+  "subtype_detail": {
+    "B_cell": {
+      "B cells Memory": 1392,
+      "Plasmablasts": 2667,
+      "B cells Naive": 584
+    },
+    "CD8_T": {
+      "T_cells_c4_CD8+_ZFP36": 1735,
+      "T_cells_c7_CD8+_IFNG": 1025,
+      "T_cells_c8_CD8+_LAG3": 1581,
+      "T_cells_c5_CD8+_GZMK": 280
+    },
+    "Treg": {
+      "T_cells_c2_CD4+_T-regs_FOXP3": 1710
+    },
+    "NK": {
+      "T_cells_c9_NK_cells_AREG": 753,
+      "T_cells_c10_NKT_cells_FCGR3A": 360
+    },
+    "Macrophage": {
+      "Myeloid_c10_Macrophage_1_EGR1": 1431,
+      "Myeloid_c2_LAM2_APOE": 776,
+      "Myeloid_c1_LAM1_FABP5": 1406,
+      "Myeloid_c9_Macrophage_2_CXCL10": 388,
+      "Myeloid_c0_DC_LAMP3": 61,
+      "Myeloid_c5_Macrophage_3_SIGLEC1": 26
+    },
+    "Tumor": {
+      "Cancer LumB SC": 167,
+      "Cancer Cycling": 4372,
+      "Cancer Basal SC": 4177,
+      "Cancer LumA SC": 77,
+      "Cancer Her2 SC": 2043
+    }
+  },
+  "gene_signatures": {
+    "CD8_T": {
+      "exhaustion": [
+        "PDCD1",
+        "HAVCR2",
+        "LAG3",
+        "TIGIT",
+        "CTLA4"
+      ],
+      "activation": [
+        "GZMB",
+        "PRF1",
+        "IFNG",
+        "GNLY",
+        "NKG7"
+      ],
+      "energy": [
+        "MKI67",
+        "ATP5A1",
+        "SLC2A1"
+      ],
+      "cytotoxicity": [
+        "GZMB",
+        "PRF1",
+        "GNLY",
+        "GZMA"
+      ]
+    },
+    "Tumor": {
+      "proliferation_rate": [
+        "MKI67",
+        "TOP2A",
+        "PCNA",
+        "MCM2"
+      ],
+      "immune_evasion": [
+        "CD274",
+        "PDCD1LG2",
+        "IDO1",
+        "LGALS9"
+      ],
+      "energy": [
+        "SLC2A1",
+        "HK2",
+        "LDHA",
+        "PKM"
+      ],
+      "hypoxia": [
+        "HIF1A",
+        "VEGFA",
+        "CA9",
+        "BNIP3"
+      ]
+    },
+    "Treg": {
+      "suppressive_activity": [
+        "FOXP3",
+        "IL2RA",
+        "CTLA4",
+        "TIGIT",
+        "IL10"
+      ],
+      "activation": [
+        "TNFRSF4",
+        "TNFRSF18",
+        "ICOS"
+      ],
+      "energy": [
+        "MKI67",
+        "SLC2A1"
+      ]
+    },
+    "Macrophage": {
+      "polarization": [
+        "CD163",
+        "MRC1",
+        "MSR1",
+        "CD206"
+      ],
+      "m1_score": [
+        "NOS2",
+        "TNF",
+        "IL1B",
+        "CXCL10"
+      ],
+      "energy": [
+        "MKI67",
+        "SLC2A1"
+      ],
+      "phagocytosis": [
+        "CD68",
+        "FCGR1A",
+        "FCGR3A"
+      ]
+    },
+    "NK": {
+      "activation": [
+        "NKG7",
+        "GNLY",
+        "GZMB",
+        "PRF1",
+        "KLRD1"
+      ],
+      "energy": [
+        "MKI67",
+        "SLC2A1"
+      ],
+      "cytotoxicity": [
+        "GZMB",
+        "PRF1",
+        "GNLY"
+      ]
+    },
+    "B_cell": {
+      "activation": [
+        "CD19",
+        "MS4A1",
+        "CD79A",
+        "CD27"
+      ],
+      "energy": [
+        "MKI67",
+        "SLC2A1"
+      ]
+    }
+  },
+  "note": "Gene expression values need to be extracted from count matrix for full calibration. This file contains metadata-level structure.",
+  "cells_sample": [
+    {
+      "barcode": "CID44041_ACGAGCCGTCCAAGTT",
+      "original_type": "B cells Memory",
+      "agent_type": "B_cell",
+      "sample_id": "CID44041",
+      "nCount_RNA": 1879,
+      "nFeature_RNA": 566,
+      "percent_mito": 2.66098988823842
+    },
+    {
+      "barcode": "CID44041_AGCTCCTCAGCGTCCA",
+      "original_type": "B cells Memory",
+      "agent_type": "B_cell",
+      "sample_id": "CID44041",
+      "nCount_RNA": 3081,
+      "nFeature_RNA": 779,
+      "percent_mito": 3.31061343719572
+    },
+    {
+      "barcode": "CID44041_AGGCCGTAGGTGATTA",
+      "original_type": "B cells Memory",
+      "agent_type": "B_cell",
+      "sample_id": "CID44041",
+      "nCount_RNA": 1776,
+      "nFeature_RNA": 598,
+      "percent_mito": 2.47747747747748
+    },
+    {
+      "barcode": "CID44041_AGTTGGTCAGCGATCC",
+      "original_type": "B cells Memory",
+      "agent_type": "B_cell",
+      "sample_id": "CID44041",
+      "nCount_RNA": 2670,
+      "nFeature_RNA": 790,
+      "percent_mito": 2.65917602996255
+    },
+    {
+      "barcode": "CID44041_ATCTGCCGTGACAAAT",
+      "original_type": "B cells Memory",
+      "agent_type": "B_cell",
+      "sample_id": "CID44041",
+      "nCount_RNA": 5947,
+      "nFeature_RNA": 1719,
+      "percent_mito": 3.32940978644695
+    }
+  ]
+}

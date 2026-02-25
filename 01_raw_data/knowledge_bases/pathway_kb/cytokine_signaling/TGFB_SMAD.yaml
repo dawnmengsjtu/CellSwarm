@@ -1,0 +1,143 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: TGFB_SMAD
+pathway_name: TGF-beta/SMAD Signaling
+category: cytokine_signaling
+kegg_id: hsa04350
+components:
+  receptors:
+  - TGFBR1
+  - TGFBR2
+  ligands:
+  - TGFB1
+  - TGFB2
+  - TGFB3
+  downstream:
+  - SMAD2
+  - SMAD3
+  - SMAD4
+  - SMAD7
+  transcription_factors:
+  - SMAD2
+  - SMAD3
+  - SMAD4
+  - FOXP3
+  key_genes:
+  - TGFB1
+  - TGFBR1
+  - TGFBR2
+  - SMAD2
+  - SMAD3
+  - SMAD4
+signal_fields_affected:
+- TGF_beta
+cell_type_effects:
+  CD8_T:
+    when_active: TGF-beta suppresses CD8+ T cell effector function, inhibits proliferation,
+      and promotes tissue-resident memory phenotype.
+    behavioral_mapping:
+      attack: -0.25
+      proliferate: -0.2
+      rest: 0.2
+      migrate: -0.15
+    state_effects:
+      activation: -0.2
+      cytotoxicity: -0.2
+      exhaustion: 0.1
+  Tumor:
+    when_active: 'TGF-beta has dual roles: tumor suppressor early (growth arrest)
+      but promoter late (EMT, invasion, immune evasion).'
+    behavioral_mapping:
+      migrate: 0.2
+      evade: 0.2
+      proliferate: -0.1
+    state_effects:
+      immune_evasion: 0.25
+  Treg:
+    when_active: TGF-beta is essential for induced Treg differentiation (iTreg) and
+      maintains FOXP3 expression.
+    behavioral_mapping:
+      suppress: 0.3
+      signal: 0.1
+    state_effects:
+      suppressive_activity: 0.25
+      activation: 0.1
+  Macrophage:
+    when_active: TGF-beta promotes M2 polarization and suppresses pro-inflammatory
+      functions.
+    behavioral_mapping:
+      polarize: 0.25
+      phagocytose: -0.1
+    state_effects:
+      polarization: 0.25
+  NK:
+    when_active: TGF-beta strongly suppresses NK cell cytotoxicity and IFN-gamma production.
+    behavioral_mapping:
+      attack: -0.3
+      signal: -0.15
+    state_effects:
+      cytotoxicity: -0.25
+      activation: -0.2
+  B_cell:
+    when_active: TGF-beta promotes IgA class switching and inhibits B cell proliferation.
+    behavioral_mapping:
+      proliferate: -0.1
+      signal: 0.05
+    state_effects:
+      activation: -0.1
+crosstalk:
+- pathway: IFNG_JAK_STAT
+  type: antagonistic
+  description: TGF-beta and IFN-gamma have opposing effects on immune activation and
+    macrophage polarization
+- pathway: PD1_PDL1
+  type: synergistic_inhibition
+  description: TGF-beta and PD-1 cooperate in T cell exhaustion and immune exclusion
+- pathway: WNT_beta_catenin
+  type: context_dependent
+  description: TGF-beta can activate or inhibit Wnt signaling depending on context
+targeted_by:
+- drug_id: galunisertib
+  mechanism: TGF-beta receptor I kinase inhibitor (investigational)
+references:
+- description: TGF-beta in tumor immune evasion. Batlle & Massague. Immunity 2019
+  pmid: '30995507'
+  pmid_verified: true
+- description: TGF-beta drives immune exclusion. Mariathasan et al. Nature 2018
+  pmid: '29669246'
+  pmid_verified: true
+data_calibration:
+  source: GSE176078 TNBC scRNA-seq (CellChat-lite)
+  n_cells: 997
+  communication_strength: 0.024
+  max_communication_strength: 0.1052
+  n_active_pairs: 13
+  top_interactions:
+  - sender: Treg
+    receiver: Macrophage
+    ligand: TGFB1
+    receptor: TGFBR2
+    probability: 0.1052
+  - sender: Macrophage
+    receiver: Tumor
+    ligand: TGFB1
+    receptor: TGFBR1
+    probability: 0.0466
+  - sender: Treg
+    receiver: CD8_T
+    ligand: TGFB1
+    receptor: TGFBR2
+    probability: 0.0411
+  - sender: Tumor
+    receiver: Macrophage
+    ligand: TGFB1
+    receptor: TGFBR2
+    probability: 0.0299
+  - sender: Treg
+    receiver: Tumor
+    ligand: TGFB1
+    receptor: TGFBR1
+    probability: 0.0232

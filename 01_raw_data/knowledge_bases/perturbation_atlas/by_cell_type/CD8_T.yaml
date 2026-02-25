@@ -1,0 +1,588 @@
+meta:
+  schema_version: '1.0'
+  cell_type: CD8_T
+  total_entries: 15
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+perturbations:
+- id: PDCD1_KO_CD8T
+  gene: PDCD1
+  gene_full_name: Programmed Cell Death 1 (PD-1)
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: exhaustion_score
+    direction: decrease
+    effect_size: -0.45
+    confidence: high
+  - parameter: cytotoxicity
+    direction: increase
+    effect_size: 0.62
+    confidence: high
+  - parameter: proliferation
+    direction: increase
+    effect_size: 0.31
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      attack: 0.25
+      rest: -0.15
+      proliferate: 0.1
+    state_changes:
+      exhaustion: -0.3
+      activation: 0.2
+      cytotoxicity: 0.25
+  evidence:
+  - description: Genome-wide CRISPR screen in human T cells. Shifrut et al. Cell 2018
+    pmid: '29995861'
+    pmid_verified: true
+  - description: PD-1 blockade restores effector function. Wherry. Nat Immunol 2011
+    pmid: '21739672'
+    pmid_verified: true
+  notes: PD-1 is the primary exhaustion checkpoint; knockout restores effector function
+    in TILs
+- id: CTLA4_KO_CD8T
+  gene: CTLA4
+  gene_full_name: Cytotoxic T-Lymphocyte Associated Protein 4
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: proliferation
+    direction: increase
+    effect_size: 0.55
+    confidence: high
+  - parameter: cytotoxicity
+    direction: increase
+    effect_size: 0.35
+    confidence: medium
+  - parameter: exhaustion_score
+    direction: decrease
+    effect_size: -0.2
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      proliferate: 0.2
+      attack: 0.15
+      rest: -0.15
+      migrate: 0.05
+    state_changes:
+      activation: 0.25
+      exhaustion: -0.15
+      cytotoxicity: 0.15
+  evidence:
+  - description: CTLA-4 inhibitory function in T cells. Leach et al. Science 1996
+    pmid: '8596936'
+    pmid_verified: true
+  notes: CTLA-4 KO primarily enhances proliferation and priming rather than direct
+    cytotoxicity
+- id: TOX_KO_CD8T
+  gene: TOX
+  gene_full_name: Thymocyte Selection Associated HMG Box
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: exhaustion_score
+    direction: decrease
+    effect_size: -0.7
+    confidence: high
+  - parameter: persistence
+    direction: decrease
+    effect_size: -0.4
+    confidence: high
+  - parameter: cytotoxicity
+    direction: increase
+    effect_size: 0.3
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      attack: 0.15
+      rest: -0.25
+      apoptosis: 0.1
+    state_changes:
+      exhaustion: -0.5
+      activation: 0.15
+      energy: -0.1
+  evidence:
+  - description: TOX is required for CD8 T cell exhaustion. Khan et al. Nature 2019
+    pmid: '31207603'
+    pmid_verified: true
+  notes: TOX KO prevents exhaustion program but cells fail to persist long-term in
+    chronic settings
+- id: TCF7_KO_CD8T
+  gene: TCF7
+  gene_full_name: Transcription Factor 7 (TCF-1)
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: stemness
+    direction: decrease
+    effect_size: -0.8
+    confidence: high
+  - parameter: self_renewal
+    direction: decrease
+    effect_size: -0.65
+    confidence: high
+  - parameter: exhaustion_score
+    direction: increase
+    effect_size: 0.4
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      proliferate: -0.15
+      rest: 0.1
+      apoptosis: 0.1
+    state_changes:
+      exhaustion: 0.3
+      activation: -0.1
+      energy: -0.15
+  evidence:
+  - description: TCF1+ progenitor exhausted T cells predict immunotherapy response.
+      Sade-Feldman et al. Cell 2018
+    pmid: '30388456'
+    pmid_verified: true
+  notes: TCF7/TCF-1 maintains the progenitor exhausted pool; loss accelerates terminal
+    exhaustion
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 8787_TCF7_P1P2_ENSG00000081059
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0724
+        max_effect: 0.2752
+        min_effect: -0.0507
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.0835
+        max_effect: 0.1568
+        min_effect: 0.0254
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0304
+        max_effect: 0.1327
+        min_effect: -0.1171
+        n_markers: 3
+      migration:
+        mean_effect: -0.1939
+        max_effect: -0.1939
+        min_effect: -0.1939
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0513
+        max_effect: 0.0727
+        min_effect: 0.0299
+        n_markers: 2
+- id: TBX21_OE_CD8T
+  gene: TBX21
+  gene_full_name: T-Box Transcription Factor 21 (T-bet)
+  perturbation_type: overexpression
+  context: in_vitro
+  phenotype_changes:
+  - parameter: cytotoxicity
+    direction: increase
+    effect_size: 0.55
+    confidence: high
+  - parameter: ifng_production
+    direction: increase
+    effect_size: 0.7
+    confidence: high
+  - parameter: exhaustion_score
+    direction: decrease
+    effect_size: -0.25
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      attack: 0.25
+      signal: 0.1
+      rest: -0.15
+    state_changes:
+      cytotoxicity: 0.3
+      activation: 0.25
+      exhaustion: -0.15
+  evidence:
+  - description: T-bet drives Th1 and CD8 effector differentiation. Szabo et al. Science
+      2000
+    pmid: '10761931'
+    pmid_verified: true
+  notes: T-bet is the master regulator of type 1 immunity; overexpression enhances
+    effector function
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 8752_TBX21_P1P2_ENSG00000073861
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0318
+        max_effect: 0.1573
+        min_effect: -0.099
+        n_markers: 6
+      apoptosis:
+        mean_effect: -0.0136
+        max_effect: 0.1312
+        min_effect: -0.2241
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0298
+        max_effect: 0.0991
+        min_effect: -0.1069
+        n_markers: 3
+      migration:
+        mean_effect: -0.1176
+        max_effect: -0.1176
+        min_effect: -0.1176
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0864
+        max_effect: 0.2082
+        min_effect: -0.0354
+        n_markers: 2
+- id: LAG3_KO_CD8T
+  gene: LAG3
+  gene_full_name: Lymphocyte Activating 3
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: exhaustion_score
+    direction: decrease
+    effect_size: -0.25
+    confidence: medium
+  - parameter: cytotoxicity
+    direction: increase
+    effect_size: 0.2
+    confidence: medium
+  - parameter: proliferation
+    direction: increase
+    effect_size: 0.15
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      attack: 0.1
+      proliferate: 0.08
+      rest: -0.1
+    state_changes:
+      exhaustion: -0.15
+      activation: 0.1
+      cytotoxicity: 0.1
+  evidence:
+  - description: LAG-3 as immune checkpoint target. Triebel et al. J Exp Med 1990
+    pmid: '1692078'
+    pmid_verified: true
+  notes: LAG-3 KO has moderate effect alone; synergizes with PD-1 blockade
+- id: TIGIT_KO_CD8T
+  gene: TIGIT
+  gene_full_name: T Cell Immunoreceptor With Ig And ITIM Domains
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: exhaustion_score
+    direction: decrease
+    effect_size: -0.2
+    confidence: medium
+  - parameter: cytotoxicity
+    direction: increase
+    effect_size: 0.25
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      attack: 0.12
+      rest: -0.08
+    state_changes:
+      exhaustion: -0.12
+      cytotoxicity: 0.12
+      activation: 0.08
+  evidence:
+  - description: TIGIT as co-inhibitory receptor on T and NK cells. Johnston et al.
+      Cancer Cell 2014
+    pmid: '25465800'
+    pmid_verified: true
+  notes: TIGIT competes with CD226 for PVR binding; KO restores moderate anti-tumor
+    activity
+- id: HAVCR2_KO_CD8T
+  gene: HAVCR2
+  gene_full_name: Hepatitis A Virus Cellular Receptor 2 (TIM-3)
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: exhaustion_score
+    direction: decrease
+    effect_size: -0.3
+    confidence: medium
+  - parameter: cytotoxicity
+    direction: increase
+    effect_size: 0.25
+    confidence: medium
+  - parameter: ifng_production
+    direction: increase
+    effect_size: 0.2
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      attack: 0.12
+      signal: 0.05
+      rest: -0.1
+    state_changes:
+      exhaustion: -0.2
+      cytotoxicity: 0.15
+      activation: 0.1
+  evidence:
+  - description: TIM-3 marks terminally exhausted T cells. Sakuishi et al. J Exp Med
+      2010
+    pmid: '20819927'
+    pmid_verified: true
+  notes: TIM-3/HAVCR2 marks the most dysfunctional TIL subset; KO partially restores
+    function
+- id: IFNG_OE_CD8T
+  gene: IFNG
+  gene_full_name: Interferon Gamma
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: antigen_presentation_induction
+    direction: increase
+    effect_size: 0.8
+    confidence: high
+  - parameter: pd_l1_upregulation
+    direction: increase
+    effect_size: 0.6
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      signal: 0.2
+      attack: 0.1
+    state_changes:
+      activation: 0.2
+      cytotoxicity: 0.15
+  evidence:
+  - description: IFN-gamma in anti-tumor immunity. Dunn et al. Nat Immunol 2006
+    pmid: '17063185'
+    pmid_verified: true
+  notes: 'IFN-gamma is a double-edged sword: enhances MHC-I but also upregulates PD-L1'
+- id: GZMB_OE_CD8T
+  gene: GZMB
+  gene_full_name: Granzyme B
+  perturbation_type: overexpression
+  context: in_vitro
+  phenotype_changes:
+  - parameter: cytotoxicity
+    direction: increase
+    effect_size: 0.75
+    confidence: high
+  - parameter: target_cell_killing
+    direction: increase
+    effect_size: 0.65
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      attack: 0.3
+      rest: -0.1
+    state_changes:
+      cytotoxicity: 0.4
+  evidence:
+  - description: Granzyme B in cytotoxic lymphocyte function. Voskoboinik et al. Nat
+      Rev Immunol 2015
+    pmid: '25998963'
+    pmid_verified: true
+  notes: Granzyme B is the primary effector molecule for target cell killing
+- id: PRF1_KO_CD8T
+  gene: PRF1
+  gene_full_name: Perforin 1
+  perturbation_type: knockout
+  context: in_vitro
+  phenotype_changes:
+  - parameter: cytotoxicity
+    direction: decrease
+    effect_size: -0.85
+    confidence: high
+  - parameter: target_cell_killing
+    direction: decrease
+    effect_size: -0.8
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      attack: -0.35
+      rest: 0.15
+      signal: 0.1
+    state_changes:
+      cytotoxicity: -0.5
+  evidence:
+  - description: Perforin-dependent cytotoxicity. Kagi et al. Nature 1994
+    pmid: '7805735'
+    pmid_verified: true
+  notes: Perforin is essential for granule-mediated killing; KO nearly abolishes direct
+    cytotoxicity
+- id: IL2_STIM_CD8T
+  gene: IL2
+  gene_full_name: Interleukin 2
+  perturbation_type: drug_inhibition
+  context: in_vitro
+  phenotype_changes:
+  - parameter: proliferation
+    direction: increase
+    effect_size: 0.9
+    confidence: high
+  - parameter: survival
+    direction: increase
+    effect_size: 0.6
+    confidence: high
+  - parameter: exhaustion_score
+    direction: decrease
+    effect_size: -0.15
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      proliferate: 0.3
+      rest: -0.15
+      attack: 0.05
+    state_changes:
+      energy: 0.25
+      activation: 0.2
+  evidence:
+  - description: IL-2 signaling in T cell expansion. Boyman & Sprent. Nat Rev Immunol
+      2012
+    pmid: '22564618'
+    pmid_verified: true
+  notes: IL-2 is the primary T cell growth factor; exogenous IL-2 drives robust expansion
+- id: BATF_KO_CD8T
+  gene: BATF
+  gene_full_name: Basic Leucine Zipper ATF-Like Transcription Factor
+  perturbation_type: knockout
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: exhaustion_score
+    direction: decrease
+    effect_size: -0.35
+    confidence: medium
+  - parameter: effector_function
+    direction: increase
+    effect_size: 0.25
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      attack: 0.1
+      rest: -0.1
+    state_changes:
+      exhaustion: -0.2
+      activation: 0.1
+  evidence:
+  - description: BATF in T cell exhaustion program. Quigley et al. Nat Med 2010
+    pmid: '20890291'
+    pmid_verified: true
+  notes: BATF cooperates with IRF4 in the exhaustion transcriptional program
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 768_BATF_P1P2_ENSG00000156127
+    pathway_effects:
+      proliferation:
+        mean_effect: -0.0052
+        max_effect: 0.099
+        min_effect: -0.169
+        n_markers: 6
+      apoptosis:
+        mean_effect: 0.0651
+        max_effect: 0.115
+        min_effect: -0.0054
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0942
+        max_effect: 0.1476
+        min_effect: 0.0373
+        n_markers: 3
+      migration:
+        mean_effect: 0.0726
+        max_effect: 0.0726
+        min_effect: 0.0726
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0283
+        max_effect: 0.1609
+        min_effect: -0.1043
+        n_markers: 2
+- id: EOMES_OE_CD8T
+  gene: EOMES
+  gene_full_name: Eomesodermin
+  perturbation_type: overexpression
+  context: tumor_infiltrating
+  phenotype_changes:
+  - parameter: exhaustion_score
+    direction: increase
+    effect_size: 0.35
+    confidence: medium
+  - parameter: cytotoxicity
+    direction: decrease
+    effect_size: -0.2
+    confidence: medium
+  cellswarm_mapping:
+    behavior_changes:
+      rest: 0.1
+      attack: -0.1
+    state_changes:
+      exhaustion: 0.25
+      cytotoxicity: -0.1
+  evidence:
+  - description: Eomes drives terminal exhaustion in chronic infection. Paley et al.
+      Science 2012
+    pmid: '23159438'
+    pmid_verified: true
+  notes: High Eomes marks terminally exhausted CD8 T cells; contrasts with T-bet which
+    maintains function
+  data_calibration:
+    source: Replogle et al. 2022 (Cell), K562 Perturb-seq
+    replogle_id: 2656_EOMES_P1P2_ENSG00000163508
+    pathway_effects:
+      proliferation:
+        mean_effect: 0.0565
+        max_effect: 0.2023
+        min_effect: -0.0292
+        n_markers: 6
+      apoptosis:
+        mean_effect: -0.0404
+        max_effect: 0.133
+        min_effect: -0.1463
+        n_markers: 5
+      immune_evasion:
+        mean_effect: 0.0438
+        max_effect: 0.1141
+        min_effect: -0.0779
+        n_markers: 3
+      migration:
+        mean_effect: 0.0206
+        max_effect: 0.0206
+        min_effect: 0.0206
+        n_markers: 1
+      inflammation:
+        mean_effect: 0.0191
+        max_effect: 0.1979
+        min_effect: -0.1598
+        n_markers: 2
+- id: CD28_KO_CD8T
+  gene: CD28
+  gene_full_name: CD28 Molecule
+  perturbation_type: knockout
+  context: in_vitro
+  phenotype_changes:
+  - parameter: activation
+    direction: decrease
+    effect_size: -0.7
+    confidence: high
+  - parameter: proliferation
+    direction: decrease
+    effect_size: -0.6
+    confidence: high
+  - parameter: survival
+    direction: decrease
+    effect_size: -0.45
+    confidence: high
+  cellswarm_mapping:
+    behavior_changes:
+      proliferate: -0.25
+      attack: -0.15
+      rest: 0.2
+      apoptosis: 0.1
+    state_changes:
+      activation: -0.4
+      energy: -0.2
+  evidence:
+  - description: CD28 costimulation is essential for T cell activation. Lenschow et
+      al. Annu Rev Immunol 1996
+    pmid: '8717514'
+    pmid_verified: true
+  notes: CD28 provides the critical costimulatory signal; without it T cells become
+    anergic

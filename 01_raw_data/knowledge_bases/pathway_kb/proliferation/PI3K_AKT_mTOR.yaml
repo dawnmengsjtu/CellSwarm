@@ -1,0 +1,135 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: PI3K_AKT_mTOR
+pathway_name: PI3K/AKT/mTOR Signaling
+category: proliferation
+kegg_id: hsa04151
+components:
+  receptors:
+  - EGFR
+  - ERBB2
+  - IGF1R
+  - PDGFRA
+  ligands:
+  - EGF
+  - IGF1
+  - PDGFA
+  downstream:
+  - PIK3CA
+  - PIK3R1
+  - AKT1
+  - MTOR
+  - RPTOR
+  - RICTOR
+  - TSC1
+  - TSC2
+  - PTEN
+  transcription_factors:
+  - FOXO1
+  - FOXO3
+  - HIF1A
+  key_genes:
+  - PIK3CA
+  - PTEN
+  - AKT1
+  - MTOR
+  - RPS6KB1
+  - EIF4EBP1
+signal_fields_affected:
+- glucose
+- oxygen
+cell_type_effects:
+  CD8_T:
+    when_active: PI3K/AKT promotes T cell activation, metabolic reprogramming to glycolysis,
+      and effector differentiation. mTOR balances effector vs memory fate.
+    behavioral_mapping:
+      proliferate: 0.2
+      attack: 0.15
+      migrate: 0.1
+    state_effects:
+      activation: 0.2
+      metabolic_fitness: 0.15
+  Tumor:
+    when_active: PI3K/AKT/mTOR is the most frequently activated oncogenic pathway.
+      Drives proliferation, survival, metabolic reprogramming, and angiogenesis. PTEN
+      loss is common.
+    behavioral_mapping:
+      proliferate: 0.3
+      evade: 0.1
+      migrate: 0.1
+      apoptosis: -0.2
+    state_effects:
+      growth_rate: 0.3
+      survival: 0.25
+      metabolic_activity: 0.2
+  Treg:
+    when_active: mTOR inhibition favors Treg differentiation. Active PI3K/AKT can
+      destabilize FOXP3.
+    behavioral_mapping:
+      suppress: -0.1
+      proliferate: 0.1
+    state_effects:
+      foxp3_stability: -0.1
+      proliferation: 0.1
+  Macrophage:
+    when_active: PI3K/AKT promotes M2 polarization and anti-inflammatory phenotype.
+      mTOR drives metabolic adaptation.
+    behavioral_mapping:
+      polarize: 0.15
+      phagocytose: 0.1
+    state_effects:
+      m2_polarization: 0.15
+      metabolic_fitness: 0.1
+  NK:
+    when_active: mTOR signaling is essential for NK cell development and cytotoxicity.
+      IL-15 activates PI3K/AKT in NK cells.
+    behavioral_mapping:
+      attack: 0.15
+      proliferate: 0.1
+    state_effects:
+      cytotoxicity: 0.15
+      metabolic_fitness: 0.1
+  B_cell:
+    when_active: PI3K signaling is essential for B cell development, survival, and
+      BCR signaling.
+    behavioral_mapping:
+      proliferate: 0.15
+      signal: 0.1
+    state_effects:
+      survival: 0.15
+crosstalk:
+- pathway: RAS_MAPK
+  type: parallel
+  description: PI3K and RAS-MAPK are co-activated by RTKs; cross-inhibition and compensation
+    are common
+- pathway: apoptosis_intrinsic
+  type: antagonistic
+  description: AKT phosphorylates BAD, preventing mitochondrial apoptosis
+- pathway: WNT_beta_catenin
+  type: cross_activation
+  description: AKT phosphorylates GSK3-beta, stabilizing beta-catenin
+- pathway: ferroptosis
+  type: antagonistic
+  description: mTORC1 promotes GPX4 translation, protecting from ferroptosis
+targeted_by: []
+references:
+- description: The PI3K-AKT pathway in cancer. Fruman et al. Nat Rev Drug Discov 2017
+  pmid: '28802037'
+  pmid_verified: true
+- description: mTOR signaling in growth, metabolism, and disease. Saxton & Sabatini.
+    Cell 2017
+  pmid: '28283069'
+  pmid_verified: true
+additional_agents:
+- drug_id: everolimus
+  mechanism: mTOR inhibitor (mTORC1)
+  in_drug_library: false
+- drug_id: alpelisib
+  mechanism: PI3K-alpha selective inhibitor
+  in_drug_library: false
+- drug_id: ipatasertib
+  mechanism: AKT inhibitor
+  in_drug_library: false

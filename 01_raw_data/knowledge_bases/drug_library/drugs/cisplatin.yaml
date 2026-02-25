@@ -1,0 +1,134 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+  calibrated_from: GDSC2 (Sanger)
+  calibration_date: '2026-02-13'
+drug_id: cisplatin
+generic_name: Cisplatin
+brand_name: Platinol
+drug_class: chemotherapy
+subclass: cytotoxic
+molecular_type: small_molecule
+fda_status: approved
+approved_indications:
+- TNBC
+- Melanoma
+- NSCLC
+- CRC-MSI-H
+- CRC-MSS
+- Ovarian
+targets:
+- name: DNA/microtubule
+  type: cellular_machinery
+  action: inhibitor
+  selectivity: low
+cell_effects:
+  CD8_T:
+    direct: true
+    state_effects:
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.03
+      notes: Mild lymphotoxicity
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.04
+      notes: ICD-mediated activation
+  Tumor:
+    direct: true
+    state_effects:
+    - parameter: apoptosis_susceptibility
+      direction: increase
+      rate_per_step: 0.2
+    - parameter: proliferation_rate
+      direction: decrease
+      rate_per_step: 0.15
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.1
+    notes: 'ICD strength: 2/3'
+  Treg:
+    direct: true
+    state_effects:
+    - parameter: suppressive_activity
+      direction: decrease
+      rate_per_step: 0.04
+    notes: Tregs are relatively chemo-sensitive
+  Macrophage:
+    direct: false
+    state_effects:
+    - parameter: phagocytic_activity
+      direction: increase
+      rate_per_step: 0.06
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.04
+    notes: ICD promotes phagocytosis of dying tumor cells
+  NK:
+    direct: true
+    state_effects:
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.02
+    notes: Mild NK toxicity
+  B_cell:
+    direct: true
+    state_effects:
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.03
+    notes: B cells are chemo-sensitive
+environment_effects:
+- field: IFN_gamma
+  action: amplify
+  magnitude: 0.1
+  notes: ICD-mediated immune activation
+pharmacokinetics:
+  administration: IV
+  standard_dose: 75 mg/m2 q3w
+  onset_steps: 1
+  peak_steps: 1
+  half_life_steps: 0.3
+  concentration_curve: pulse
+  steady_state_fraction: 0.6
+  gdsc2_ic50:
+    ln_ic50_mean: 4.4341
+    ln_ic50_std: 1.4575
+    auc_mean: 0.9644
+    n_cell_lines: 50
+    source: GDSC2 release 8.5
+dose_response:
+  model: hill
+  ec50: 0.4
+  hill_coefficient: 2.0
+  max_effect: 1.0
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.7
+    notes: BRCA+ TNBC
+  Melanoma:
+    efficacy_modifier: 0.3
+    notes: Dacarbazine preferred historically
+  NSCLC:
+    efficacy_modifier: 0.8
+    notes: Cisplatin doublet standard
+  CRC-MSI-H:
+    efficacy_modifier: 0.3
+    notes: Not standard
+  CRC-MSS:
+    efficacy_modifier: 0.3
+    notes: Oxaliplatin preferred
+  Ovarian:
+    efficacy_modifier: 0.9
+    notes: First-line with paclitaxel
+resistance:
+- mechanism: Drug efflux pump (MDR1/P-gp) upregulation
+  onset_steps: 10
+  probability: 0.2
+- mechanism: DNA repair pathway upregulation
+  onset_steps: 12
+  probability: 0.15
+references:
+- description: Cisplatin and immunogenic cell death. Tesniere et al. Oncogene 2010
+  pmid: '19881547'
+  verified: true

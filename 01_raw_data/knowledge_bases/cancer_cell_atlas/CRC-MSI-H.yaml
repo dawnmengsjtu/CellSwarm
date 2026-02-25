@@ -1,0 +1,396 @@
+meta:
+  schema_version: '1.0'
+  generated_by: CellSwarm Cancer Atlas Builder
+  generated_at: '2026-02-13'
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+cancer_id: CRC-MSI-H
+full_name: Colorectal Cancer - Microsatellite Instability-High
+tissue: Colon/Rectum
+icd_code: C18.9
+tme_phenotype: immune_hot
+cell_types:
+  Tumor:
+    proportion:
+    - 0.35
+    - 0.5
+    subtypes:
+    - Hypermutated epithelial
+    - Medullary-like
+    - Mucinous
+    key_markers:
+    - CK20
+    - CDX2
+    - MSH2
+    - MLH1
+    - PMS2
+    - MSH6
+    doubling_time_hours:
+    - 48
+    - 72
+    functional_states:
+    - high_mutational_burden
+    - neoantigen_rich
+    - antigen_presentation_competent
+    - IFNG_responsive
+    initial_state:
+      energy:
+      - 0.5
+      - 0.7
+      immune_evasion:
+      - 0.2
+      - 0.4
+      proliferation_rate:
+      - 0.6
+      - 0.8
+      apoptosis_susceptibility:
+      - 0.3
+      - 0.5
+    behavior_mapping:
+      proliferate: 0.3
+      migrate: 0.2
+      signal: 0.2
+      rest: 0.15
+      apoptosis: 0.1
+      evade: 0.05
+    notes: MSI-H CRC has 10-100x more mutations than MSS. Right-sided location predominant. Strong lymphocytic infiltration.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  CD8_T:
+    proportion:
+    - 0.15
+    - 0.3
+    subtypes:
+    - Effector
+    - Memory
+    - Exhausted
+    key_markers:
+    - CD8A
+    - CD8B
+    - GZMB
+    - PRF1
+    - IFNG
+    - PDCD1
+    functional_states:
+    - highly_cytotoxic
+    - IFNG_high
+    - clonally_expanded
+    initial_state:
+      energy:
+      - 0.6
+      - 0.8
+      activation:
+      - 0.75
+      - 0.95
+      exhaustion:
+      - 0.2
+      - 0.4
+      cytotoxicity:
+      - 0.75
+      - 0.95
+    behavior_mapping:
+      attack: 0.5
+      migrate: 0.15
+      proliferate: 0.15
+      rest: 0.1
+      signal: 0.08
+      apoptosis: 0.02
+    notes: Very high CD8+ T cell infiltration. Strong Th1/IFN-gamma signature. TILs are a hallmark feature.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  Treg:
+    proportion:
+    - 0.03
+    - 0.07
+    subtypes:
+    - Effector Treg
+    - Th1-like Treg
+    key_markers:
+    - FOXP3
+    - CD25
+    - CTLA4
+    - Helios
+    functional_states:
+    - immunosuppressive
+    - IFNG_modulated
+    initial_state:
+      energy:
+      - 0.5
+      - 0.7
+      suppressive_activity:
+      - 0.5
+      - 0.7
+      activation:
+      - 0.4
+      - 0.6
+    behavior_mapping:
+      suppress: 0.35
+      migrate: 0.15
+      signal: 0.2
+      proliferate: 0.1
+      rest: 0.15
+      apoptosis: 0.05
+    notes: Treg present but generally overwhelmed by effector responses in MSI-H tumors.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  Macrophage:
+    proportion:
+    - 0.08
+    - 0.15
+    subtypes:
+    - M1-like
+    - M2-like
+    key_markers:
+    - CD68
+    - CD163
+    - CD86
+    - HLA-DR
+    functional_states:
+    - M1_polarized
+    - phagocytic
+    - antigen_presenting
+    initial_state:
+      energy:
+      - 0.55
+      - 0.75
+      polarization:
+      - 0.35
+      - 0.5
+      phagocytic_activity:
+      - 0.6
+      - 0.8
+    m1_m2_ratio:
+    - 0.35
+    - 0.5
+    behavior_mapping:
+      phagocytose: 0.35
+      signal: 0.15
+      migrate: 0.15
+      polarize: 0.1
+      rest: 0.15
+      apoptosis: 0.1
+    notes: MSI-H shows more M1-like polarization due to IFN-gamma signaling. M1:M2 ratio approximately 1:1 to 2:1.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  NK:
+    proportion:
+    - 0.03
+    - 0.06
+    subtypes:
+    - CD56bright
+    - CD56dim
+    key_markers:
+    - NCAM1
+    - NKG2D
+    - DNAM1
+    - NKp46
+    functional_states:
+    - cytotoxic
+    - IFNG_producing
+    initial_state:
+      energy:
+      - 0.55
+      - 0.75
+      activation:
+      - 0.65
+      - 0.85
+      cytotoxicity:
+      - 0.65
+      - 0.85
+    behavior_mapping:
+      attack: 0.45
+      migrate: 0.15
+      signal: 0.15
+      rest: 0.15
+      apoptosis: 0.08
+      proliferate: 0.02
+    notes: NK cells show good functional preservation in MSI-H tumors.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  B_cell:
+    proportion:
+    - 0.08
+    - 0.15
+    subtypes:
+    - Naive B
+    - Memory B
+    - Plasma cells
+    - Germinal center B
+    key_markers:
+    - CD19
+    - CD20
+    - CD38
+    - IGHG
+    - MZB1
+    functional_states:
+    - antibody_secreting
+    - TLS_formation
+    - antigen_presenting
+    initial_state:
+      energy:
+      - 0.6
+      - 0.8
+      activation:
+      - 0.6
+      - 0.8
+      antibody_secretion:
+      - 0.5
+      - 0.7
+    behavior_mapping:
+      signal: 0.3
+      migrate: 0.15
+      proliferate: 0.2
+      rest: 0.15
+      apoptosis: 0.1
+      attack: 0.1
+    notes: Prominent B cell infiltration and TLS formation. Strong correlation with immune response.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+spatial_distribution:
+  tumor_core:
+    Tumor: 0.6
+    CD8_T: 0.15
+    Treg: 0.03
+    Macrophage: 0.12
+    NK: 0.03
+    B_cell: 0.07
+  tumor_margin:
+    Tumor: 0.35
+    CD8_T: 0.25
+    Treg: 0.05
+    Macrophage: 0.15
+    NK: 0.07
+    B_cell: 0.13
+  stroma:
+    Tumor: 0.1
+    CD8_T: 0.2
+    Treg: 0.05
+    Macrophage: 0.2
+    NK: 0.1
+    B_cell: 0.35
+cancer_specific_features:
+- Very high tumor mutational burden (10-100x MSS)
+- Defective DNA mismatch repair (dMMR)
+- Right-sided colon location predominant
+- Frequent BRAF V600E mutations (especially sporadic)
+- Lynch syndrome (germline MMR mutations) or sporadic (MLH1 promoter methylation)
+- Crohn's-like lymphoid reaction
+immunotherapy_relevance:
+  approved_agents:
+  - Pembrolizumab (PD-1 inhibitor)
+  - Nivolumab (PD-1 inhibitor)
+  - Ipilimumab + Nivolumab (CTLA-4 + PD-1)
+  - Dostarlimab (PD-1 inhibitor)
+  response_rate: 40-50% objective response rate; 70-80% disease control rate
+  biomarkers:
+  - MSI-H/dMMR status (PCR or IHC)
+  - Tumor mutational burden (very high, typically >50 mut/Mb)
+  - PD-L1 expression (less predictive than MSI status)
+  - B2M mutations (may predict resistance)
+immune_escape_mechanisms:
+- B2M loss (antigen presentation defect)
+- HLA loss
+- T cell exhaustion
+- JAK1/2 mutations (IFN resistance)
+- WNT pathway activation
+- Neoantigen depletion (immunoediting)
+simulation_defaults:
+  total_cells: 1000
+  grid_size:
+  - 50
+  - 50
+  recommended_steps: 30
+  step_time_mapping: 1 step ≈ 1 day of tumor-immune interaction
+  key_signals:
+  - PD_L1
+  - TGF_beta
+  - IFN_gamma
+  - IL2
+  - oxygen
+  - glucose
+references:
+- pmid: 34019806
+  description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+  verified: true
+- pmid: 30127393
+  description: Jiang et al. TIDE signatures. Nat Med 2018
+  verified: true
+- pmid: 29628290
+  description: Thorsson et al. The Immune Landscape of Cancer. Immunity 2018
+  verified: true
+- pmid: 26457759
+  description: Guinney et al. Consensus molecular subtypes of CRC. Nat Med 2015
+  verified: true
+- pmid: 17008531
+  description: Galon et al. Type, density, location of immune cells predict CRC outcome. Science 2006
+  verified: true
+- pmid: 29754777
+  description: Pagès et al. International validation of Immunoscore. Lancet 2018
+  verified: true
+- pmid: 34450029
+  description: Pelka et al. Spatially organized immune hubs in CRC. Cell 2021
+  verified: true
+- pmid: 33264544
+  description: 'André et al. KEYNOTE-177: pembrolizumab in MSI-H CRC. NEJM 2020'
+  verified: true
+- pmid: 35660797
+  description: Cercek et al. PD-1 blockade in dMMR rectal cancer. NEJM 2022
+  verified: true
+- pmid: 32451460
+  description: Lee et al. Lineage-dependent gene expression in CRC immunity. Nat Genet 2020
+  verified: true
+- pmid: 32302573
+  description: Zhang et al. Single-cell analyses of myeloid-targeted therapies in CRC. Cell 2020
+  verified: true
+- pmid: 38981439
+  description: Chen et al. Spatiotemporal scRNA analysis of CRC. Cancer Cell 2024
+  verified: true
+- pmid: 35365629
+  description: Qi et al. FAP+ fibroblasts and SPP1+ macrophages in CRC. Nat Commun 2022
+  verified: true
+- pmid: 25822800
+  description: Newman et al. CIBERSORT. Nat Methods 2015
+  verified: true
+- pmid: 32442275
+  description: Li et al. TIMER2.0. Nucleic Acids Res 2020
+  verified: true
+visualization:
+  cell_colors:
+    Tumor: '#C44E52'
+    CD8_T: '#4C72B0'
+    Treg: '#DD8452'
+    Macrophage: '#55A868'
+    NK: '#8172B3'
+    B_cell: '#CCB974'
+  abbreviation: CRC-MSI-H
+  icon: colon

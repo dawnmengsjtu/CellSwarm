@@ -1,0 +1,112 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: ferroptosis
+pathway_name: Ferroptosis (Iron-Dependent Cell Death)
+category: cell_death
+components:
+  receptors:
+  - TFRC
+  ligands: []
+  downstream:
+  - SLC7A11
+  - GPX4
+  - ACSL4
+  - LPCAT3
+  - ALOX15
+  transcription_factors:
+  - NFE2L2
+  - TP53
+  key_genes:
+  - GPX4
+  - SLC7A11
+  - ACSL4
+  - TFRC
+  - FTH1
+  - NFE2L2
+  - FSP1
+signal_fields_affected:
+- oxygen
+cell_type_effects:
+  CD8_T:
+    when_active: CD8 T cells can induce ferroptosis in tumor cells by secreting IFN-gamma
+      which downregulates SLC7A11. T cells themselves are susceptible to lipid peroxidation
+      in TME.
+    behavioral_mapping:
+      attack: 0.1
+      apoptosis: 0.15
+      signal: 0.1
+    state_effects:
+      cytotoxicity: 0.1
+      lipid_peroxidation: 0.15
+  Tumor:
+    when_active: Ferroptosis is a vulnerability in therapy-resistant tumors. GPX4
+      inhibition or cystine deprivation triggers iron-dependent death. Mesenchymal-state
+      tumors are more susceptible.
+    behavioral_mapping:
+      apoptosis: 0.35
+      proliferate: -0.2
+      evade: -0.1
+    state_effects:
+      survival: -0.3
+      lipid_peroxidation: 0.3
+  Treg:
+    when_active: Tregs are relatively resistant to ferroptosis due to GPX4 expression.
+      GPX4 knockout in Tregs paradoxically enhances anti-tumor immunity.
+    behavioral_mapping:
+      apoptosis: 0.1
+      suppress: -0.15
+    state_effects:
+      suppressive_activity: -0.15
+  Macrophage:
+    when_active: M1 macrophages promote ferroptosis in tumor cells. Ferroptotic cells
+      release DAMPs that activate macrophages.
+    behavioral_mapping:
+      phagocytose: 0.15
+      polarize: 0.1
+      signal: 0.1
+    state_effects:
+      m1_polarization: 0.1
+      pro_inflammatory: 0.1
+  NK:
+    when_active: NK cells are minimally affected by ferroptosis. Can benefit from
+      ferroptotic DAMP release.
+    behavioral_mapping:
+      attack: 0.05
+    state_effects:
+      activation: 0.05
+  B_cell:
+    when_active: B cells have limited direct involvement in ferroptosis pathways.
+    behavioral_mapping:
+      signal: 0.05
+    state_effects:
+      activation: 0.05
+crosstalk:
+- pathway: IFNG_JAK_STAT
+  type: synergistic
+  description: IFN-gamma from T cells downregulates SLC7A11, promoting tumor ferroptosis
+- pathway: PI3K_AKT_mTOR
+  type: antagonistic
+  description: mTORC1 promotes GPX4 synthesis, protecting from ferroptosis
+- pathway: apoptosis_intrinsic
+  type: independent
+  description: Ferroptosis is mechanistically distinct from apoptosis; caspase-independent
+targeted_by: []
+references:
+- description: 'Ferroptosis: an iron-dependent form of nonapoptotic cell death. Dixon
+    et al. Cell 2012'
+  pmid: '22632970'
+  pmid_verified: true
+- description: CD8+ T cells regulate tumour ferroptosis during cancer immunotherapy.
+    Wang et al. Nature 2019
+  pmid: '31043744'
+  pmid_verified: true
+additional_agents:
+- drug_id: erastin
+  mechanism: System Xc- inhibitor, depletes cysteine/GSH
+  in_drug_library: false
+- drug_id: RSL3
+  mechanism: Direct GPX4 inhibitor
+  in_drug_library: false

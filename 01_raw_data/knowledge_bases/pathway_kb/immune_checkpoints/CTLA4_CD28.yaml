@@ -1,0 +1,130 @@
+meta:
+  schema_version: '1.0'
+  generated_by: Dawn (literature curation)
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+pathway_id: CTLA4_CD28
+pathway_name: CTLA-4/CD28 Costimulation Checkpoint
+category: immune_checkpoint
+kegg_id: hsa04514
+components:
+  receptors:
+  - CTLA4
+  - CD28
+  ligands:
+  - CD80
+  - CD86
+  downstream:
+  - PI3K
+  - AKT
+  - PP2A
+  - SHP2
+  transcription_factors:
+  - NFAT
+  - AP1
+  - NFKB
+  key_genes:
+  - CTLA4
+  - CD28
+  - CD80
+  - CD86
+signal_fields_affected:
+- IL2
+cell_type_effects:
+  CD8_T:
+    when_active: CTLA-4 outcompetes CD28 for B7 ligands, blocking costimulation. Inhibits
+      early T cell activation and IL-2 production.
+    behavioral_mapping:
+      attack: -0.2
+      proliferate: -0.25
+      rest: 0.2
+      signal: -0.15
+    state_effects:
+      activation: -0.25
+      cytotoxicity: -0.15
+  Treg:
+    when_active: CTLA-4 is constitutively expressed on Tregs and essential for their
+      suppressive function. Captures B7 ligands via trans-endocytosis.
+    behavioral_mapping:
+      suppress: 0.25
+      signal: 0.1
+    state_effects:
+      suppressive_activity: 0.2
+  Tumor:
+    when_active: 'Indirect effect: CTLA-4 mediated T cell suppression benefits tumor
+      survival.'
+    behavioral_mapping:
+      evade: 0.15
+    state_effects:
+      immune_evasion: 0.1
+  Macrophage:
+    when_active: CTLA-4 blockade enhances macrophage-mediated ADCC via Fc receptor
+      engagement.
+    behavioral_mapping:
+      phagocytose: 0.05
+    state_effects: {}
+  NK:
+    when_active: Minimal direct effect on NK cells.
+    behavioral_mapping: {}
+    state_effects: {}
+  B_cell:
+    when_active: CTLA-4 on B cells modulates germinal center responses.
+    behavioral_mapping:
+      signal: -0.05
+    state_effects: {}
+crosstalk:
+- pathway: PD1_PDL1
+  type: synergistic_inhibition
+  description: CTLA-4 acts early (priming), PD-1 acts late (effector phase); complementary
+    inhibition
+- pathway: IL2_STAT5
+  type: antagonistic
+  description: CTLA-4 suppresses IL-2 production, reducing STAT5 signaling
+- pathway: TCR_signaling
+  type: antagonistic
+  description: CTLA-4 competes with CD28 for costimulatory ligands
+targeted_by:
+- drug_id: ipilimumab
+  mechanism: Anti-CTLA-4 monoclonal antibody
+- drug_id: tremelimumab
+  mechanism: Anti-CTLA-4 monoclonal antibody
+references:
+- description: CTLA-4 inhibitory function in T cells. Leach et al. Science 1996
+  pmid: '8596936'
+  pmid_verified: true
+- description: CTLA-4 is essential for Treg-mediated suppression. Wing et al. Science
+    2008
+  pmid: '18845758'
+  pmid_verified: true
+data_calibration:
+  source: GSE176078 TNBC scRNA-seq (CellChat-lite)
+  n_cells: 997
+  communication_strength: 0.0675
+  max_communication_strength: 0.1982
+  n_active_pairs: 6
+  top_interactions:
+  - sender: Macrophage
+    receiver: Treg
+    ligand: CD86
+    receptor: CTLA4
+    probability: 0.1982
+  - sender: Macrophage
+    receiver: CD8_T
+    ligand: CD86
+    receptor: CTLA4
+    probability: 0.1122
+  - sender: Macrophage
+    receiver: Treg
+    ligand: CD80
+    receptor: CTLA4
+    probability: 0.046
+  - sender: Macrophage
+    receiver: CD8_T
+    ligand: CD80
+    receptor: CTLA4
+    probability: 0.0325
+  - sender: B_cell
+    receiver: Treg
+    ligand: CD86
+    receptor: CTLA4
+    probability: 0.0094

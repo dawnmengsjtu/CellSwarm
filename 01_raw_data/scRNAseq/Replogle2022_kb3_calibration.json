@@ -1,0 +1,799 @@
+{
+  "source": "Replogle et al. 2022 (Cell)",
+  "dataset": "K562_gwps_normalized_bulk",
+  "n_perturbations": 21,
+  "n_total_in_dataset": 11258,
+  "pathway_markers": {
+    "proliferation": [
+      "MKI67",
+      "PCNA",
+      "CDK2",
+      "CDK4",
+      "CCND1",
+      "CCNE1",
+      "MCM2"
+    ],
+    "apoptosis": [
+      "BAX",
+      "BCL2",
+      "CASP3",
+      "CASP8",
+      "CASP9",
+      "BID",
+      "PARP1"
+    ],
+    "immune_evasion": [
+      "CD274",
+      "PDCD1LG2",
+      "B2M",
+      "HLA-A",
+      "HLA-B",
+      "HLA-C",
+      "IFNGR1"
+    ],
+    "migration": [
+      "MMP2",
+      "MMP9",
+      "VIM",
+      "CDH1",
+      "CDH2",
+      "SNAI1",
+      "TWIST1"
+    ],
+    "inflammation": [
+      "TNF",
+      "IL6",
+      "IL1B",
+      "CXCL8",
+      "CCL2",
+      "NFKB1",
+      "STAT3"
+    ],
+    "exhaustion": [
+      "PDCD1",
+      "CTLA4",
+      "LAG3",
+      "HAVCR2",
+      "TIGIT",
+      "TOX",
+      "ENTPD1"
+    ]
+  },
+  "perturbations": {
+    "B2M": {
+      "replogle_id": "724_B2M_P2_ENSG00000166710",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": -0.0323,
+          "max_effect": 0.1389,
+          "min_effect": -0.1033,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": 0.0067,
+          "max_effect": 0.1096,
+          "min_effect": -0.1189,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": -0.0438,
+          "max_effect": 0.0949,
+          "min_effect": -0.3152,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.0064,
+          "max_effect": -0.0064,
+          "min_effect": -0.0064,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.002,
+          "max_effect": 0.0635,
+          "min_effect": -0.0595,
+          "n_markers": 2
+        }
+      }
+    },
+    "BATF": {
+      "replogle_id": "768_BATF_P1P2_ENSG00000156127",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": -0.0052,
+          "max_effect": 0.099,
+          "min_effect": -0.169,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": 0.0651,
+          "max_effect": 0.115,
+          "min_effect": -0.0054,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.0942,
+          "max_effect": 0.1476,
+          "min_effect": 0.0373,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": 0.0726,
+          "max_effect": 0.0726,
+          "min_effect": 0.0726,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.0283,
+          "max_effect": 0.1609,
+          "min_effect": -0.1043,
+          "n_markers": 2
+        }
+      }
+    },
+    "BCL6": {
+      "replogle_id": "805_BCL6_P1P2_ENSG00000113916",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": -0.016,
+          "max_effect": 0.0397,
+          "min_effect": -0.1291,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": -0.0003,
+          "max_effect": 0.0824,
+          "min_effect": -0.0756,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": -0.0516,
+          "max_effect": 0.0345,
+          "min_effect": -0.1089,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": 0.0475,
+          "max_effect": 0.0475,
+          "min_effect": 0.0475,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": -0.007,
+          "max_effect": 0.0628,
+          "min_effect": -0.0768,
+          "n_markers": 2
+        }
+      }
+    },
+    "BRCA1": {
+      "replogle_id": "884_BRCA1_P1P2_ENSG00000012048",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": 0.0194,
+          "max_effect": 0.1123,
+          "min_effect": -0.0249,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": -0.0133,
+          "max_effect": 0.1028,
+          "min_effect": -0.1138,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.0748,
+          "max_effect": 0.1281,
+          "min_effect": 0.0175,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.1772,
+          "max_effect": -0.1772,
+          "min_effect": -0.1772,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.1341,
+          "max_effect": 0.2537,
+          "min_effect": 0.0145,
+          "n_markers": 2
+        }
+      }
+    },
+    "CD47": {
+      "replogle_id": "1367_CD47_P1P2_ENSG00000196776",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": -0.0232,
+          "max_effect": 0.0887,
+          "min_effect": -0.1933,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": 0.0222,
+          "max_effect": 0.1384,
+          "min_effect": -0.0593,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.1735,
+          "max_effect": 0.2293,
+          "min_effect": 0.085,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.0608,
+          "max_effect": -0.0608,
+          "min_effect": -0.0608,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.0368,
+          "max_effect": 0.0932,
+          "min_effect": -0.0196,
+          "n_markers": 2
+        }
+      }
+    },
+    "CTNNB1": {
+      "replogle_id": "1937_CTNNB1_P1P2_ENSG00000168036",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": -0.0273,
+          "max_effect": 0.2694,
+          "min_effect": -0.2229,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": 0.0302,
+          "max_effect": 0.3382,
+          "min_effect": -0.2309,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.0936,
+          "max_effect": 0.254,
+          "min_effect": -0.1468,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": 0.0408,
+          "max_effect": 0.0408,
+          "min_effect": 0.0408,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": -0.1484,
+          "max_effect": -0.0808,
+          "min_effect": -0.216,
+          "n_markers": 2
+        }
+      }
+    },
+    "EOMES": {
+      "replogle_id": "2656_EOMES_P1P2_ENSG00000163508",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": 0.0565,
+          "max_effect": 0.2023,
+          "min_effect": -0.0292,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": -0.0404,
+          "max_effect": 0.133,
+          "min_effect": -0.1463,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.0438,
+          "max_effect": 0.1141,
+          "min_effect": -0.0779,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": 0.0206,
+          "max_effect": 0.0206,
+          "min_effect": 0.0206,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.0191,
+          "max_effect": 0.1979,
+          "min_effect": -0.1598,
+          "n_markers": 2
+        }
+      }
+    },
+    "FOXP3": {
+      "replogle_id": "3188_FOXP3_P1P2_ENSG00000049768",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": -0.0058,
+          "max_effect": 0.0964,
+          "min_effect": -0.1008,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": -0.0022,
+          "max_effect": 0.1667,
+          "min_effect": -0.122,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.0753,
+          "max_effect": 0.1419,
+          "min_effect": 0.0266,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": 0.0128,
+          "max_effect": 0.0128,
+          "min_effect": 0.0128,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.0088,
+          "max_effect": 0.0777,
+          "min_effect": -0.06,
+          "n_markers": 2
+        }
+      }
+    },
+    "IKZF2": {
+      "replogle_id": "4083_IKZF2_P1_ENSG00000030419",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": 0.0331,
+          "max_effect": 0.172,
+          "min_effect": -0.0941,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": 0.0173,
+          "max_effect": 0.2129,
+          "min_effect": -0.106,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.1206,
+          "max_effect": 0.3029,
+          "min_effect": -0.117,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.0861,
+          "max_effect": -0.0861,
+          "min_effect": -0.0861,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.0835,
+          "max_effect": 0.0928,
+          "min_effect": 0.0742,
+          "n_markers": 2
+        }
+      }
+    },
+    "JAK1": {
+      "replogle_id": "4247_JAK1_P1P2_ENSG00000162434",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": 0.0483,
+          "max_effect": 0.1163,
+          "min_effect": -0.0459,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": -0.005,
+          "max_effect": 0.1789,
+          "min_effect": -0.0843,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": -0.0021,
+          "max_effect": 0.115,
+          "min_effect": -0.0686,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.0514,
+          "max_effect": -0.0514,
+          "min_effect": -0.0514,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": -0.1911,
+          "max_effect": -0.1225,
+          "min_effect": -0.2598,
+          "n_markers": 2
+        }
+      }
+    },
+    "KRAS": {
+      "replogle_id": "4466_KRAS_P1P2_ENSG00000133703",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": -0.0098,
+          "max_effect": 0.1224,
+          "min_effect": -0.078,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": -0.0063,
+          "max_effect": 0.1144,
+          "min_effect": -0.0749,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": -0.0662,
+          "max_effect": -0.0347,
+          "min_effect": -0.1126,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.2211,
+          "max_effect": -0.2211,
+          "min_effect": -0.2211,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": -0.033,
+          "max_effect": -0.0255,
+          "min_effect": -0.0404,
+          "n_markers": 2
+        }
+      }
+    },
+    "MYC": {
+      "replogle_id": "5374_MYC_P1P2_ENSG00000136997",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": 0.0506,
+          "max_effect": 0.1295,
+          "min_effect": -0.0677,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": -0.0425,
+          "max_effect": 0.0181,
+          "min_effect": -0.1699,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.1321,
+          "max_effect": 0.3266,
+          "min_effect": 0.0168,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.2574,
+          "max_effect": -0.2574,
+          "min_effect": -0.2574,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.0398,
+          "max_effect": 0.1884,
+          "min_effect": -0.1088,
+          "n_markers": 2
+        }
+      }
+    },
+    "PAX5": {
+      "replogle_id": "6092_PAX5_P1P2_ENSG00000196092",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": -0.0097,
+          "max_effect": 0.0486,
+          "min_effect": -0.0573,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": -0.0023,
+          "max_effect": 0.1341,
+          "min_effect": -0.12,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.0236,
+          "max_effect": 0.1253,
+          "min_effect": -0.0915,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.0265,
+          "max_effect": -0.0265,
+          "min_effect": -0.0265,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.0092,
+          "max_effect": 0.0901,
+          "min_effect": -0.0717,
+          "n_markers": 2
+        }
+      }
+    },
+    "PPARG": {
+      "replogle_id": "6610_PPARG_P2_ENSG00000132170",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": -0.0137,
+          "max_effect": 0.3345,
+          "min_effect": -0.3231,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": 0.0506,
+          "max_effect": 0.2124,
+          "min_effect": -0.0727,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.1464,
+          "max_effect": 0.2606,
+          "min_effect": 0.0419,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.161,
+          "max_effect": -0.161,
+          "min_effect": -0.161,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": -0.0312,
+          "max_effect": -0.0055,
+          "min_effect": -0.0569,
+          "n_markers": 2
+        }
+      }
+    },
+    "STAT1": {
+      "replogle_id": "8494_STAT1_P1P2_ENSG00000115415",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": 0.0329,
+          "max_effect": 0.2064,
+          "min_effect": -0.2741,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": -0.0001,
+          "max_effect": 0.2101,
+          "min_effect": -0.0974,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.012,
+          "max_effect": 0.1298,
+          "min_effect": -0.1241,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.0347,
+          "max_effect": -0.0347,
+          "min_effect": -0.0347,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": -0.1098,
+          "max_effect": -0.0919,
+          "min_effect": -0.1277,
+          "n_markers": 2
+        }
+      }
+    },
+    "STAT6": {
+      "replogle_id": "8500_STAT6_P1P2_ENSG00000166888",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": -0.0436,
+          "max_effect": 0.2306,
+          "min_effect": -0.2476,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": 0.1256,
+          "max_effect": 0.3996,
+          "min_effect": -0.4542,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.0458,
+          "max_effect": 0.1368,
+          "min_effect": -0.0571,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": 1.493,
+          "max_effect": 1.493,
+          "min_effect": 1.493,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.3141,
+          "max_effect": 0.6593,
+          "min_effect": -0.0311,
+          "n_markers": 2
+        }
+      }
+    },
+    "TBX21": {
+      "replogle_id": "8752_TBX21_P1P2_ENSG00000073861",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": 0.0318,
+          "max_effect": 0.1573,
+          "min_effect": -0.099,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": -0.0136,
+          "max_effect": 0.1312,
+          "min_effect": -0.2241,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.0298,
+          "max_effect": 0.0991,
+          "min_effect": -0.1069,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.1176,
+          "max_effect": -0.1176,
+          "min_effect": -0.1176,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.0864,
+          "max_effect": 0.2082,
+          "min_effect": -0.0354,
+          "n_markers": 2
+        }
+      }
+    },
+    "TCF7": {
+      "replogle_id": "8787_TCF7_P1P2_ENSG00000081059",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": 0.0724,
+          "max_effect": 0.2752,
+          "min_effect": -0.0507,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": 0.0835,
+          "max_effect": 0.1568,
+          "min_effect": 0.0254,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.0304,
+          "max_effect": 0.1327,
+          "min_effect": -0.1171,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.1939,
+          "max_effect": -0.1939,
+          "min_effect": -0.1939,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.0513,
+          "max_effect": 0.0727,
+          "min_effect": 0.0299,
+          "n_markers": 2
+        }
+      }
+    },
+    "TGFB1": {
+      "replogle_id": "8859_TGFB1_P1P2_ENSG00000105329",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": 0.0023,
+          "max_effect": 0.1149,
+          "min_effect": -0.1065,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": 0.043,
+          "max_effect": 0.1079,
+          "min_effect": -0.0583,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.0321,
+          "max_effect": 0.0824,
+          "min_effect": 0.0029,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": 0.0086,
+          "max_effect": 0.0086,
+          "min_effect": 0.0086,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.0059,
+          "max_effect": 0.0112,
+          "min_effect": 0.0007,
+          "n_markers": 2
+        }
+      }
+    },
+    "TP53": {
+      "replogle_id": "9195_TP53_P1P2_ENSG00000141510",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": -0.0051,
+          "max_effect": 0.1098,
+          "min_effect": -0.0988,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": 0.0448,
+          "max_effect": 0.1363,
+          "min_effect": -0.0906,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": 0.0595,
+          "max_effect": 0.1411,
+          "min_effect": -0.0561,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": -0.0614,
+          "max_effect": -0.0614,
+          "min_effect": -0.0614,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.046,
+          "max_effect": 0.0636,
+          "min_effect": 0.0285,
+          "n_markers": 2
+        }
+      }
+    },
+    "VEGFA": {
+      "replogle_id": "9718_VEGFA_P1P2_ENSG00000112715",
+      "pathway_effects": {
+        "proliferation": {
+          "mean_effect": 0.0221,
+          "max_effect": 0.1223,
+          "min_effect": -0.0607,
+          "n_markers": 6
+        },
+        "apoptosis": {
+          "mean_effect": -0.0119,
+          "max_effect": 0.1153,
+          "min_effect": -0.0811,
+          "n_markers": 5
+        },
+        "immune_evasion": {
+          "mean_effect": -0.0345,
+          "max_effect": 0.0009,
+          "min_effect": -0.0924,
+          "n_markers": 3
+        },
+        "migration": {
+          "mean_effect": 0.0179,
+          "max_effect": 0.0179,
+          "min_effect": 0.0179,
+          "n_markers": 1
+        },
+        "inflammation": {
+          "mean_effect": 0.1012,
+          "max_effect": 0.1927,
+          "min_effect": 0.0096,
+          "n_markers": 2
+        }
+      }
+    }
+  }
+}

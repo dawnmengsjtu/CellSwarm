@@ -1,0 +1,62 @@
+% Results Section — CellSwarm Q1 Paper
+% Each subsection corresponds to one main figure
+
+\section*{Results}
+
+\subsection*{CellSwarm recapitulates TNBC tumor microenvironment composition}
+
+To evaluate whether LLM-driven cell agents can reproduce realistic tumor microenvironment (TME) dynamics, we simulated triple-negative breast cancer (TNBC) using CellSwarm and compared the results against single-cell RNA sequencing data from GSE176078. We benchmarked three simulation modes: Agent (DeepSeek-driven), Rules (deterministic rule-based), and Random (stochastic baseline).
+
+Over 30 simulation steps, Agent and Rules modes maintained stable immune-to-tumor ratios close to the real TNBC value, while Random mode collapsed as CD8$^+$ T cells were depleted (Fig.~\ref{fig:2}B). The Agent mode achieved a final tumor cell proportion of 40.0\%, closely matching the real value of 40.1\% (Fig.~\ref{fig:2}C). However, systematic biases were observed across cell types: CD8$^+$ T cells were overestimated by 43.7\% and B cells underestimated by 64.6\%, a pattern consistent across all simulation modes (Fig.~\ref{fig:2}C,D), suggesting an architectural limitation rather than a model-specific deficiency.
+
+Quantitatively, the Agent mode achieved a Jensen-Shannon (JS) divergence of 0.144 $\pm$ 0.001 from real proportions, comparable to Rules (0.146 $\pm$ 0.001) and substantially better than Random (0.263 $\pm$ 0.017; $P$ = 7.9 $\times$ 10$^{-3}$, Mann-Whitney U test; Fig.~\ref{fig:2}E). Shannon diversity indices further confirmed that Agent (H$'$ = 1.54) and Rules (H$'$ = 1.57) preserved realistic ecosystem diversity (real H$'$ = 1.56), whereas Random collapsed to H$'$ = 1.26 (Fig.~\ref{fig:2}F). Across 8 LLM backends, 5 models achieved Tier-1 accuracy (JS $< 0.16$), with DeepSeek and GLM4Flash performing best (Fig.~\ref{fig:2}G).
+
+Finally, to contextualize the TNBC results within a broader immunological landscape, we examined CD8$^+$/Treg ratios across six cancer types. The simulation correctly recapitulated the expected immune contexture gradient, with immunologically ``hot'' tumors (CRC-MSI-H: 4.65, TNBC: 4.03, Melanoma: 3.48) exhibiting significantly higher ratios than ``cold'' tumors (NSCLC: 1.43, Ovarian: 1.10, CRC-MSS: 1.00; Fig.~\ref{fig:2}H).
+
+
+\subsection*{Cross-cancer generalization and treatment response prediction}
+
+A key advantage of the CellSwarm framework is its modularity: switching the Cancer Atlas KB enables simulation of different tumor types without retraining or parameter adjustment. We evaluated this capability across six cancer types spanning the immunological spectrum (Fig.~\ref{fig:3}A).
+
+Tumor growth dynamics varied substantially across cancer types (Fig.~\ref{fig:3}B), with immunologically hot tumors showing greater immune-mediated control. Direct comparison of CRC-MSI-H and CRC-MSS---two subtypes of the same organ---revealed distinct immune compositions, with MSI-H exhibiting elevated CD8$^+$ T cell and reduced Treg proportions relative to MSS (Fig.~\ref{fig:3}C). A normalized immune landscape heatmap across all six cancers confirmed that the simulation captures known immunological differences, including high NK cell activity in Melanoma and elevated Treg infiltration in Ovarian cancer (Fig.~\ref{fig:3}D).
+
+We next evaluated treatment response by simulating anti-PD1 and anti-CTLA4 immunotherapy. Agent-mode simulations predicted tumor response rates of 19.4\% for anti-PD1 and 9.2\% for anti-CTLA4 (Fig.~\ref{fig:3}E), with corresponding tumor count trajectories showing dose-dependent reduction (Fig.~\ref{fig:3}F). Early intervention consistently outperformed late intervention for both drugs (Fig.~\ref{fig:3}G), consistent with clinical observations of improved outcomes with earlier immunotherapy initiation.
+
+Critically, simulated response rates aligned with published clinical data: anti-PD1 simulated ORR of 19.4\% versus clinical 21\%, and anti-CTLA4 simulated ORR of 9.2\% versus clinical 12\% (Fig.~\ref{fig:3}H). Anti-TGF$\beta$ was excluded from this comparison due to a 16-fold mismatch between simulated (60.3\%) and clinical ($\sim$5\%) response rates, which we analyze as a failure case in Fig.~\ref{fig:6}C.
+
+
+\subsection*{LLM agents capture indirect gene perturbation effects}
+
+The central hypothesis of CellSwarm is that LLM-driven agents can reason about biological perturbations through their encoded knowledge, capturing effects that rule-based systems cannot represent. To test this, we simulated five gene knockouts spanning direct tumor suppressors (TP53, BRCA1) and indirect immune modulators (IFNG, TGFB1, IL2).
+
+For direct knockouts, both Agent and Rules modes responded appropriately: TP53\_KO increased tumor growth in Agent mode (tumor ratio = 1.067) while Rules mode showed its characteristic fixed response (0.851; Fig.~\ref{fig:4}A). The critical distinction emerged with indirect knockouts. IFNG knockout---which does not directly affect tumor cells but impairs CD8$^+$ T cell cytotoxicity---produced divergent responses: Agent mode showed a 9.2\% increase in tumor burden (tumor ratio = 1.092), while Rules mode showed no change from its baseline response (0.851; Fig.~\ref{fig:4}B). This divergence is visualized in the perturbation heatmap (Fig.~\ref{fig:4}C), where indirect KOs show Agent-specific sensitivity that Rules mode cannot capture.
+
+The IFNG\_KO result represents the strongest evidence for LLM reasoning in our framework. Time-course analysis revealed that Agent-mode tumor counts progressively increased under IFNG knockout, reflecting the loss of IFN-$\gamma$-mediated immune surveillance, while Rules-mode trajectories remained unchanged (Fig.~\ref{fig:4}D). Examination of immune cell composition confirmed that IFNG knockout differentially affected the Agent-mode TME, with altered CD8$^+$ T cell and macrophage proportions relative to Rules mode (Fig.~\ref{fig:4}E).
+
+A sensitivity analysis plotting Agent versus Rules tumor ratios across all five knockouts revealed that direct KOs cluster near the diagonal (both modes respond), while indirect KOs deviate substantially (Fig.~\ref{fig:4}F), confirming that the LLM's encoded biological knowledge enables it to propagate perturbation effects through causal pathways that rule-based systems cannot traverse.
+
+
+\subsection*{Multi-model benchmarking reveals robust performance across LLM architectures}
+
+To assess whether CellSwarm's performance depends on a specific LLM, we benchmarked eight engines: six commercial LLMs (DeepSeek, GLM4Flash, Qwen-Turbo, Qwen-Plus, Qwen-Max, Kimi-K2.5), a deterministic rule-based engine, and a random baseline, each run with five independent seeds.
+
+Model performance stratified into two distinct tiers (Fig.~\ref{fig:5}A). Tier 1 models (DeepSeek, GLM4Flash, Qwen-Turbo, and Rules) achieved JS divergences below 0.16, while Tier 2 models (Qwen-Plus, Qwen-Max, Kimi) exceeded 0.20 ($P$ = 6.2 $\times$ 10$^{-7}$, Mann-Whitney U test). Notably, the top three LLMs matched or exceeded the hand-crafted Rules engine, demonstrating that LLM-driven simulation is not merely feasible but competitive with expert-designed alternatives.
+
+Cost-performance analysis revealed substantial variation in computational requirements across LLMs (Fig.~\ref{fig:5}B), with DeepSeek offering the best trade-off between accuracy and runtime. Reproducibility, measured by coefficient of variation (CV) of JS divergence across seeds, was excellent for Tier 1 models (CV $<$ 3\%) and acceptable for Tier 2 (CV $<$ 9\%; Fig.~\ref{fig:5}D).
+
+Knowledge base ablation experiments identified the Cancer Atlas as the single most critical component (Fig.~\ref{fig:5}C). Removing the Cancer Atlas increased JS divergence from 0.144 to 0.272---equivalent to Random mode (0.263)---while removing the Drug Library or Pathway KB had negligible effects (JS = 0.143 and 0.144, respectively). This indicates that cell-type composition knowledge, rather than pharmacological or pathway information, is the primary driver of baseline simulation accuracy.
+
+Detailed analysis of cell-type-specific errors across all eight models revealed a universal pattern: CD8$^+$ T cells and NK cells were systematically overestimated, while B cells were underestimated, regardless of the underlying LLM (Fig.~\ref{fig:5}E). This consistency across architecturally diverse models suggests a fundamental limitation in the simulation framework's representation of lymphocyte dynamics, rather than a deficiency in any individual model.
+
+
+\subsection*{Mechanistic analysis reveals emergent simulation behaviors}
+
+To understand the biological mechanisms underlying CellSwarm's simulation dynamics, we examined cell cycle distributions, microenvironmental signaling, and treatment failure modes.
+
+Cell cycle analysis revealed a striking difference between simulation modes (Fig.~\ref{fig:6}A). Agent and Rules modes maintained 85.1\% and 82.4\% of cells in G0 (quiescent) phase, respectively, closely reflecting the predominantly quiescent state of real tumors. In contrast, Random mode showed only 48.3\% G0, with substantially more cells in proliferative phases (G1/S/G2/M), explaining its uncontrolled tumor expansion observed in Fig.~\ref{fig:2}B.
+
+Microenvironmental signal dynamics provided insight into the IFNG knockout mechanism (Fig.~\ref{fig:6}B). Under baseline conditions, IFN-$\gamma$ levels remained elevated throughout the simulation, maintaining immune surveillance. IFNG knockout abolished this signal, leading to compensatory increases in TGF-$\beta$ and PD-L1---an immunosuppressive shift that the Agent mode correctly propagated to downstream cell behaviors. This signal-level analysis confirms that the LLM agents respond to environmental context rather than operating in isolation.
+
+Analysis of the anti-TGF$\beta$ treatment failure (Fig.~\ref{fig:6}C) revealed that both Agent and Rules modes dramatically over-responded to TGF-$\beta$ blockade, with tumor ratios of 0.397 and 0.296 respectively---far exceeding the $\sim$5\% clinical response rate. This over-response was consistent across seeds and timing conditions, indicating a systematic overestimation of TGF-$\beta$'s role in tumor immune evasion within the current knowledge base framework.
+
+Finally, comparison of cell compositions under IFNG knockout between Agent and Rules modes (Fig.~\ref{fig:6}D) confirmed that the Agent mode produces a distinct immunological state---with altered CD8$^+$ T cell, macrophage, and Treg proportions---that reflects the biological consequences of IFN-$\gamma$ loss, while Rules mode maintains its invariant composition regardless of the perturbation context.

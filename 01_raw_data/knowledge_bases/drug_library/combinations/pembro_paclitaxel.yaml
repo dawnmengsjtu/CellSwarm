@@ -1,0 +1,64 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+combination_id: pembro_paclitaxel
+components:
+- pembrolizumab
+- paclitaxel
+clinical_trial: KEYNOTE-355
+indication: TNBC
+interaction_model: bliss_independence
+synergy_rules:
+  CD8_T:
+    synergy_factor: 1.3
+    affected_parameters:
+    - activation
+    - exhaustion
+    - cytotoxicity
+    notes: ICD from paclitaxel enhances anti-PD-1 response
+  Tumor:
+    synergy_factor: 1.2
+    affected_parameters:
+    - apoptosis_susceptibility
+    notes: Immune-mediated + direct cytotoxicity
+  Treg:
+    synergy_factor: 1.1
+    affected_parameters:
+    - suppressive_activity
+  Macrophage:
+    synergy_factor: 1.1
+    affected_parameters:
+    - polarization
+  NK:
+    synergy_factor: 1.1
+    affected_parameters:
+    - activation
+  B_cell:
+    synergy_factor: 1.0
+    affected_parameters: []
+toxicity_interaction:
+  irAE_probability: 0.3
+  dose_adjustment: 0.85
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 1.2
+    notes: KEYNOTE-355 PD-L1+ CPS>=10 OS benefit
+  Melanoma:
+    efficacy_modifier: 0.8
+    notes: Not standard combination
+  NSCLC:
+    efficacy_modifier: 0.9
+    notes: KEYNOTE-189 uses pembro+chemo
+  CRC-MSI-H:
+    efficacy_modifier: 0.7
+    notes: ICI preferred alone
+  CRC-MSS:
+    efficacy_modifier: 0.3
+    notes: Limited benefit
+  Ovarian:
+    efficacy_modifier: 0.6
+    notes: Investigational
+references:
+- description: 'KEYNOTE-355: Pembro+chemo in TNBC. Cortes et al. NEJM 2022'
+  pmid: '35857659'
+  verified: true

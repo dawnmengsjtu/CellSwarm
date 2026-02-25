@@ -1,0 +1,430 @@
+meta:
+  schema_version: '1.0'
+  generated_by: CellSwarm Cancer Atlas Builder
+  generated_at: '2026-02-13'
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+  calibrated_from: GSE176078 (Wu et al. 2021)
+  calibration_date: '2026-02-13'
+  calibration_method: gene_signature_scoring on scRNA-seq
+cancer_id: TNBC
+full_name: Triple-Negative Breast Cancer
+tissue: Breast
+icd_code: C50.9
+tme_phenotype: immune_hot
+cell_types:
+  Tumor:
+    proportion:
+    - 0.3512
+    - 0.4512
+    subtypes:
+    - Basal-like 1
+    - Basal-like 2
+    - Immunomodulatory
+    - Mesenchymal
+    - Mesenchymal stem-like
+    - Luminal androgen receptor
+    key_markers:
+    - KRT5
+    - KRT14
+    - EGFR
+    - KI67
+    - TP53
+    doubling_time_hours:
+    - 48
+    - 72
+    functional_states:
+    - high_proliferation
+    - EMT_active
+    - antigen_presentation_deficient
+    - PD_L1_expression_variable
+    initial_state:
+      energy:
+      - 0.6212
+      - 1.4883
+      immune_evasion:
+      - 0.15
+      - 0.35
+      proliferation_rate:
+      - 0.0
+      - 0.3466
+      apoptosis_susceptibility:
+      - 0.2
+      - 0.4
+    behavior_mapping:
+      proliferate: 0.35
+      migrate: 0.2
+      signal: 0.15
+      rest: 0.15
+      apoptosis: 0.05
+      evade: 0.1
+    notes: TNBC tumor cells show high genomic instability, frequent BRCA1/2 mutations,
+      and heterogeneous PD-L1 expression. Basal-like subtypes dominate.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes predict immunotherapy
+        response. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: 'Jiang et al. TIDE: T cell dysfunction and exclusion signatures.
+        Nat Med 2018'
+      verified: true
+  CD8_T:
+    proportion:
+    - 0.1211
+    - 0.2211
+    subtypes:
+    - Effector memory
+    - Exhausted
+    - Tissue-resident memory
+    key_markers:
+    - CD8A
+    - CD8B
+    - GZMB
+    - PRF1
+    - PDCD1
+    functional_states:
+    - cytotoxic_active
+    - exhausted_in_tumor_core
+    - IFNG_producing
+    initial_state:
+      energy:
+      - 0.4
+      - 0.7
+      activation:
+      - 0.4159
+      - 1.0961
+      exhaustion:
+      - 0.0
+      - 0.497
+      cytotoxicity:
+      - 0.3466
+      - 1.0236
+    behavior_mapping:
+      attack: 0.3
+      migrate: 0.2
+      proliferate: 0.1
+      rest: 0.15
+      signal: 0.15
+      apoptosis: 0.1
+    notes: Higher CD8+ T cell infiltration compared to other breast cancer subtypes.
+      Exhaustion more prominent in tumor core.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes predict immunotherapy
+        response. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: 'Jiang et al. TIDE: T cell dysfunction and exclusion signatures.
+        Nat Med 2018'
+      verified: true
+  Treg:
+    proportion:
+    - 0.0133
+    - 0.1133
+    subtypes:
+    - Effector Treg
+    - Resting Treg
+    key_markers:
+    - FOXP3
+    - CD25
+    - CTLA4
+    - IL2RA
+    - TIGIT
+    functional_states:
+    - immunosuppressive
+    - IL10_producing
+    - TGF_beta_active
+    initial_state:
+      energy:
+      - 0.5
+      - 0.7
+      suppressive_activity:
+      - 0.2773
+      - 0.7773
+      activation:
+      - 0.231
+      - 1.1337
+    behavior_mapping:
+      suppress: 0.4
+      migrate: 0.15
+      signal: 0.15
+      proliferate: 0.1
+      rest: 0.15
+      apoptosis: 0.05
+    notes: Elevated Treg infiltration correlates with poor prognosis in TNBC.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes predict immunotherapy
+        response. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: 'Jiang et al. TIDE: T cell dysfunction and exclusion signatures.
+        Nat Med 2018'
+      verified: true
+  Macrophage:
+    proportion:
+    - 0.1013
+    - 0.2013
+    subtypes:
+    - M1-like
+    - M2-like
+    - TAM
+    key_markers:
+    - CD68
+    - CD163
+    - CD206
+    - CSF1R
+    - MARCO
+    functional_states:
+    - phagocytic
+    - immunosuppressive_M2_dominant
+    - angiogenic
+    initial_state:
+      energy:
+      - 0.5
+      - 0.8
+      polarization:
+      - 0.45
+      - 0.65
+      phagocytic_activity:
+      - 0.4
+      - 0.6
+    m1_m2_ratio:
+    - 0.35
+    - 0.5
+    behavior_mapping:
+      phagocytose: 0.25
+      signal: 0.15
+      migrate: 0.15
+      polarize: 0.1
+      rest: 0.25
+      apoptosis: 0.1
+    notes: TNBC shows mixed M1/M2 polarization with more M1 in immune-hot tumors.
+      M1:M2 ratio approximately 1:1.5 to 1:2.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes predict immunotherapy
+        response. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: 'Jiang et al. TIDE: T cell dysfunction and exclusion signatures.
+        Nat Med 2018'
+      verified: true
+  NK:
+    proportion:
+    - 0.01
+    - 0.0912
+    subtypes:
+    - CD56bright
+    - CD56dim
+    key_markers:
+    - NCAM1
+    - NKG2D
+    - NKP46
+    - CD16
+    - KLRK1
+    functional_states:
+    - cytotoxic
+    - cytokine_producing
+    - partially_exhausted
+    initial_state:
+      energy:
+      - 0.5
+      - 0.7
+      activation:
+      - 0.9883
+      - 1.8102
+      cytotoxicity:
+      - 0.7675
+      - 1.8184
+    behavior_mapping:
+      attack: 0.35
+      migrate: 0.2
+      signal: 0.1
+      rest: 0.2
+      apoptosis: 0.1
+      proliferate: 0.05
+    notes: NK cell function often impaired in TNBC TME due to immunosuppressive cytokines.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes predict immunotherapy
+        response. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: 'Jiang et al. TIDE: T cell dysfunction and exclusion signatures.
+        Nat Med 2018'
+      verified: true
+  B_cell:
+    proportion:
+    - 0.1219
+    - 0.2219
+    subtypes:
+    - Naive B
+    - Memory B
+    - Plasma cells
+    key_markers:
+    - CD19
+    - CD20
+    - CD38
+    - IGHG1
+    - MZB1
+    functional_states:
+    - antibody_secreting
+    - antigen_presenting
+    - regulatory_B_cells
+    initial_state:
+      energy:
+      - 0.4
+      - 0.6
+      activation:
+      - 0.2747
+      - 0.9344
+      antibody_secretion:
+      - 0.3
+      - 0.5
+    behavior_mapping:
+      signal: 0.25
+      migrate: 0.15
+      proliferate: 0.15
+      rest: 0.2
+      apoptosis: 0.1
+      attack: 0.15
+    notes: B cell infiltration and tertiary lymphoid structures associated with better
+      response to immunotherapy.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes predict immunotherapy
+        response. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: 'Jiang et al. TIDE: T cell dysfunction and exclusion signatures.
+        Nat Med 2018'
+      verified: true
+spatial_distribution:
+  tumor_core:
+    Tumor: 0.75
+    CD8_T: 0.05
+    Treg: 0.08
+    Macrophage: 0.1
+    NK: 0.01
+    B_cell: 0.01
+  tumor_margin:
+    Tumor: 0.45
+    CD8_T: 0.2
+    Treg: 0.06
+    Macrophage: 0.12
+    NK: 0.06
+    B_cell: 0.11
+  stroma:
+    Tumor: 0.1
+    CD8_T: 0.15
+    Treg: 0.05
+    Macrophage: 0.25
+    NK: 0.1
+    B_cell: 0.35
+cancer_specific_features:
+- High genomic instability with frequent TP53 mutations (>80%)
+- Deficient homologous recombination (BRCA1/2 mutations in ~15-20%)
+- High PD-L1 expression variability (20-40% of cases)
+- Frequent EMT activation in mesenchymal subtypes
+- Elevated tumor mutational burden compared to other breast cancers
+immunotherapy_relevance:
+  approved_agents:
+  - Atezolizumab (PD-L1 inhibitor) + nab-paclitaxel
+  - Pembrolizumab (PD-1 inhibitor) + chemotherapy
+  response_rate: 20-40% for PD-L1 positive; 10-20% overall
+  biomarkers:
+  - PD-L1 expression (SP142 assay, IC ≥ 1%)
+  - Tumor-infiltrating lymphocytes (TILs)
+  - Tumor mutational burden (TMB)
+  - BRCA1/2 mutation status
+immune_escape_mechanisms:
+- PD-L1 upregulation on tumor and immune cells
+- T cell exhaustion via chronic antigen exposure
+- Treg-mediated immunosuppression
+- M2 macrophage polarization
+- IDO1-mediated tryptophan depletion
+- CAF-mediated T cell exclusion
+simulation_defaults:
+  total_cells: 1000
+  grid_size:
+  - 50
+  - 50
+  recommended_steps: 30
+  step_time_mapping: 1 step ≈ 1 day of tumor-immune interaction
+  key_signals:
+  - PD_L1
+  - TGF_beta
+  - IFN_gamma
+  - IL2
+  - oxygen
+  - glucose
+references:
+- pmid: 34019806
+  description: Bagaev et al. Conserved pan-cancer TME subtypes predict immunotherapy
+    response. Cancer Cell 2021
+  verified: true
+- pmid: 30127393
+  description: 'Jiang et al. TIDE: T cell dysfunction and exclusion signatures. Nat
+    Med 2018'
+  verified: true
+- pmid: 29628290
+  description: Thorsson et al. The Immune Landscape of Cancer. Immunity 2018
+  verified: true
+- pmid: 32442275
+  description: Li et al. TIMER2.0 for tumor-infiltrating immune cell analysis. Nucleic
+    Acids Res 2020
+  verified: true
+- pmid: 25822800
+  description: 'Newman et al. CIBERSORT: robust enumeration of cell subsets. Nat Methods
+    2015'
+  verified: true
+- pmid: 21633166
+  description: Lehmann et al. Identification of TNBC subtypes. J Clin Invest 2011
+  verified: true
+- pmid: 34493872
+  description: Wu et al. Single-cell and spatially resolved atlas of human breast
+    cancers. Nat Genet 2021
+  verified: true
+- pmid: 28474673
+  description: Chung et al. Single-cell RNA-seq of primary breast cancer TME. Nat
+    Commun 2017
+  verified: true
+- pmid: 30135555
+  description: Savas et al. Single-cell profiling of breast cancer T cells. Nat Med
+    2018
+  verified: true
+- pmid: 30650045
+  description: Loi et al. Tumor-infiltrating lymphocytes and prognosis in breast cancer.
+    J Clin Oncol 2019
+  verified: true
+- pmid: 32101663
+  description: 'Schmid et al. KEYNOTE-522: pembrolizumab neoadjuvant TNBC. NEJM 2020'
+  verified: true
+- pmid: 30345906
+  description: 'Schmid et al. IMpassion130: atezolizumab + nab-paclitaxel in TNBC.
+    NEJM 2018'
+  verified: true
+- pmid: 39592577
+  description: Wang et al. Spatial transcriptomics reveals heterogeneity in TNBC.
+    Nat Commun 2024
+  verified: true
+- pmid: 28117416
+  description: Mantovani et al. TAMs as treatment targets in oncology. Nat Rev Clin
+    Oncol 2017
+  verified: true
+- pmid: 31942075
+  description: Helmink et al. B cells and TLS promote immunotherapy response. Nature
+    2020
+  verified: true
+visualization:
+  cell_colors:
+    Tumor: '#C44E52'
+    CD8_T: '#4C72B0'
+    Treg: '#DD8452'
+    Macrophage: '#55A868'
+    NK: '#8172B3'
+    B_cell: '#CCB974'
+  abbreviation: TNBC
+  icon: breast

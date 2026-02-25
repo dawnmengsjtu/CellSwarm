@@ -1,0 +1,128 @@
+{
+  "source": "GSE169246",
+  "reference": "Zhang et al. Cancer Cell 2021",
+  "pmid": "34653365",
+  "cancer_type": "TNBC",
+  "treatment": "paclitaxel ± atezolizumab",
+  "total_pre": 177896,
+  "total_post": 164263,
+  "pre_proportions": {
+    "Tumor": 0.0109,
+    "CD8_T": 0.2139,
+    "Treg": 0.0631,
+    "Macrophage": 0.1463,
+    "NK": 0.3326,
+    "B_cell": 0.2332
+  },
+  "post_proportions": {
+    "Tumor": 0.0127,
+    "CD8_T": 0.207,
+    "Treg": 0.0549,
+    "Macrophage": 0.1356,
+    "NK": 0.4259,
+    "B_cell": 0.1638
+  },
+  "changes": {
+    "Tumor": {
+      "pre_proportion": 0.0109,
+      "post_proportion": 0.0127,
+      "delta": 0.0018,
+      "fold_change": 1.1651,
+      "direction": "increase"
+    },
+    "CD8_T": {
+      "pre_proportion": 0.2139,
+      "post_proportion": 0.207,
+      "delta": -0.0069,
+      "fold_change": 0.9677,
+      "direction": "decrease"
+    },
+    "Treg": {
+      "pre_proportion": 0.0631,
+      "post_proportion": 0.0549,
+      "delta": -0.0082,
+      "fold_change": 0.87,
+      "direction": "decrease"
+    },
+    "Macrophage": {
+      "pre_proportion": 0.1463,
+      "post_proportion": 0.1356,
+      "delta": -0.0107,
+      "fold_change": 0.9269,
+      "direction": "decrease"
+    },
+    "NK": {
+      "pre_proportion": 0.3326,
+      "post_proportion": 0.4259,
+      "delta": 0.0933,
+      "fold_change": 1.2805,
+      "direction": "increase"
+    },
+    "B_cell": {
+      "pre_proportion": 0.2332,
+      "post_proportion": 0.1638,
+      "delta": -0.0694,
+      "fold_change": 0.7024,
+      "direction": "decrease"
+    }
+  },
+  "interpretation": {
+    "treatment": "paclitaxel ± atezolizumab (anti-PD-L1)",
+    "key_findings": [
+      "NK cells expand significantly post-treatment (largest increase)",
+      "B cells decrease substantially (largest decrease)",
+      "Treg cells decrease (immunosuppression reduced)",
+      "Macrophages decrease moderately",
+      "CD8_T cells decrease slightly (paclitaxel damages tumor-reactive T cells, per Zhang et al.)",
+      "Tumor proportion increases slightly (but absolute numbers may differ)"
+    ],
+    "kb2_implications": {
+      "atezolizumab": {
+        "NK_activation_boost": "Strong — NK expansion is the dominant immune response",
+        "Treg_suppression": "Moderate — Treg proportion drops ~20%",
+        "B_cell_reduction": "Unexpected — B cells drop significantly, possibly paclitaxel effect",
+        "CD8_T_damage": "Mild — paclitaxel selectively damages tumor-reactive T cells"
+      }
+    }
+  },
+  "kb2_calibration": {
+    "cancer_id": "TNBC",
+    "drug": "atezolizumab_paclitaxel",
+    "source": "GSE169246",
+    "reference": "Zhang et al. Cancer Cell 2021",
+    "pmid": "34653365",
+    "treatment_steps": 10,
+    "cell_effects": {
+      "Tumor": {
+        "proportion_change_rate": 0.00018,
+        "direction": "increase",
+        "fold_change": 1.1651
+      },
+      "CD8_T": {
+        "proportion_change_rate": -0.00069,
+        "direction": "decrease",
+        "fold_change": 0.9677
+      },
+      "Treg": {
+        "proportion_change_rate": -0.00082,
+        "direction": "decrease",
+        "fold_change": 0.87
+      },
+      "Macrophage": {
+        "proportion_change_rate": -0.00107,
+        "direction": "decrease",
+        "fold_change": 0.9269
+      },
+      "NK": {
+        "proportion_change_rate": 0.00933,
+        "direction": "increase",
+        "fold_change": 1.2805
+      },
+      "B_cell": {
+        "proportion_change_rate": -0.00694,
+        "direction": "decrease",
+        "fold_change": 0.7024
+      }
+    }
+  }
+}

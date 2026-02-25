@@ -1,0 +1,146 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+  calibrated_from: GSE169246 (Zhang et al. 2021)
+  calibration_date: '2026-02-13'
+drug_id: atezolizumab
+generic_name: Atezolizumab
+brand_name: Tecentriq
+drug_class: immune_checkpoint_inhibitor
+subclass: anti_PDL1
+molecular_type: monoclonal_antibody
+fda_status: approved
+approved_indications:
+- TNBC
+- NSCLC
+targets:
+- name: PD-L1
+  gene: CD274
+  type: ligand
+  action: antagonist
+  selectivity: high
+cell_effects:
+  CD8_T:
+    direct: true
+    state_effects:
+    - parameter: exhaustion
+      direction: decrease
+      rate_per_step: 0.07
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.05
+    - parameter: cytotoxicity
+      direction: increase
+      rate_per_step: 0.04
+    functional_effects:
+    - action: attack
+      probability_modifier: 0.18
+    - action: proliferate
+      probability_modifier: 0.08
+    data_calibration:
+      source: GSE169246
+      proportion_change: -0.00069
+      fold_change: 0.9677
+      direction: decrease
+  Tumor:
+    direct: true
+    state_effects:
+    - parameter: immune_evasion
+      direction: decrease
+      rate_per_step: 0.05
+    notes: Blocks PD-L1 on tumor surface directly
+    data_calibration:
+      source: GSE169246
+      proportion_change: 0.00018
+      fold_change: 1.1651
+      direction: increase
+  Treg:
+    direct: false
+    state_effects: []
+    data_calibration:
+      source: GSE169246
+      proportion_change: -0.00082
+      fold_change: 0.87
+      direction: decrease
+  Macrophage:
+    direct: false
+    state_effects:
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.02
+    data_calibration:
+      source: GSE169246
+      proportion_change: -0.00107
+      fold_change: 0.9269
+      direction: decrease
+  NK:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.02
+    data_calibration:
+      source: GSE169246
+      proportion_change: 0.00933
+      fold_change: 1.2805
+      direction: increase
+  B_cell:
+    direct: false
+    state_effects: []
+    data_calibration:
+      source: GSE169246
+      proportion_change: -0.00694
+      fold_change: 0.7024
+      direction: decrease
+environment_effects:
+- field: PD_L1
+  action: neutralize
+  magnitude: 0.9
+- field: IFN_gamma
+  action: amplify
+  magnitude: 0.08
+  onset: delayed
+  delay_steps: 2
+pharmacokinetics:
+  administration: IV
+  standard_dose: 1200 mg q3w
+  onset_steps: 1
+  peak_steps: 3
+  half_life_steps: 27
+  concentration_curve: plateau
+  steady_state_fraction: 0.85
+dose_response:
+  model: hill
+  ec50: 0.5
+  hill_coefficient: 2.0
+  max_effect: 1.0
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.75
+    notes: IMpassion130 PD-L1+ IC>=1%
+  Melanoma:
+    efficacy_modifier: 0.7
+    notes: Not first-line
+  NSCLC:
+    efficacy_modifier: 0.85
+    notes: IMpower150
+  CRC-MSI-H:
+    efficacy_modifier: 0.6
+    notes: Limited data
+  CRC-MSS:
+    efficacy_modifier: 0.1
+    notes: Ineffective
+  Ovarian:
+    efficacy_modifier: 0.3
+    notes: Limited efficacy
+resistance:
+- mechanism: Alternative checkpoint upregulation (TIGIT, LAG-3)
+  onset_steps: 20
+  probability: 0.1
+- mechanism: TGF-beta mediated T cell exclusion
+  onset_steps: 15
+  probability: 0.08
+references:
+- description: 'IMpassion130: Atezo+nab-paclitaxel in TNBC. Schmid et al. NEJM 2018'
+  pmid: '30345906'
+  verified: true

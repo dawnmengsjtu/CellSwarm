@@ -1,0 +1,124 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: nivolumab
+generic_name: Nivolumab
+brand_name: Opdivo
+drug_class: immune_checkpoint_inhibitor
+subclass: anti_PD1
+molecular_type: monoclonal_antibody
+fda_status: approved
+approved_indications:
+- melanoma
+- NSCLC
+- CRC-MSI-H
+targets:
+- name: PD-1
+  gene: PDCD1
+  type: receptor
+  action: antagonist
+  selectivity: high
+cell_effects:
+  CD8_T:
+    direct: true
+    state_effects:
+    - parameter: exhaustion
+      direction: decrease
+      rate_per_step: 0.07
+      condition: exhaustion > 0.1
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.06
+      max_value: 1.0
+    - parameter: cytotoxicity
+      direction: increase
+      rate_per_step: 0.05
+    functional_effects:
+    - action: attack
+      probability_modifier: 0.18
+    - action: proliferate
+      probability_modifier: 0.08
+  Tumor:
+    direct: false
+    state_effects:
+    - parameter: immune_evasion
+      direction: decrease
+      rate_per_step: 0.04
+    - parameter: apoptosis_susceptibility
+      direction: increase
+      rate_per_step: 0.05
+      condition: nearby_CD8T_count > 2
+  Treg:
+    direct: false
+    state_effects: []
+    notes: Minimal direct effect
+  Macrophage:
+    direct: false
+    state_effects:
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.02
+  NK:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.03
+  B_cell:
+    direct: false
+    state_effects: []
+environment_effects:
+- field: PD_L1
+  action: neutralize
+  magnitude: 0.8
+- field: IFN_gamma
+  action: amplify
+  magnitude: 0.1
+  onset: delayed
+  delay_steps: 2
+pharmacokinetics:
+  administration: IV
+  standard_dose: 240 mg q2w or 480 mg q4w
+  onset_steps: 1
+  peak_steps: 3
+  half_life_steps: 25
+  concentration_curve: plateau
+  steady_state_fraction: 0.85
+dose_response:
+  model: hill
+  ec50: 0.5
+  hill_coefficient: 2.0
+  max_effect: 1.0
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.5
+    notes: Not approved for TNBC
+  Melanoma:
+    efficacy_modifier: 1.0
+    notes: CheckMate-067 response ~45%
+  NSCLC:
+    efficacy_modifier: 0.85
+    notes: CheckMate-227
+  CRC-MSI-H:
+    efficacy_modifier: 0.9
+    notes: CheckMate-142
+  CRC-MSS:
+    efficacy_modifier: 0.1
+    notes: Nearly ineffective
+  Ovarian:
+    efficacy_modifier: 0.25
+    notes: Limited efficacy
+resistance:
+- mechanism: Alternative checkpoint upregulation
+  onset_steps: 20
+  probability: 0.1
+- mechanism: JAK1/2 mutations (IFN-gamma pathway defect)
+  onset_steps: 18
+  probability: 0.05
+references:
+- description: 'CheckMate-067: Nivo+Ipi in melanoma. Wolchok et al. NEJM 2025'
+  pmid: '39282897'
+  verified: true
+- description: 'CheckMate-227: Nivo+Ipi in NSCLC. Hellmann et al. NEJM 2019'
+  pmid: '31562796'
+  verified: true

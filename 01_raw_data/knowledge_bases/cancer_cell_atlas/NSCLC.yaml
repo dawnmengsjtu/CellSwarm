@@ -1,0 +1,399 @@
+meta:
+  schema_version: '1.0'
+  generated_by: CellSwarm Cancer Atlas Builder
+  generated_at: '2026-02-13'
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+cancer_id: NSCLC
+full_name: Non-Small Cell Lung Cancer
+tissue: Lung
+icd_code: C34.9
+tme_phenotype: immune_altered_excluded
+cell_types:
+  Tumor:
+    proportion:
+    - 0.5
+    - 0.7
+    subtypes:
+    - Adenocarcinoma
+    - Squamous cell carcinoma
+    - Large cell carcinoma
+    key_markers:
+    - TTF1
+    - NAPSIN
+    - P40
+    - CK7
+    - EGFR
+    - KRAS
+    doubling_time_hours:
+    - 36
+    - 60
+    functional_states:
+    - EMT_active_in_stroma
+    - EGFR_signaling_active
+    - antigen_presentation_downregulated
+    - PD_L1_inducible
+    initial_state:
+      energy:
+      - 0.65
+      - 0.85
+      immune_evasion:
+      - 0.5
+      - 0.7
+      proliferation_rate:
+      - 0.75
+      - 0.9
+      apoptosis_susceptibility:
+      - 0.15
+      - 0.35
+    behavior_mapping:
+      proliferate: 0.4
+      migrate: 0.2
+      signal: 0.15
+      rest: 0.1
+      apoptosis: 0.05
+      evade: 0.1
+    notes: NSCLC shows smoking-related mutational signatures. Adenocarcinoma and squamous cell carcinoma have distinct TME
+      patterns.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  CD8_T:
+    proportion:
+    - 0.05
+    - 0.15
+    subtypes:
+    - Effector
+    - Exhausted
+    - Senescent
+    key_markers:
+    - CD8A
+    - CD8B
+    - GZMB
+    - PRF1
+    - PDCD1
+    - LAG3
+    functional_states:
+    - cytotoxic
+    - exhausted
+    - IFNG_producing_at_margin
+    initial_state:
+      energy:
+      - 0.45
+      - 0.65
+      activation:
+      - 0.4
+      - 0.6
+      exhaustion:
+      - 0.4
+      - 0.6
+      cytotoxicity:
+      - 0.5
+      - 0.7
+    behavior_mapping:
+      attack: 0.2
+      migrate: 0.25
+      proliferate: 0.1
+      rest: 0.2
+      signal: 0.15
+      apoptosis: 0.1
+    notes: CD8+ T cells often excluded from tumor core by CAF-mediated barriers. Higher infiltration at tumor margin.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  Treg:
+    proportion:
+    - 0.04
+    - 0.1
+    subtypes:
+    - Effector Treg
+    - Th1-like Treg
+    key_markers:
+    - FOXP3
+    - CD25
+    - CTLA4
+    - Helios
+    - GITR
+    functional_states:
+    - immunosuppressive
+    - COX2_producing
+    initial_state:
+      energy:
+      - 0.5
+      - 0.7
+      suppressive_activity:
+      - 0.6
+      - 0.8
+      activation:
+      - 0.5
+      - 0.7
+    behavior_mapping:
+      suppress: 0.45
+      migrate: 0.15
+      signal: 0.15
+      proliferate: 0.1
+      rest: 0.1
+      apoptosis: 0.05
+    notes: High Treg infiltration correlates with poor prognosis. COX2/PGE2 pathway important.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  Macrophage:
+    proportion:
+    - 0.08
+    - 0.18
+    subtypes:
+    - M1-like
+    - M2-like
+    - Alveolar macrophage-derived
+    key_markers:
+    - CD68
+    - CD163
+    - CD204
+    - VSIG4
+    - MRC1
+    functional_states:
+    - phagocytic
+    - M2_dominant
+    - pro_angiogenic
+    initial_state:
+      energy:
+      - 0.5
+      - 0.7
+      polarization:
+      - 0.75
+      - 0.9
+      phagocytic_activity:
+      - 0.3
+      - 0.5
+    m1_m2_ratio:
+    - 0.15
+    - 0.25
+    behavior_mapping:
+      phagocytose: 0.2
+      signal: 0.2
+      migrate: 0.15
+      polarize: 0.15
+      rest: 0.2
+      apoptosis: 0.1
+    notes: TAMs show strong M2 polarization in NSCLC. Associated with poor prognosis. M1:M2 ratio approximately 1:4.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  NK:
+    proportion:
+    - 0.02
+    - 0.05
+    subtypes:
+    - CD56bright
+    - CD56dim
+    key_markers:
+    - NCAM1
+    - NKG2D
+    - DNAM1
+    - NKG2A
+    functional_states:
+    - cytotoxic
+    - HLA_E_inhibited
+    initial_state:
+      energy:
+      - 0.35
+      - 0.55
+      activation:
+      - 0.3
+      - 0.5
+      cytotoxicity:
+      - 0.4
+      - 0.6
+    behavior_mapping:
+      attack: 0.25
+      migrate: 0.25
+      signal: 0.1
+      rest: 0.25
+      apoptosis: 0.1
+      proliferate: 0.05
+    notes: NK cells show reduced cytotoxicity in NSCLC due to HLA-E upregulation and TGF-beta.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  B_cell:
+    proportion:
+    - 0.03
+    - 0.08
+    subtypes:
+    - Naive B
+    - Memory B
+    - Plasma cells
+    key_markers:
+    - CD19
+    - CD20
+    - CD138
+    - IGHG
+    functional_states:
+    - antibody_producing
+    - TLS_formation
+    initial_state:
+      energy:
+      - 0.45
+      - 0.65
+      activation:
+      - 0.35
+      - 0.55
+      antibody_secretion:
+      - 0.25
+      - 0.45
+    behavior_mapping:
+      signal: 0.3
+      migrate: 0.15
+      proliferate: 0.15
+      rest: 0.2
+      apoptosis: 0.1
+      attack: 0.1
+    notes: B cells and TLS associated with better prognosis in NSCLC. Higher in immune-enriched subtype.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+spatial_distribution:
+  tumor_core:
+    Tumor: 0.8
+    CD8_T: 0.03
+    Treg: 0.05
+    Macrophage: 0.09
+    NK: 0.01
+    B_cell: 0.02
+  tumor_margin:
+    Tumor: 0.5
+    CD8_T: 0.18
+    Treg: 0.07
+    Macrophage: 0.12
+    NK: 0.05
+    B_cell: 0.08
+  stroma:
+    Tumor: 0.15
+    CD8_T: 0.12
+    Treg: 0.06
+    Macrophage: 0.22
+    NK: 0.08
+    B_cell: 0.37
+cancer_specific_features:
+- High mutational burden from smoking exposure
+- EGFR/ALK/KRAS driver mutations define molecular subtypes
+- Strong fibrotic stroma in many cases
+- EMT activation particularly in stromal areas
+- High PD-L1 expression (≥50% in ~25-30% of cases)
+- Smoking-related mutational signatures
+immunotherapy_relevance:
+  approved_agents:
+  - Pembrolizumab (PD-1 inhibitor)
+  - Nivolumab (PD-1 inhibitor)
+  - Atezolizumab (PD-L1 inhibitor)
+  - Durvalumab (PD-L1 inhibitor)
+  - Cemiplimab (PD-1 inhibitor)
+  - Ipilimumab + Nivolumab (CTLA-4 + PD-1)
+  response_rate: 25-45% for PD-L1 ≥50%; 15-20% overall in unselected patients
+  biomarkers:
+  - PD-L1 expression (TPS ≥ 50% optimal)
+  - Tumor mutational burden (TMB ≥ 10 mut/Mb)
+  - MSI-H status (rare, ~0.5-1%)
+  - EGFR/ALK status (predicts lower response)
+immune_escape_mechanisms:
+- PD-L1 upregulation via IFN-gamma and genetic alterations
+- STK11/LKB1 loss (cold tumor phenotype)
+- Beta-2-microglobulin loss
+- JAK1/2 mutations causing IFN resistance
+- T cell exclusion by CAF barriers
+- M2 macrophage-mediated suppression
+simulation_defaults:
+  total_cells: 1000
+  grid_size:
+  - 50
+  - 50
+  recommended_steps: 30
+  step_time_mapping: 1 step ≈ 1 day of tumor-immune interaction
+  key_signals:
+  - PD_L1
+  - TGF_beta
+  - IFN_gamma
+  - IL2
+  - oxygen
+  - glucose
+references:
+- pmid: 34019806
+  description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+  verified: true
+- pmid: 30127393
+  description: Jiang et al. TIDE signatures. Nat Med 2018
+  verified: true
+- pmid: 29628290
+  description: Thorsson et al. The Immune Landscape of Cancer. Immunity 2018
+  verified: true
+- pmid: 32442275
+  description: Li et al. TIMER2.0. Nucleic Acids Res 2020
+  verified: true
+- pmid: 25822800
+  description: Newman et al. CIBERSORT. Nat Methods 2015
+  verified: true
+- pmid: 32822576
+  description: Maynard et al. Therapy-induced evolution of human lung cancer by scRNA-seq. Cell 2020
+  verified: true
+- pmid: 29988129
+  description: Lambrechts et al. Phenotype molding of stromal cells in lung TME. Nat Med 2018
+  verified: true
+- pmid: 32385277
+  description: Kim et al. scRNA-seq of metastatic lung adenocarcinoma. Nat Commun 2020
+  verified: true
+- pmid: 28475900
+  description: Lavin et al. Innate immune landscape in early lung adenocarcinoma. Cell 2017
+  verified: true
+- pmid: 30093729
+  description: Guo et al. Global characterization of T cells in NSCLC by scRNA-seq. Nat Med 2018
+  verified: true
+- pmid: 29658856
+  description: 'Gandhi et al. KEYNOTE-024: pembrolizumab + chemo in NSCLC. NEJM 2018'
+  verified: true
+- pmid: 31562796
+  description: 'Hellmann et al. CheckMate-227: nivolumab + ipilimumab in NSCLC. NEJM 2019'
+  verified: true
+- pmid: 34767762
+  description: Leader et al. Single-cell analysis refines NSCLC classification. Cancer Cell 2021
+  verified: true
+- pmid: 21708957
+  description: Platonova et al. Coordinated alterations of intratumoral NK cells in lung carcinoma. J Immunol 2011
+  verified: true
+- pmid: 38782901
+  description: De Zuani et al. Single-cell and spatial transcriptomics of NSCLC. Nat Commun 2024
+  verified: true
+visualization:
+  cell_colors:
+    Tumor: '#C44E52'
+    CD8_T: '#4C72B0'
+    Treg: '#DD8452'
+    Macrophage: '#55A868'
+    NK: '#8172B3'
+    B_cell: '#CCB974'
+  abbreviation: NSCLC
+  icon: lung

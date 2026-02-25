@@ -1,0 +1,403 @@
+meta:
+  schema_version: '1.0'
+  generated_by: CellSwarm Cancer Atlas Builder
+  generated_at: '2026-02-13'
+  last_updated: '2026-02-13'
+  compatible_engine: cellswarm>=2.0
+cancer_id: Ovarian
+full_name: High-Grade Serous Ovarian Cancer
+tissue: Ovary/Fallopian Tube
+icd_code: C56.9
+tme_phenotype: immune_altered_immunosuppressed
+cell_types:
+  Tumor:
+    proportion:
+    - 0.55
+    - 0.7
+    subtypes:
+    - C1 (Mesenchymal)
+    - C2 (Immunoreactive)
+    - C4 (Differentiated)
+    - C5 (Proliferative)
+    key_markers:
+    - PAX8
+    - WT1
+    - TP53
+    - BRCA1
+    - BRCA2
+    - CA125
+    doubling_time_hours:
+    - 60
+    - 96
+    functional_states:
+    - high_genomic_instability
+    - homologous_recombination_deficiency
+    - EMT_active_in_C1
+    - antigen_presentation_variable
+    initial_state:
+      energy:
+      - 0.6
+      - 0.8
+      immune_evasion:
+      - 0.6
+      - 0.8
+      proliferation_rate:
+      - 0.65
+      - 0.85
+      apoptosis_susceptibility:
+      - 0.2
+      - 0.4
+    behavior_mapping:
+      proliferate: 0.4
+      migrate: 0.2
+      signal: 0.15
+      rest: 0.12
+      apoptosis: 0.05
+      evade: 0.08
+    notes: HGSOC originates from fallopian tube epithelium. High genomic instability due to HR deficiency (BRCA mutations
+      in ~50%).
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  CD8_T:
+    proportion:
+    - 0.03
+    - 0.12
+    subtypes:
+    - Effector
+    - Exhausted
+    - Anergic
+    key_markers:
+    - CD8A
+    - CD8B
+    - GZMB
+    - PRF1
+    - PDCD1
+    - TIM3
+    functional_states:
+    - variable_infiltration
+    - exhausted_in_immune_reactive
+    - functionally_suppressed
+    initial_state:
+      energy:
+      - 0.4
+      - 0.6
+      activation:
+      - 0.35
+      - 0.55
+      exhaustion:
+      - 0.55
+      - 0.75
+      cytotoxicity:
+      - 0.35
+      - 0.55
+    behavior_mapping:
+      attack: 0.15
+      migrate: 0.25
+      proliferate: 0.05
+      rest: 0.35
+      signal: 0.12
+      apoptosis: 0.08
+    notes: CD8+ T cell infiltration highly variable between molecular subtypes. C2 (immunoreactive) has highest infiltration.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  Treg:
+    proportion:
+    - 0.04
+    - 0.1
+    subtypes:
+    - Effector Treg
+    - Naive Treg
+    key_markers:
+    - FOXP3
+    - CD25
+    - CTLA4
+    - CCR4
+    functional_states:
+    - highly_immunosuppressive
+    - IL10_producing
+    - TGF_beta_active
+    initial_state:
+      energy:
+      - 0.5
+      - 0.7
+      suppressive_activity:
+      - 0.7
+      - 0.9
+      activation:
+      - 0.6
+      - 0.8
+    behavior_mapping:
+      suppress: 0.55
+      migrate: 0.15
+      signal: 0.15
+      proliferate: 0.08
+      rest: 0.05
+      apoptosis: 0.02
+    notes: High Treg infiltration is a hallmark of HGSOC. Strongly associated with poor prognosis.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  Macrophage:
+    proportion:
+    - 0.12
+    - 0.22
+    subtypes:
+    - M1-like
+    - M2-like
+    - TAM
+    - Ovarian macrophages
+    key_markers:
+    - CD68
+    - CD163
+    - CD206
+    - MS4A4A
+    - SIGLEC1
+    functional_states:
+    - M2_dominant
+    - pro_angiogenic
+    - immunosuppressive
+    - metastasis_promoting
+    initial_state:
+      energy:
+      - 0.55
+      - 0.75
+      polarization:
+      - 0.8
+      - 0.95
+      phagocytic_activity:
+      - 0.3
+      - 0.5
+    m1_m2_ratio:
+    - 0.1
+    - 0.2
+    behavior_mapping:
+      phagocytose: 0.15
+      signal: 0.25
+      migrate: 0.15
+      polarize: 0.15
+      rest: 0.2
+      apoptosis: 0.1
+    notes: Very high TAM infiltration with strong M2 polarization. M1:M2 ratio approximately 1:4 to 1:6. Key promoter of metastasis.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  NK:
+    proportion:
+    - 0.01
+    - 0.04
+    subtypes:
+    - CD56dim
+    key_markers:
+    - NCAM1
+    - NKG2D
+    - NKG2A
+    - DNAM1
+    functional_states:
+    - impaired_function
+    - inhibited_by_HLA_E
+    - ADCC_capable
+    initial_state:
+      energy:
+      - 0.3
+      - 0.5
+      activation:
+      - 0.25
+      - 0.45
+      cytotoxicity:
+      - 0.3
+      - 0.5
+    behavior_mapping:
+      attack: 0.2
+      migrate: 0.25
+      signal: 0.1
+      rest: 0.3
+      apoptosis: 0.1
+      proliferate: 0.05
+    notes: NK cells functionally impaired in HGSOC. HLA-E upregulation on tumor cells inhibits NK activity.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+  B_cell:
+    proportion:
+    - 0.02
+    - 0.07
+    subtypes:
+    - Naive B
+    - Memory B
+    - Plasma cells
+    key_markers:
+    - CD19
+    - CD20
+    - CD138
+    - IGHG
+    functional_states:
+    - antibody_secreting
+    - regulatory_B_cells
+    initial_state:
+      energy:
+      - 0.4
+      - 0.6
+      activation:
+      - 0.3
+      - 0.5
+      antibody_secretion:
+      - 0.2
+      - 0.4
+    behavior_mapping:
+      signal: 0.25
+      migrate: 0.15
+      proliferate: 0.1
+      rest: 0.3
+      apoptosis: 0.1
+      attack: 0.1
+    notes: B cell infiltration generally low. Some evidence of regulatory B cells promoting tumor growth.
+    references:
+    - pmid: 34019806
+      description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+      verified: true
+    - pmid: 30127393
+      description: Jiang et al. TIDE signatures. Nat Med 2018
+      verified: true
+spatial_distribution:
+  tumor_core:
+    Tumor: 0.75
+    CD8_T: 0.04
+    Treg: 0.06
+    Macrophage: 0.13
+    NK: 0.01
+    B_cell: 0.01
+  tumor_margin:
+    Tumor: 0.55
+    CD8_T: 0.12
+    Treg: 0.06
+    Macrophage: 0.16
+    NK: 0.04
+    B_cell: 0.07
+  stroma:
+    Tumor: 0.15
+    CD8_T: 0.1
+    Treg: 0.07
+    Macrophage: 0.3
+    NK: 0.05
+    B_cell: 0.33
+cancer_specific_features:
+- Universal TP53 mutation (>95%)
+- Homologous recombination deficiency (50% with BRCA mutations)
+- High genomic instability (CNV burden)
+- Peritoneal dissemination pattern
+- Ascites with immunosuppressive microenvironment
+- Platinum sensitivity initially, resistance develops
+immunotherapy_relevance:
+  approved_agents:
+  - Pembrolizumab (PD-1 inhibitor) - limited indication for MSI-H/dMMR
+  - Dostarlimab (PD-1 inhibitor) - MSI-H only
+  - Nivolumab combinations in trials
+  response_rate: 10-15% in unselected patients; higher in BRCA-mutant or PD-L1 positive
+  biomarkers:
+  - BRCA1/2 mutation status
+  - Homologous recombination deficiency (HRD) score
+  - PD-L1 expression
+  - MSI-H/dMMR status (rare, ~2%)
+  - Tumor-infiltrating lymphocytes (TILs)
+immune_escape_mechanisms:
+- High Treg infiltration
+- M2 macrophage dominance
+- PD-L1 upregulation
+- IDO1-mediated tryptophan depletion
+- MDSC accumulation
+- HLA-E mediated NK inhibition
+- Angiogenesis (VEGF)
+- Ascites immunosuppression
+- CA125 immunosuppressive effects
+simulation_defaults:
+  total_cells: 1000
+  grid_size:
+  - 50
+  - 50
+  recommended_steps: 30
+  step_time_mapping: 1 step ≈ 1 day of tumor-immune interaction
+  key_signals:
+  - PD_L1
+  - TGF_beta
+  - IFN_gamma
+  - IL2
+  - oxygen
+  - glucose
+references:
+- pmid: 34019806
+  description: Bagaev et al. Conserved pan-cancer TME subtypes. Cancer Cell 2021
+  verified: true
+- pmid: 30127393
+  description: Jiang et al. TIDE signatures. Nat Med 2018
+  verified: true
+- pmid: 29628290
+  description: Thorsson et al. The Immune Landscape of Cancer. Immunity 2018
+  verified: true
+- pmid: 15322536
+  description: Curiel et al. Specific recruitment of Tregs in ovarian carcinoma. Nat Med 2004
+  verified: true
+- pmid: 17360651
+  description: Hamanishi et al. PD-L1 and CD8+ T cells prognostic in ovarian cancer. PNAS 2007
+  verified: true
+- pmid: 18698038
+  description: Tothill et al. Novel molecular subtypes of ovarian cancer. Clin Cancer Res 2008
+  verified: true
+- pmid: 35488273
+  description: Zhang et al. Integrated scRNA and bulk RNA analysis of ovarian cancer. Genome Med 2022
+  verified: true
+- pmid: 33149148
+  description: Desbois et al. Digital pathology identifies T-cell exclusion mediators in ovarian cancer. Nat Commun 2020
+  verified: true
+- pmid: 34143972
+  description: Barber et al. Immunotherapy in ovarian cancer review. Lancet Oncol 2021
+  verified: true
+- pmid: 23784932
+  description: Reinartz et al. Mixed-polarization macrophages in ovarian carcinoma. Int J Cancer 2014
+  verified: true
+- pmid: 25822800
+  description: Newman et al. CIBERSORT. Nat Methods 2015
+  verified: true
+- pmid: 32442275
+  description: Li et al. TIMER2.0. Nucleic Acids Res 2020
+  verified: true
+- pmid: 28117416
+  description: Mantovani et al. TAMs as treatment targets. Nat Rev Clin Oncol 2017
+  verified: true
+- pmid: 29625050
+  description: Sanchez-Vega et al. TCGA oncogenic signaling pathways. Cell 2018
+  verified: true
+- pmid: 31942075
+  description: Helmink et al. B cells and TLS promote immunotherapy response. Nature 2020
+  verified: true
+visualization:
+  cell_colors:
+    Tumor: '#C44E52'
+    CD8_T: '#4C72B0'
+    Treg: '#DD8452'
+    Macrophage: '#55A868'
+    NK: '#8172B3'
+    B_cell: '#CCB974'
+  abbreviation: OV
+  icon: ovary

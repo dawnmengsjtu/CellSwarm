@@ -1,0 +1,47 @@
+% ============================================================
+% TABLES — Main Text
+% ============================================================
+
+\begin{table}[!ht]
+\centering
+\caption{\textbf{Eight-model benchmark on TNBC baseline simulation.} JS: Jensen--Shannon divergence from real scRNA-seq proportions (GSE176078). CV: coefficient of variation of tumor ratio across 5 seeds. Runtime and tokens measured per single 30-step, 500-cell simulation.}
+\label{tab:model_benchmark}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+Model & JS (mean$\pm$SD) & $R^2$ & CV & Tumor Ratio & Tokens/run & Runtime \\
+\midrule
+DeepSeek     & 0.144$\pm$0.001 & 0.786 & 0.083 & 0.943$\pm$0.078 & 2.8M & 20.5 min \\
+Rules        & 0.146$\pm$0.001 & 0.752 & 0.035 & 0.849$\pm$0.029 & ---  & $<$1 s \\
+GLM-4-Flash  & 0.147$\pm$0.002 & 0.742 & 0.052 & 0.832$\pm$0.043 & 2.8M & 12.8 min \\
+Qwen-Turbo   & 0.156$\pm$0.004 & 0.652 & 0.060 & 0.699$\pm$0.042 & 3.0M & 8.2 min \\
+\midrule
+Qwen-Plus    & 0.210$\pm$0.007 & 0.207 & 0.068 & 0.387$\pm$0.026 & 3.0M & 13.7 min \\
+Qwen-Max     & 0.212$\pm$0.018 & 0.211 & 0.168 & 0.393$\pm$0.066 & 3.0M & 23.7 min \\
+Kimi-K2.5    & 0.219$\pm$0.002 & 0.858 & 0.015 & 2.751$\pm$0.042 & 3.2M & 49.3 min \\
+\midrule
+Random       & 0.263$\pm$0.017 & 0.757 & 0.066 & 1.216$\pm$0.081 & ---  & $<$1 s \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{\textbf{Perturbation experiment results (7 KOs).} Tumor ratio (TR) and percentage change ($\Delta$) relative to mode-specific baseline. Direct KOs target checkpoint variables in the rule-based attack threshold (TCR+CD28$-$PD1$-$CTLA4$>$0.5); indirect KOs target genes outside the rule boundary. $P$: two-sided $t$-test, Agent vs.\ Rules ($n=3$ seeds each).}
+\label{tab:perturbation}
+\small
+\begin{tabular}{llcccccc}
+\toprule
+KO & Type & Agent TR & Agent $\Delta$ & Rules TR & Rules $\Delta$ & $P$ (A vs R) \\
+\midrule
+PD-1   & Direct   & 0.670$\pm$0.09 & $-$29.0\% & 0.469$\pm$0.07 & $-$44.8\% & 0.043 \\
+CTLA-4 & Direct   & 0.630$\pm$0.08 & $-$33.2\% & 0.439$\pm$0.08 & $-$48.3\% & 0.049 \\
+\midrule
+IFN-$\gamma$ & Indirect & 1.092$\pm$0.05 & $+$15.7\% & 0.852$\pm$0.03 & $+$0.3\% & 0.005 \\
+TGF-$\beta$1 & Indirect & 1.047$\pm$0.07 & $+$11.0\% & 0.852$\pm$0.03 & $+$0.3\% & 0.028 \\
+TP53         & Indirect & 1.067$\pm$0.12 & $+$13.1\% & 0.852$\pm$0.03 & $+$0.3\% & 0.089 \\
+BRCA1        & Indirect & 1.113$\pm$0.21 & $+$18.0\% & 0.852$\pm$0.03 & $+$0.3\% & 0.168 \\
+IL-2         & Indirect & 1.035$\pm$0.12 & $+$9.7\%  & 0.852$\pm$0.03 & $+$0.3\% & 0.116 \\
+\bottomrule
+\end{tabular}
+\end{table}

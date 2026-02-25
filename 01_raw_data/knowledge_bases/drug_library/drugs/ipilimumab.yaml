@@ -1,0 +1,125 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+drug_id: ipilimumab
+generic_name: Ipilimumab
+brand_name: Yervoy
+drug_class: immune_checkpoint_inhibitor
+subclass: anti_CTLA4
+molecular_type: monoclonal_antibody
+fda_status: approved
+approved_indications:
+- melanoma
+- NSCLC
+- CRC-MSI-H
+targets:
+- name: CTLA-4
+  gene: CTLA4
+  type: receptor
+  action: antagonist
+  selectivity: high
+cell_effects:
+  CD8_T:
+    direct: true
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.08
+    - parameter: exhaustion
+      direction: decrease
+      rate_per_step: 0.04
+    functional_effects:
+    - action: proliferate
+      probability_modifier: 0.15
+    - action: attack
+      probability_modifier: 0.1
+    notes: Primarily enhances T cell priming and expansion
+  Tumor:
+    direct: false
+    state_effects:
+    - parameter: apoptosis_susceptibility
+      direction: increase
+      rate_per_step: 0.03
+      condition: nearby_CD8T_count > 1
+  Treg:
+    direct: true
+    state_effects:
+    - parameter: suppressive_activity
+      direction: decrease
+      rate_per_step: 0.06
+    functional_effects:
+    - action: apoptosis
+      probability_modifier: 0.1
+    notes: CTLA-4 highly expressed on Tregs; Fc-mediated ADCC depletes Tregs
+  Macrophage:
+    direct: false
+    state_effects:
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.03
+    - parameter: phagocytic_activity
+      direction: increase
+      rate_per_step: 0.04
+    notes: Macrophages mediate Treg depletion via ADCC
+  NK:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.03
+  B_cell:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.02
+environment_effects:
+- field: IFN_gamma
+  action: amplify
+  magnitude: 0.15
+- field: IL2
+  action: amplify
+  magnitude: 0.1
+pharmacokinetics:
+  administration: IV
+  standard_dose: 3 mg/kg q3w x4
+  onset_steps: 2
+  peak_steps: 5
+  half_life_steps: 15
+  concentration_curve: plateau
+  steady_state_fraction: 0.8
+dose_response:
+  model: hill
+  ec50: 0.4
+  hill_coefficient: 1.5
+  max_effect: 1.0
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.4
+    notes: Not approved, limited data
+  Melanoma:
+    efficacy_modifier: 1.0
+    notes: First approved ICI for melanoma
+  NSCLC:
+    efficacy_modifier: 0.7
+    notes: Combination with nivo
+  CRC-MSI-H:
+    efficacy_modifier: 0.8
+    notes: CheckMate-142 combo
+  CRC-MSS:
+    efficacy_modifier: 0.15
+    notes: Minimal efficacy
+  Ovarian:
+    efficacy_modifier: 0.3
+    notes: Limited data
+resistance:
+- mechanism: T cell anergy despite CTLA-4 blockade
+  onset_steps: 15
+  probability: 0.12
+- mechanism: Compensatory PD-1/PD-L1 upregulation
+  onset_steps: 10
+  probability: 0.15
+references:
+- description: 'CheckMate-067: Ipi+Nivo in melanoma. Larkin et al. NEJM 2015'
+  pmid: '26027431'
+  verified: true

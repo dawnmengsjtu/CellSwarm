@@ -1,0 +1,116 @@
+meta:
+  schema_version: '1.0'
+  compatible_engine: cellswarm>=2.0
+  calibrated_from: GDSC2 (Sanger)
+  calibration_date: '2026-02-13'
+drug_id: olaparib
+generic_name: Olaparib
+brand_name: Lynparza
+drug_class: targeted_therapy
+subclass: PARP_inhibitor
+molecular_type: small_molecule
+fda_status: approved
+approved_indications:
+- TNBC
+- Ovarian
+targets:
+- name: PARP1/2
+  gene: PARP1
+  type: enzyme
+  action: inhibitor
+  selectivity: high
+cell_effects:
+  CD8_T:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.03
+    notes: PARP inhibition increases tumor immunogenicity via STING pathway
+  Tumor:
+    direct: true
+    state_effects:
+    - parameter: apoptosis_susceptibility
+      direction: increase
+      rate_per_step: 0.15
+      condition: BRCA_mutant
+    - parameter: proliferation_rate
+      direction: decrease
+      rate_per_step: 0.1
+    - parameter: energy
+      direction: decrease
+      rate_per_step: 0.05
+    notes: Synthetic lethality in HRD tumors
+  Treg:
+    direct: false
+    state_effects: []
+  Macrophage:
+    direct: false
+    state_effects:
+    - parameter: polarization
+      direction: decrease
+      rate_per_step: 0.02
+    notes: STING activation promotes M1
+  NK:
+    direct: false
+    state_effects:
+    - parameter: activation
+      direction: increase
+      rate_per_step: 0.02
+  B_cell:
+    direct: false
+    state_effects: []
+environment_effects:
+- field: IFN_gamma
+  action: amplify
+  magnitude: 0.08
+  notes: STING-mediated type I IFN
+pharmacokinetics:
+  administration: oral
+  standard_dose: 300 mg BID
+  onset_steps: 1
+  peak_steps: 1
+  half_life_steps: 0.5
+  concentration_curve: exponential_decay
+  steady_state_fraction: 0.75
+  gdsc2_ic50:
+    ln_ic50_mean: 4.7818
+    ln_ic50_std: 1.0331
+    auc_mean: 0.9648
+    n_cell_lines: 50
+    source: GDSC2 release 8.5
+dose_response:
+  model: hill
+  ec50: 0.3
+  hill_coefficient: 2.5
+  max_effect: 1.0
+cancer_specific_modifiers:
+  TNBC:
+    efficacy_modifier: 0.9
+    notes: BRCA+ TNBC high response
+  Melanoma:
+    efficacy_modifier: 0.3
+    notes: Limited HRD
+  NSCLC:
+    efficacy_modifier: 0.3
+    notes: Limited HRD
+  CRC-MSI-H:
+    efficacy_modifier: 0.4
+    notes: Some HRD overlap
+  CRC-MSS:
+    efficacy_modifier: 0.2
+    notes: Low HRD
+  Ovarian:
+    efficacy_modifier: 1.0
+    notes: BRCA+ HGSOC primary indication
+resistance:
+- mechanism: BRCA reversion mutations
+  onset_steps: 20
+  probability: 0.15
+- mechanism: Drug efflux pump upregulation
+  onset_steps: 15
+  probability: 0.1
+references:
+- description: 'OlympiAD: Olaparib in BRCA+ breast cancer. Robson et al. NEJM 2017'
+  pmid: '28578601'
+  verified: true
